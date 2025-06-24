@@ -9,7 +9,16 @@ datasource db {
 }
 
 model User {
-  id    String  @id @default(uuid())
-  email String  @unique
-  name  String?
+  id                 String   @id @default(uuid())
+  email              String   @unique
+  name               String?
+  surName            String?
+  lastName           String?
+  login              String   @unique
+  password           String
+  createdAt          DateTime @default(now())
+  isActivated        Boolean  @default(false) @map("is_activated")
+  activatedEmailCode String   @default("") @map("activated_email_code")
+
+  @@map("user")
 }

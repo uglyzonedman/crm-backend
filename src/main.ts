@@ -10,7 +10,8 @@ async function bootstrap() {
     .setVersion('1.0')
     .addBearerAuth()
     .build();
-
+  app.setGlobalPrefix('api');
+  app.enableCors({ origin: '*' });
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('swagger', app, document);
   app.setGlobalPrefix('api');

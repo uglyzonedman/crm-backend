@@ -56,13 +56,15 @@ export class AuthService {
   async login(dto: LoginDto) {
     try {
       const findUser = await this.prisma.user.findFirst({
-        where: { login: dto.login },
+        where: {
+          OR: [{ login: dto.identifier }, { email: dto.identifier }],
+        },
       });
 
       if (!findUser) {
         throw new BadRequestException({
           status: 'error',
-          message: 'Пользователь с таким логином не найден',
+          message: 'Пользователь с таким логином или email не найден',
         });
       }
 
@@ -70,7 +72,7 @@ export class AuthService {
         dto.password,
         findUser.password,
       );
-      console.log('isPasswordValid', isPasswordValid);
+
       if (!isPasswordValid) {
         throw new BadRequestException({
           status: 'error',
