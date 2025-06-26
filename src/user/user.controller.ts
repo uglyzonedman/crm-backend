@@ -1,4 +1,4 @@
-import { Controller, Get, UseGuards } from '@nestjs/common';
+import { Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { UserService } from './user.service';
 import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
 import { User } from 'src/decorators/user.decorator';
@@ -11,5 +11,10 @@ export class UserController {
   @UseGuards(JwtAuthGuard)
   async getMe(@User() user: { userId: string; login: string }) {
     return await this.userService.getMe(user.userId);
+  }
+
+  @Post('recovery-password/:email')
+  async recoveryPassword(@Param('email') email: string) {
+    return this.userService.recoveryPasswordSendMessage(email);
   }
 }

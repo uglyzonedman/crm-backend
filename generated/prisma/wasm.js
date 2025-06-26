@@ -133,6 +133,15 @@ exports.Prisma.UserScalarFieldEnum = {
   activatedEmailCode: 'activatedEmailCode'
 };
 
+exports.Prisma.RecoveryPasswordCodeScalarFieldEnum = {
+  id: 'id',
+  recoveryCode: 'recoveryCode',
+  userId: 'userId',
+  isUsed: 'isUsed',
+  createdAt: 'createdAt',
+  expiresAt: 'expiresAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -150,7 +159,8 @@ exports.Prisma.NullsOrder = {
 
 
 exports.Prisma.ModelName = {
-  User: 'User'
+  User: 'User',
+  RecoveryPasswordCode: 'RecoveryPasswordCode'
 };
 
 /**

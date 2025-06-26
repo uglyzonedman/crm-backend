@@ -20,5 +20,19 @@ model User {
   isActivated        Boolean  @default(false) @map("is_activated")
   activatedEmailCode String   @default("") @map("activated_email_code")
 
+  recoveryCodes RecoveryPasswordCode[]
+
   @@map("user")
+}
+
+model RecoveryPasswordCode {
+  id           String   @id @default(uuid())
+  recoveryCode String   @map("recovery_code")
+  userId       String
+  isUsed       Boolean  @default(false) @map("is_used")
+  createdAt    DateTime @default(now()) @map("created_at")
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt    DateTime @map("expires_at")
+
+  @@map("recovery_password_code")
 }

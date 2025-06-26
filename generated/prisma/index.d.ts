@@ -18,6 +18,11 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  * 
  */
 export type User = $Result.DefaultSelection<Prisma.$UserPayload>
+/**
+ * Model RecoveryPasswordCode
+ * 
+ */
+export type RecoveryPasswordCode = $Result.DefaultSelection<Prisma.$RecoveryPasswordCodePayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -153,6 +158,16 @@ export class PrismaClient<
     * ```
     */
   get user(): Prisma.UserDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.recoveryPasswordCode`: Exposes CRUD operations for the **RecoveryPasswordCode** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more RecoveryPasswordCodes
+    * const recoveryPasswordCodes = await prisma.recoveryPasswordCode.findMany()
+    * ```
+    */
+  get recoveryPasswordCode(): Prisma.RecoveryPasswordCodeDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -593,7 +608,8 @@ export namespace Prisma {
 
 
   export const ModelName: {
-    User: 'User'
+    User: 'User',
+    RecoveryPasswordCode: 'RecoveryPasswordCode'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -612,7 +628,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user"
+      modelProps: "user" | "recoveryPasswordCode"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -687,6 +703,80 @@ export namespace Prisma {
           count: {
             args: Prisma.UserCountArgs<ExtArgs>
             result: $Utils.Optional<UserCountAggregateOutputType> | number
+          }
+        }
+      }
+      RecoveryPasswordCode: {
+        payload: Prisma.$RecoveryPasswordCodePayload<ExtArgs>
+        fields: Prisma.RecoveryPasswordCodeFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.RecoveryPasswordCodeFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RecoveryPasswordCodePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.RecoveryPasswordCodeFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RecoveryPasswordCodePayload>
+          }
+          findFirst: {
+            args: Prisma.RecoveryPasswordCodeFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RecoveryPasswordCodePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.RecoveryPasswordCodeFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RecoveryPasswordCodePayload>
+          }
+          findMany: {
+            args: Prisma.RecoveryPasswordCodeFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RecoveryPasswordCodePayload>[]
+          }
+          create: {
+            args: Prisma.RecoveryPasswordCodeCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RecoveryPasswordCodePayload>
+          }
+          createMany: {
+            args: Prisma.RecoveryPasswordCodeCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.RecoveryPasswordCodeCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RecoveryPasswordCodePayload>[]
+          }
+          delete: {
+            args: Prisma.RecoveryPasswordCodeDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RecoveryPasswordCodePayload>
+          }
+          update: {
+            args: Prisma.RecoveryPasswordCodeUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RecoveryPasswordCodePayload>
+          }
+          deleteMany: {
+            args: Prisma.RecoveryPasswordCodeDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.RecoveryPasswordCodeUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.RecoveryPasswordCodeUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RecoveryPasswordCodePayload>[]
+          }
+          upsert: {
+            args: Prisma.RecoveryPasswordCodeUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RecoveryPasswordCodePayload>
+          }
+          aggregate: {
+            args: Prisma.RecoveryPasswordCodeAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateRecoveryPasswordCode>
+          }
+          groupBy: {
+            args: Prisma.RecoveryPasswordCodeGroupByArgs<ExtArgs>
+            result: $Utils.Optional<RecoveryPasswordCodeGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.RecoveryPasswordCodeCountArgs<ExtArgs>
+            result: $Utils.Optional<RecoveryPasswordCodeCountAggregateOutputType> | number
           }
         }
       }
@@ -775,6 +865,7 @@ export namespace Prisma {
   }
   export type GlobalOmitConfig = {
     user?: UserOmit
+    recoveryPasswordCode?: RecoveryPasswordCodeOmit
   }
 
   /* Types for Logging */
@@ -863,6 +954,36 @@ export namespace Prisma {
    * Count Types
    */
 
+
+  /**
+   * Count Type UserCountOutputType
+   */
+
+  export type UserCountOutputType = {
+    recoveryCodes: number
+  }
+
+  export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    recoveryCodes?: boolean | UserCountOutputTypeCountRecoveryCodesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserCountOutputType
+     */
+    select?: UserCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountRecoveryCodesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RecoveryPasswordCodeWhereInput
+  }
 
 
   /**
@@ -1073,6 +1194,8 @@ export namespace Prisma {
     createdAt?: boolean
     isActivated?: boolean
     activatedEmailCode?: boolean
+    recoveryCodes?: boolean | User$recoveryCodesArgs<ExtArgs>
+    _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1115,10 +1238,18 @@ export namespace Prisma {
   }
 
   export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "name" | "surName" | "lastName" | "login" | "password" | "createdAt" | "isActivated" | "activatedEmailCode", ExtArgs["result"]["user"]>
+  export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    recoveryCodes?: boolean | User$recoveryCodesArgs<ExtArgs>
+    _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type UserIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
-    objects: {}
+    objects: {
+      recoveryCodes: Prisma.$RecoveryPasswordCodePayload<ExtArgs>[]
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       email: string
@@ -1524,6 +1655,7 @@ export namespace Prisma {
    */
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    recoveryCodes<T extends User$recoveryCodesArgs<ExtArgs> = {}>(args?: Subset<T, User$recoveryCodesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RecoveryPasswordCodePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1580,6 +1712,10 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
      * Filter, which User to fetch.
      */
     where: UserWhereUniqueInput
@@ -1598,6 +1734,10 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
      * Filter, which User to fetch.
      */
     where: UserWhereUniqueInput
@@ -1615,6 +1755,10 @@ export namespace Prisma {
      * Omit specific fields from the User
      */
     omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
     /**
      * Filter, which User to fetch.
      */
@@ -1664,6 +1808,10 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
      * Filter, which User to fetch.
      */
     where?: UserWhereInput
@@ -1712,6 +1860,10 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
      * Filter, which Users to fetch.
      */
     where?: UserWhereInput
@@ -1754,6 +1906,10 @@ export namespace Prisma {
      * Omit specific fields from the User
      */
     omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
     /**
      * The data needed to create a User.
      */
@@ -1802,6 +1958,10 @@ export namespace Prisma {
      * Omit specific fields from the User
      */
     omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
     /**
      * The data needed to update a User.
      */
@@ -1869,6 +2029,10 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
      * The filter to search for the User to update in case it exists.
      */
     where: UserWhereUniqueInput
@@ -1895,6 +2059,10 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
      * Filter which User to delete.
      */
     where: UserWhereUniqueInput
@@ -1915,6 +2083,30 @@ export namespace Prisma {
   }
 
   /**
+   * User.recoveryCodes
+   */
+  export type User$recoveryCodesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RecoveryPasswordCode
+     */
+    select?: RecoveryPasswordCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RecoveryPasswordCode
+     */
+    omit?: RecoveryPasswordCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecoveryPasswordCodeInclude<ExtArgs> | null
+    where?: RecoveryPasswordCodeWhereInput
+    orderBy?: RecoveryPasswordCodeOrderByWithRelationInput | RecoveryPasswordCodeOrderByWithRelationInput[]
+    cursor?: RecoveryPasswordCodeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: RecoveryPasswordCodeScalarFieldEnum | RecoveryPasswordCodeScalarFieldEnum[]
+  }
+
+  /**
    * User without action
    */
   export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1926,6 +2118,1081 @@ export namespace Prisma {
      * Omit specific fields from the User
      */
     omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model RecoveryPasswordCode
+   */
+
+  export type AggregateRecoveryPasswordCode = {
+    _count: RecoveryPasswordCodeCountAggregateOutputType | null
+    _min: RecoveryPasswordCodeMinAggregateOutputType | null
+    _max: RecoveryPasswordCodeMaxAggregateOutputType | null
+  }
+
+  export type RecoveryPasswordCodeMinAggregateOutputType = {
+    id: string | null
+    recoveryCode: string | null
+    userId: string | null
+    isUsed: boolean | null
+    createdAt: Date | null
+    expiresAt: Date | null
+  }
+
+  export type RecoveryPasswordCodeMaxAggregateOutputType = {
+    id: string | null
+    recoveryCode: string | null
+    userId: string | null
+    isUsed: boolean | null
+    createdAt: Date | null
+    expiresAt: Date | null
+  }
+
+  export type RecoveryPasswordCodeCountAggregateOutputType = {
+    id: number
+    recoveryCode: number
+    userId: number
+    isUsed: number
+    createdAt: number
+    expiresAt: number
+    _all: number
+  }
+
+
+  export type RecoveryPasswordCodeMinAggregateInputType = {
+    id?: true
+    recoveryCode?: true
+    userId?: true
+    isUsed?: true
+    createdAt?: true
+    expiresAt?: true
+  }
+
+  export type RecoveryPasswordCodeMaxAggregateInputType = {
+    id?: true
+    recoveryCode?: true
+    userId?: true
+    isUsed?: true
+    createdAt?: true
+    expiresAt?: true
+  }
+
+  export type RecoveryPasswordCodeCountAggregateInputType = {
+    id?: true
+    recoveryCode?: true
+    userId?: true
+    isUsed?: true
+    createdAt?: true
+    expiresAt?: true
+    _all?: true
+  }
+
+  export type RecoveryPasswordCodeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which RecoveryPasswordCode to aggregate.
+     */
+    where?: RecoveryPasswordCodeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RecoveryPasswordCodes to fetch.
+     */
+    orderBy?: RecoveryPasswordCodeOrderByWithRelationInput | RecoveryPasswordCodeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: RecoveryPasswordCodeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RecoveryPasswordCodes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RecoveryPasswordCodes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned RecoveryPasswordCodes
+    **/
+    _count?: true | RecoveryPasswordCodeCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: RecoveryPasswordCodeMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: RecoveryPasswordCodeMaxAggregateInputType
+  }
+
+  export type GetRecoveryPasswordCodeAggregateType<T extends RecoveryPasswordCodeAggregateArgs> = {
+        [P in keyof T & keyof AggregateRecoveryPasswordCode]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateRecoveryPasswordCode[P]>
+      : GetScalarType<T[P], AggregateRecoveryPasswordCode[P]>
+  }
+
+
+
+
+  export type RecoveryPasswordCodeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RecoveryPasswordCodeWhereInput
+    orderBy?: RecoveryPasswordCodeOrderByWithAggregationInput | RecoveryPasswordCodeOrderByWithAggregationInput[]
+    by: RecoveryPasswordCodeScalarFieldEnum[] | RecoveryPasswordCodeScalarFieldEnum
+    having?: RecoveryPasswordCodeScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: RecoveryPasswordCodeCountAggregateInputType | true
+    _min?: RecoveryPasswordCodeMinAggregateInputType
+    _max?: RecoveryPasswordCodeMaxAggregateInputType
+  }
+
+  export type RecoveryPasswordCodeGroupByOutputType = {
+    id: string
+    recoveryCode: string
+    userId: string
+    isUsed: boolean
+    createdAt: Date
+    expiresAt: Date
+    _count: RecoveryPasswordCodeCountAggregateOutputType | null
+    _min: RecoveryPasswordCodeMinAggregateOutputType | null
+    _max: RecoveryPasswordCodeMaxAggregateOutputType | null
+  }
+
+  type GetRecoveryPasswordCodeGroupByPayload<T extends RecoveryPasswordCodeGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<RecoveryPasswordCodeGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof RecoveryPasswordCodeGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], RecoveryPasswordCodeGroupByOutputType[P]>
+            : GetScalarType<T[P], RecoveryPasswordCodeGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type RecoveryPasswordCodeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    recoveryCode?: boolean
+    userId?: boolean
+    isUsed?: boolean
+    createdAt?: boolean
+    expiresAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["recoveryPasswordCode"]>
+
+  export type RecoveryPasswordCodeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    recoveryCode?: boolean
+    userId?: boolean
+    isUsed?: boolean
+    createdAt?: boolean
+    expiresAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["recoveryPasswordCode"]>
+
+  export type RecoveryPasswordCodeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    recoveryCode?: boolean
+    userId?: boolean
+    isUsed?: boolean
+    createdAt?: boolean
+    expiresAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["recoveryPasswordCode"]>
+
+  export type RecoveryPasswordCodeSelectScalar = {
+    id?: boolean
+    recoveryCode?: boolean
+    userId?: boolean
+    isUsed?: boolean
+    createdAt?: boolean
+    expiresAt?: boolean
+  }
+
+  export type RecoveryPasswordCodeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "recoveryCode" | "userId" | "isUsed" | "createdAt" | "expiresAt", ExtArgs["result"]["recoveryPasswordCode"]>
+  export type RecoveryPasswordCodeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type RecoveryPasswordCodeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type RecoveryPasswordCodeIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $RecoveryPasswordCodePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "RecoveryPasswordCode"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      recoveryCode: string
+      userId: string
+      isUsed: boolean
+      createdAt: Date
+      expiresAt: Date
+    }, ExtArgs["result"]["recoveryPasswordCode"]>
+    composites: {}
+  }
+
+  type RecoveryPasswordCodeGetPayload<S extends boolean | null | undefined | RecoveryPasswordCodeDefaultArgs> = $Result.GetResult<Prisma.$RecoveryPasswordCodePayload, S>
+
+  type RecoveryPasswordCodeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<RecoveryPasswordCodeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: RecoveryPasswordCodeCountAggregateInputType | true
+    }
+
+  export interface RecoveryPasswordCodeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['RecoveryPasswordCode'], meta: { name: 'RecoveryPasswordCode' } }
+    /**
+     * Find zero or one RecoveryPasswordCode that matches the filter.
+     * @param {RecoveryPasswordCodeFindUniqueArgs} args - Arguments to find a RecoveryPasswordCode
+     * @example
+     * // Get one RecoveryPasswordCode
+     * const recoveryPasswordCode = await prisma.recoveryPasswordCode.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends RecoveryPasswordCodeFindUniqueArgs>(args: SelectSubset<T, RecoveryPasswordCodeFindUniqueArgs<ExtArgs>>): Prisma__RecoveryPasswordCodeClient<$Result.GetResult<Prisma.$RecoveryPasswordCodePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one RecoveryPasswordCode that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {RecoveryPasswordCodeFindUniqueOrThrowArgs} args - Arguments to find a RecoveryPasswordCode
+     * @example
+     * // Get one RecoveryPasswordCode
+     * const recoveryPasswordCode = await prisma.recoveryPasswordCode.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends RecoveryPasswordCodeFindUniqueOrThrowArgs>(args: SelectSubset<T, RecoveryPasswordCodeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__RecoveryPasswordCodeClient<$Result.GetResult<Prisma.$RecoveryPasswordCodePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first RecoveryPasswordCode that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RecoveryPasswordCodeFindFirstArgs} args - Arguments to find a RecoveryPasswordCode
+     * @example
+     * // Get one RecoveryPasswordCode
+     * const recoveryPasswordCode = await prisma.recoveryPasswordCode.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends RecoveryPasswordCodeFindFirstArgs>(args?: SelectSubset<T, RecoveryPasswordCodeFindFirstArgs<ExtArgs>>): Prisma__RecoveryPasswordCodeClient<$Result.GetResult<Prisma.$RecoveryPasswordCodePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first RecoveryPasswordCode that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RecoveryPasswordCodeFindFirstOrThrowArgs} args - Arguments to find a RecoveryPasswordCode
+     * @example
+     * // Get one RecoveryPasswordCode
+     * const recoveryPasswordCode = await prisma.recoveryPasswordCode.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends RecoveryPasswordCodeFindFirstOrThrowArgs>(args?: SelectSubset<T, RecoveryPasswordCodeFindFirstOrThrowArgs<ExtArgs>>): Prisma__RecoveryPasswordCodeClient<$Result.GetResult<Prisma.$RecoveryPasswordCodePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more RecoveryPasswordCodes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RecoveryPasswordCodeFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all RecoveryPasswordCodes
+     * const recoveryPasswordCodes = await prisma.recoveryPasswordCode.findMany()
+     * 
+     * // Get first 10 RecoveryPasswordCodes
+     * const recoveryPasswordCodes = await prisma.recoveryPasswordCode.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const recoveryPasswordCodeWithIdOnly = await prisma.recoveryPasswordCode.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends RecoveryPasswordCodeFindManyArgs>(args?: SelectSubset<T, RecoveryPasswordCodeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RecoveryPasswordCodePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a RecoveryPasswordCode.
+     * @param {RecoveryPasswordCodeCreateArgs} args - Arguments to create a RecoveryPasswordCode.
+     * @example
+     * // Create one RecoveryPasswordCode
+     * const RecoveryPasswordCode = await prisma.recoveryPasswordCode.create({
+     *   data: {
+     *     // ... data to create a RecoveryPasswordCode
+     *   }
+     * })
+     * 
+     */
+    create<T extends RecoveryPasswordCodeCreateArgs>(args: SelectSubset<T, RecoveryPasswordCodeCreateArgs<ExtArgs>>): Prisma__RecoveryPasswordCodeClient<$Result.GetResult<Prisma.$RecoveryPasswordCodePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many RecoveryPasswordCodes.
+     * @param {RecoveryPasswordCodeCreateManyArgs} args - Arguments to create many RecoveryPasswordCodes.
+     * @example
+     * // Create many RecoveryPasswordCodes
+     * const recoveryPasswordCode = await prisma.recoveryPasswordCode.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends RecoveryPasswordCodeCreateManyArgs>(args?: SelectSubset<T, RecoveryPasswordCodeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many RecoveryPasswordCodes and returns the data saved in the database.
+     * @param {RecoveryPasswordCodeCreateManyAndReturnArgs} args - Arguments to create many RecoveryPasswordCodes.
+     * @example
+     * // Create many RecoveryPasswordCodes
+     * const recoveryPasswordCode = await prisma.recoveryPasswordCode.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many RecoveryPasswordCodes and only return the `id`
+     * const recoveryPasswordCodeWithIdOnly = await prisma.recoveryPasswordCode.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends RecoveryPasswordCodeCreateManyAndReturnArgs>(args?: SelectSubset<T, RecoveryPasswordCodeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RecoveryPasswordCodePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a RecoveryPasswordCode.
+     * @param {RecoveryPasswordCodeDeleteArgs} args - Arguments to delete one RecoveryPasswordCode.
+     * @example
+     * // Delete one RecoveryPasswordCode
+     * const RecoveryPasswordCode = await prisma.recoveryPasswordCode.delete({
+     *   where: {
+     *     // ... filter to delete one RecoveryPasswordCode
+     *   }
+     * })
+     * 
+     */
+    delete<T extends RecoveryPasswordCodeDeleteArgs>(args: SelectSubset<T, RecoveryPasswordCodeDeleteArgs<ExtArgs>>): Prisma__RecoveryPasswordCodeClient<$Result.GetResult<Prisma.$RecoveryPasswordCodePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one RecoveryPasswordCode.
+     * @param {RecoveryPasswordCodeUpdateArgs} args - Arguments to update one RecoveryPasswordCode.
+     * @example
+     * // Update one RecoveryPasswordCode
+     * const recoveryPasswordCode = await prisma.recoveryPasswordCode.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends RecoveryPasswordCodeUpdateArgs>(args: SelectSubset<T, RecoveryPasswordCodeUpdateArgs<ExtArgs>>): Prisma__RecoveryPasswordCodeClient<$Result.GetResult<Prisma.$RecoveryPasswordCodePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more RecoveryPasswordCodes.
+     * @param {RecoveryPasswordCodeDeleteManyArgs} args - Arguments to filter RecoveryPasswordCodes to delete.
+     * @example
+     * // Delete a few RecoveryPasswordCodes
+     * const { count } = await prisma.recoveryPasswordCode.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends RecoveryPasswordCodeDeleteManyArgs>(args?: SelectSubset<T, RecoveryPasswordCodeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more RecoveryPasswordCodes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RecoveryPasswordCodeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many RecoveryPasswordCodes
+     * const recoveryPasswordCode = await prisma.recoveryPasswordCode.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends RecoveryPasswordCodeUpdateManyArgs>(args: SelectSubset<T, RecoveryPasswordCodeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more RecoveryPasswordCodes and returns the data updated in the database.
+     * @param {RecoveryPasswordCodeUpdateManyAndReturnArgs} args - Arguments to update many RecoveryPasswordCodes.
+     * @example
+     * // Update many RecoveryPasswordCodes
+     * const recoveryPasswordCode = await prisma.recoveryPasswordCode.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more RecoveryPasswordCodes and only return the `id`
+     * const recoveryPasswordCodeWithIdOnly = await prisma.recoveryPasswordCode.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends RecoveryPasswordCodeUpdateManyAndReturnArgs>(args: SelectSubset<T, RecoveryPasswordCodeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RecoveryPasswordCodePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one RecoveryPasswordCode.
+     * @param {RecoveryPasswordCodeUpsertArgs} args - Arguments to update or create a RecoveryPasswordCode.
+     * @example
+     * // Update or create a RecoveryPasswordCode
+     * const recoveryPasswordCode = await prisma.recoveryPasswordCode.upsert({
+     *   create: {
+     *     // ... data to create a RecoveryPasswordCode
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the RecoveryPasswordCode we want to update
+     *   }
+     * })
+     */
+    upsert<T extends RecoveryPasswordCodeUpsertArgs>(args: SelectSubset<T, RecoveryPasswordCodeUpsertArgs<ExtArgs>>): Prisma__RecoveryPasswordCodeClient<$Result.GetResult<Prisma.$RecoveryPasswordCodePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of RecoveryPasswordCodes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RecoveryPasswordCodeCountArgs} args - Arguments to filter RecoveryPasswordCodes to count.
+     * @example
+     * // Count the number of RecoveryPasswordCodes
+     * const count = await prisma.recoveryPasswordCode.count({
+     *   where: {
+     *     // ... the filter for the RecoveryPasswordCodes we want to count
+     *   }
+     * })
+    **/
+    count<T extends RecoveryPasswordCodeCountArgs>(
+      args?: Subset<T, RecoveryPasswordCodeCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], RecoveryPasswordCodeCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a RecoveryPasswordCode.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RecoveryPasswordCodeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends RecoveryPasswordCodeAggregateArgs>(args: Subset<T, RecoveryPasswordCodeAggregateArgs>): Prisma.PrismaPromise<GetRecoveryPasswordCodeAggregateType<T>>
+
+    /**
+     * Group by RecoveryPasswordCode.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RecoveryPasswordCodeGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends RecoveryPasswordCodeGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: RecoveryPasswordCodeGroupByArgs['orderBy'] }
+        : { orderBy?: RecoveryPasswordCodeGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, RecoveryPasswordCodeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetRecoveryPasswordCodeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the RecoveryPasswordCode model
+   */
+  readonly fields: RecoveryPasswordCodeFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for RecoveryPasswordCode.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__RecoveryPasswordCodeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the RecoveryPasswordCode model
+   */
+  interface RecoveryPasswordCodeFieldRefs {
+    readonly id: FieldRef<"RecoveryPasswordCode", 'String'>
+    readonly recoveryCode: FieldRef<"RecoveryPasswordCode", 'String'>
+    readonly userId: FieldRef<"RecoveryPasswordCode", 'String'>
+    readonly isUsed: FieldRef<"RecoveryPasswordCode", 'Boolean'>
+    readonly createdAt: FieldRef<"RecoveryPasswordCode", 'DateTime'>
+    readonly expiresAt: FieldRef<"RecoveryPasswordCode", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * RecoveryPasswordCode findUnique
+   */
+  export type RecoveryPasswordCodeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RecoveryPasswordCode
+     */
+    select?: RecoveryPasswordCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RecoveryPasswordCode
+     */
+    omit?: RecoveryPasswordCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecoveryPasswordCodeInclude<ExtArgs> | null
+    /**
+     * Filter, which RecoveryPasswordCode to fetch.
+     */
+    where: RecoveryPasswordCodeWhereUniqueInput
+  }
+
+  /**
+   * RecoveryPasswordCode findUniqueOrThrow
+   */
+  export type RecoveryPasswordCodeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RecoveryPasswordCode
+     */
+    select?: RecoveryPasswordCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RecoveryPasswordCode
+     */
+    omit?: RecoveryPasswordCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecoveryPasswordCodeInclude<ExtArgs> | null
+    /**
+     * Filter, which RecoveryPasswordCode to fetch.
+     */
+    where: RecoveryPasswordCodeWhereUniqueInput
+  }
+
+  /**
+   * RecoveryPasswordCode findFirst
+   */
+  export type RecoveryPasswordCodeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RecoveryPasswordCode
+     */
+    select?: RecoveryPasswordCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RecoveryPasswordCode
+     */
+    omit?: RecoveryPasswordCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecoveryPasswordCodeInclude<ExtArgs> | null
+    /**
+     * Filter, which RecoveryPasswordCode to fetch.
+     */
+    where?: RecoveryPasswordCodeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RecoveryPasswordCodes to fetch.
+     */
+    orderBy?: RecoveryPasswordCodeOrderByWithRelationInput | RecoveryPasswordCodeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for RecoveryPasswordCodes.
+     */
+    cursor?: RecoveryPasswordCodeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RecoveryPasswordCodes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RecoveryPasswordCodes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of RecoveryPasswordCodes.
+     */
+    distinct?: RecoveryPasswordCodeScalarFieldEnum | RecoveryPasswordCodeScalarFieldEnum[]
+  }
+
+  /**
+   * RecoveryPasswordCode findFirstOrThrow
+   */
+  export type RecoveryPasswordCodeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RecoveryPasswordCode
+     */
+    select?: RecoveryPasswordCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RecoveryPasswordCode
+     */
+    omit?: RecoveryPasswordCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecoveryPasswordCodeInclude<ExtArgs> | null
+    /**
+     * Filter, which RecoveryPasswordCode to fetch.
+     */
+    where?: RecoveryPasswordCodeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RecoveryPasswordCodes to fetch.
+     */
+    orderBy?: RecoveryPasswordCodeOrderByWithRelationInput | RecoveryPasswordCodeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for RecoveryPasswordCodes.
+     */
+    cursor?: RecoveryPasswordCodeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RecoveryPasswordCodes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RecoveryPasswordCodes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of RecoveryPasswordCodes.
+     */
+    distinct?: RecoveryPasswordCodeScalarFieldEnum | RecoveryPasswordCodeScalarFieldEnum[]
+  }
+
+  /**
+   * RecoveryPasswordCode findMany
+   */
+  export type RecoveryPasswordCodeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RecoveryPasswordCode
+     */
+    select?: RecoveryPasswordCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RecoveryPasswordCode
+     */
+    omit?: RecoveryPasswordCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecoveryPasswordCodeInclude<ExtArgs> | null
+    /**
+     * Filter, which RecoveryPasswordCodes to fetch.
+     */
+    where?: RecoveryPasswordCodeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RecoveryPasswordCodes to fetch.
+     */
+    orderBy?: RecoveryPasswordCodeOrderByWithRelationInput | RecoveryPasswordCodeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing RecoveryPasswordCodes.
+     */
+    cursor?: RecoveryPasswordCodeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RecoveryPasswordCodes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RecoveryPasswordCodes.
+     */
+    skip?: number
+    distinct?: RecoveryPasswordCodeScalarFieldEnum | RecoveryPasswordCodeScalarFieldEnum[]
+  }
+
+  /**
+   * RecoveryPasswordCode create
+   */
+  export type RecoveryPasswordCodeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RecoveryPasswordCode
+     */
+    select?: RecoveryPasswordCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RecoveryPasswordCode
+     */
+    omit?: RecoveryPasswordCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecoveryPasswordCodeInclude<ExtArgs> | null
+    /**
+     * The data needed to create a RecoveryPasswordCode.
+     */
+    data: XOR<RecoveryPasswordCodeCreateInput, RecoveryPasswordCodeUncheckedCreateInput>
+  }
+
+  /**
+   * RecoveryPasswordCode createMany
+   */
+  export type RecoveryPasswordCodeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many RecoveryPasswordCodes.
+     */
+    data: RecoveryPasswordCodeCreateManyInput | RecoveryPasswordCodeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * RecoveryPasswordCode createManyAndReturn
+   */
+  export type RecoveryPasswordCodeCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RecoveryPasswordCode
+     */
+    select?: RecoveryPasswordCodeSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the RecoveryPasswordCode
+     */
+    omit?: RecoveryPasswordCodeOmit<ExtArgs> | null
+    /**
+     * The data used to create many RecoveryPasswordCodes.
+     */
+    data: RecoveryPasswordCodeCreateManyInput | RecoveryPasswordCodeCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecoveryPasswordCodeIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * RecoveryPasswordCode update
+   */
+  export type RecoveryPasswordCodeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RecoveryPasswordCode
+     */
+    select?: RecoveryPasswordCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RecoveryPasswordCode
+     */
+    omit?: RecoveryPasswordCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecoveryPasswordCodeInclude<ExtArgs> | null
+    /**
+     * The data needed to update a RecoveryPasswordCode.
+     */
+    data: XOR<RecoveryPasswordCodeUpdateInput, RecoveryPasswordCodeUncheckedUpdateInput>
+    /**
+     * Choose, which RecoveryPasswordCode to update.
+     */
+    where: RecoveryPasswordCodeWhereUniqueInput
+  }
+
+  /**
+   * RecoveryPasswordCode updateMany
+   */
+  export type RecoveryPasswordCodeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update RecoveryPasswordCodes.
+     */
+    data: XOR<RecoveryPasswordCodeUpdateManyMutationInput, RecoveryPasswordCodeUncheckedUpdateManyInput>
+    /**
+     * Filter which RecoveryPasswordCodes to update
+     */
+    where?: RecoveryPasswordCodeWhereInput
+    /**
+     * Limit how many RecoveryPasswordCodes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * RecoveryPasswordCode updateManyAndReturn
+   */
+  export type RecoveryPasswordCodeUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RecoveryPasswordCode
+     */
+    select?: RecoveryPasswordCodeSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the RecoveryPasswordCode
+     */
+    omit?: RecoveryPasswordCodeOmit<ExtArgs> | null
+    /**
+     * The data used to update RecoveryPasswordCodes.
+     */
+    data: XOR<RecoveryPasswordCodeUpdateManyMutationInput, RecoveryPasswordCodeUncheckedUpdateManyInput>
+    /**
+     * Filter which RecoveryPasswordCodes to update
+     */
+    where?: RecoveryPasswordCodeWhereInput
+    /**
+     * Limit how many RecoveryPasswordCodes to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecoveryPasswordCodeIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * RecoveryPasswordCode upsert
+   */
+  export type RecoveryPasswordCodeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RecoveryPasswordCode
+     */
+    select?: RecoveryPasswordCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RecoveryPasswordCode
+     */
+    omit?: RecoveryPasswordCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecoveryPasswordCodeInclude<ExtArgs> | null
+    /**
+     * The filter to search for the RecoveryPasswordCode to update in case it exists.
+     */
+    where: RecoveryPasswordCodeWhereUniqueInput
+    /**
+     * In case the RecoveryPasswordCode found by the `where` argument doesn't exist, create a new RecoveryPasswordCode with this data.
+     */
+    create: XOR<RecoveryPasswordCodeCreateInput, RecoveryPasswordCodeUncheckedCreateInput>
+    /**
+     * In case the RecoveryPasswordCode was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<RecoveryPasswordCodeUpdateInput, RecoveryPasswordCodeUncheckedUpdateInput>
+  }
+
+  /**
+   * RecoveryPasswordCode delete
+   */
+  export type RecoveryPasswordCodeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RecoveryPasswordCode
+     */
+    select?: RecoveryPasswordCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RecoveryPasswordCode
+     */
+    omit?: RecoveryPasswordCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecoveryPasswordCodeInclude<ExtArgs> | null
+    /**
+     * Filter which RecoveryPasswordCode to delete.
+     */
+    where: RecoveryPasswordCodeWhereUniqueInput
+  }
+
+  /**
+   * RecoveryPasswordCode deleteMany
+   */
+  export type RecoveryPasswordCodeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which RecoveryPasswordCodes to delete
+     */
+    where?: RecoveryPasswordCodeWhereInput
+    /**
+     * Limit how many RecoveryPasswordCodes to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * RecoveryPasswordCode without action
+   */
+  export type RecoveryPasswordCodeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RecoveryPasswordCode
+     */
+    select?: RecoveryPasswordCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RecoveryPasswordCode
+     */
+    omit?: RecoveryPasswordCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecoveryPasswordCodeInclude<ExtArgs> | null
   }
 
 
@@ -1957,6 +3224,18 @@ export namespace Prisma {
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+  export const RecoveryPasswordCodeScalarFieldEnum: {
+    id: 'id',
+    recoveryCode: 'recoveryCode',
+    userId: 'userId',
+    isUsed: 'isUsed',
+    createdAt: 'createdAt',
+    expiresAt: 'expiresAt'
+  };
+
+  export type RecoveryPasswordCodeScalarFieldEnum = (typeof RecoveryPasswordCodeScalarFieldEnum)[keyof typeof RecoveryPasswordCodeScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -2054,6 +3333,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"User"> | Date | string
     isActivated?: BoolFilter<"User"> | boolean
     activatedEmailCode?: StringFilter<"User"> | string
+    recoveryCodes?: RecoveryPasswordCodeListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -2067,6 +3347,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     isActivated?: SortOrder
     activatedEmailCode?: SortOrder
+    recoveryCodes?: RecoveryPasswordCodeOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -2083,6 +3364,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"User"> | Date | string
     isActivated?: BoolFilter<"User"> | boolean
     activatedEmailCode?: StringFilter<"User"> | string
+    recoveryCodes?: RecoveryPasswordCodeListRelationFilter
   }, "id" | "email" | "login">
 
   export type UserOrderByWithAggregationInput = {
@@ -2117,6 +3399,66 @@ export namespace Prisma {
     activatedEmailCode?: StringWithAggregatesFilter<"User"> | string
   }
 
+  export type RecoveryPasswordCodeWhereInput = {
+    AND?: RecoveryPasswordCodeWhereInput | RecoveryPasswordCodeWhereInput[]
+    OR?: RecoveryPasswordCodeWhereInput[]
+    NOT?: RecoveryPasswordCodeWhereInput | RecoveryPasswordCodeWhereInput[]
+    id?: StringFilter<"RecoveryPasswordCode"> | string
+    recoveryCode?: StringFilter<"RecoveryPasswordCode"> | string
+    userId?: StringFilter<"RecoveryPasswordCode"> | string
+    isUsed?: BoolFilter<"RecoveryPasswordCode"> | boolean
+    createdAt?: DateTimeFilter<"RecoveryPasswordCode"> | Date | string
+    expiresAt?: DateTimeFilter<"RecoveryPasswordCode"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type RecoveryPasswordCodeOrderByWithRelationInput = {
+    id?: SortOrder
+    recoveryCode?: SortOrder
+    userId?: SortOrder
+    isUsed?: SortOrder
+    createdAt?: SortOrder
+    expiresAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type RecoveryPasswordCodeWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: RecoveryPasswordCodeWhereInput | RecoveryPasswordCodeWhereInput[]
+    OR?: RecoveryPasswordCodeWhereInput[]
+    NOT?: RecoveryPasswordCodeWhereInput | RecoveryPasswordCodeWhereInput[]
+    recoveryCode?: StringFilter<"RecoveryPasswordCode"> | string
+    userId?: StringFilter<"RecoveryPasswordCode"> | string
+    isUsed?: BoolFilter<"RecoveryPasswordCode"> | boolean
+    createdAt?: DateTimeFilter<"RecoveryPasswordCode"> | Date | string
+    expiresAt?: DateTimeFilter<"RecoveryPasswordCode"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type RecoveryPasswordCodeOrderByWithAggregationInput = {
+    id?: SortOrder
+    recoveryCode?: SortOrder
+    userId?: SortOrder
+    isUsed?: SortOrder
+    createdAt?: SortOrder
+    expiresAt?: SortOrder
+    _count?: RecoveryPasswordCodeCountOrderByAggregateInput
+    _max?: RecoveryPasswordCodeMaxOrderByAggregateInput
+    _min?: RecoveryPasswordCodeMinOrderByAggregateInput
+  }
+
+  export type RecoveryPasswordCodeScalarWhereWithAggregatesInput = {
+    AND?: RecoveryPasswordCodeScalarWhereWithAggregatesInput | RecoveryPasswordCodeScalarWhereWithAggregatesInput[]
+    OR?: RecoveryPasswordCodeScalarWhereWithAggregatesInput[]
+    NOT?: RecoveryPasswordCodeScalarWhereWithAggregatesInput | RecoveryPasswordCodeScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"RecoveryPasswordCode"> | string
+    recoveryCode?: StringWithAggregatesFilter<"RecoveryPasswordCode"> | string
+    userId?: StringWithAggregatesFilter<"RecoveryPasswordCode"> | string
+    isUsed?: BoolWithAggregatesFilter<"RecoveryPasswordCode"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"RecoveryPasswordCode"> | Date | string
+    expiresAt?: DateTimeWithAggregatesFilter<"RecoveryPasswordCode"> | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
     email: string
@@ -2128,6 +3470,7 @@ export namespace Prisma {
     createdAt?: Date | string
     isActivated?: boolean
     activatedEmailCode?: string
+    recoveryCodes?: RecoveryPasswordCodeCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -2141,6 +3484,7 @@ export namespace Prisma {
     createdAt?: Date | string
     isActivated?: boolean
     activatedEmailCode?: string
+    recoveryCodes?: RecoveryPasswordCodeUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -2154,6 +3498,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     isActivated?: BoolFieldUpdateOperationsInput | boolean
     activatedEmailCode?: StringFieldUpdateOperationsInput | string
+    recoveryCodes?: RecoveryPasswordCodeUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -2167,6 +3512,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     isActivated?: BoolFieldUpdateOperationsInput | boolean
     activatedEmailCode?: StringFieldUpdateOperationsInput | string
+    recoveryCodes?: RecoveryPasswordCodeUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -2206,6 +3552,68 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     isActivated?: BoolFieldUpdateOperationsInput | boolean
     activatedEmailCode?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type RecoveryPasswordCodeCreateInput = {
+    id?: string
+    recoveryCode: string
+    isUsed?: boolean
+    createdAt?: Date | string
+    expiresAt: Date | string
+    user: UserCreateNestedOneWithoutRecoveryCodesInput
+  }
+
+  export type RecoveryPasswordCodeUncheckedCreateInput = {
+    id?: string
+    recoveryCode: string
+    userId: string
+    isUsed?: boolean
+    createdAt?: Date | string
+    expiresAt: Date | string
+  }
+
+  export type RecoveryPasswordCodeUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    recoveryCode?: StringFieldUpdateOperationsInput | string
+    isUsed?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutRecoveryCodesNestedInput
+  }
+
+  export type RecoveryPasswordCodeUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    recoveryCode?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    isUsed?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RecoveryPasswordCodeCreateManyInput = {
+    id?: string
+    recoveryCode: string
+    userId: string
+    isUsed?: boolean
+    createdAt?: Date | string
+    expiresAt: Date | string
+  }
+
+  export type RecoveryPasswordCodeUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    recoveryCode?: StringFieldUpdateOperationsInput | string
+    isUsed?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RecoveryPasswordCodeUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    recoveryCode?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    isUsed?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -2254,9 +3662,19 @@ export namespace Prisma {
     not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
+  export type RecoveryPasswordCodeListRelationFilter = {
+    every?: RecoveryPasswordCodeWhereInput
+    some?: RecoveryPasswordCodeWhereInput
+    none?: RecoveryPasswordCodeWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
+  }
+
+  export type RecoveryPasswordCodeOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type UserCountOrderByAggregateInput = {
@@ -2356,6 +3774,52 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
+  export type UserScalarRelationFilter = {
+    is?: UserWhereInput
+    isNot?: UserWhereInput
+  }
+
+  export type RecoveryPasswordCodeCountOrderByAggregateInput = {
+    id?: SortOrder
+    recoveryCode?: SortOrder
+    userId?: SortOrder
+    isUsed?: SortOrder
+    createdAt?: SortOrder
+    expiresAt?: SortOrder
+  }
+
+  export type RecoveryPasswordCodeMaxOrderByAggregateInput = {
+    id?: SortOrder
+    recoveryCode?: SortOrder
+    userId?: SortOrder
+    isUsed?: SortOrder
+    createdAt?: SortOrder
+    expiresAt?: SortOrder
+  }
+
+  export type RecoveryPasswordCodeMinOrderByAggregateInput = {
+    id?: SortOrder
+    recoveryCode?: SortOrder
+    userId?: SortOrder
+    isUsed?: SortOrder
+    createdAt?: SortOrder
+    expiresAt?: SortOrder
+  }
+
+  export type RecoveryPasswordCodeCreateNestedManyWithoutUserInput = {
+    create?: XOR<RecoveryPasswordCodeCreateWithoutUserInput, RecoveryPasswordCodeUncheckedCreateWithoutUserInput> | RecoveryPasswordCodeCreateWithoutUserInput[] | RecoveryPasswordCodeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: RecoveryPasswordCodeCreateOrConnectWithoutUserInput | RecoveryPasswordCodeCreateOrConnectWithoutUserInput[]
+    createMany?: RecoveryPasswordCodeCreateManyUserInputEnvelope
+    connect?: RecoveryPasswordCodeWhereUniqueInput | RecoveryPasswordCodeWhereUniqueInput[]
+  }
+
+  export type RecoveryPasswordCodeUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<RecoveryPasswordCodeCreateWithoutUserInput, RecoveryPasswordCodeUncheckedCreateWithoutUserInput> | RecoveryPasswordCodeCreateWithoutUserInput[] | RecoveryPasswordCodeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: RecoveryPasswordCodeCreateOrConnectWithoutUserInput | RecoveryPasswordCodeCreateOrConnectWithoutUserInput[]
+    createMany?: RecoveryPasswordCodeCreateManyUserInputEnvelope
+    connect?: RecoveryPasswordCodeWhereUniqueInput | RecoveryPasswordCodeWhereUniqueInput[]
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
@@ -2370,6 +3834,48 @@ export namespace Prisma {
 
   export type BoolFieldUpdateOperationsInput = {
     set?: boolean
+  }
+
+  export type RecoveryPasswordCodeUpdateManyWithoutUserNestedInput = {
+    create?: XOR<RecoveryPasswordCodeCreateWithoutUserInput, RecoveryPasswordCodeUncheckedCreateWithoutUserInput> | RecoveryPasswordCodeCreateWithoutUserInput[] | RecoveryPasswordCodeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: RecoveryPasswordCodeCreateOrConnectWithoutUserInput | RecoveryPasswordCodeCreateOrConnectWithoutUserInput[]
+    upsert?: RecoveryPasswordCodeUpsertWithWhereUniqueWithoutUserInput | RecoveryPasswordCodeUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: RecoveryPasswordCodeCreateManyUserInputEnvelope
+    set?: RecoveryPasswordCodeWhereUniqueInput | RecoveryPasswordCodeWhereUniqueInput[]
+    disconnect?: RecoveryPasswordCodeWhereUniqueInput | RecoveryPasswordCodeWhereUniqueInput[]
+    delete?: RecoveryPasswordCodeWhereUniqueInput | RecoveryPasswordCodeWhereUniqueInput[]
+    connect?: RecoveryPasswordCodeWhereUniqueInput | RecoveryPasswordCodeWhereUniqueInput[]
+    update?: RecoveryPasswordCodeUpdateWithWhereUniqueWithoutUserInput | RecoveryPasswordCodeUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: RecoveryPasswordCodeUpdateManyWithWhereWithoutUserInput | RecoveryPasswordCodeUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: RecoveryPasswordCodeScalarWhereInput | RecoveryPasswordCodeScalarWhereInput[]
+  }
+
+  export type RecoveryPasswordCodeUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<RecoveryPasswordCodeCreateWithoutUserInput, RecoveryPasswordCodeUncheckedCreateWithoutUserInput> | RecoveryPasswordCodeCreateWithoutUserInput[] | RecoveryPasswordCodeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: RecoveryPasswordCodeCreateOrConnectWithoutUserInput | RecoveryPasswordCodeCreateOrConnectWithoutUserInput[]
+    upsert?: RecoveryPasswordCodeUpsertWithWhereUniqueWithoutUserInput | RecoveryPasswordCodeUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: RecoveryPasswordCodeCreateManyUserInputEnvelope
+    set?: RecoveryPasswordCodeWhereUniqueInput | RecoveryPasswordCodeWhereUniqueInput[]
+    disconnect?: RecoveryPasswordCodeWhereUniqueInput | RecoveryPasswordCodeWhereUniqueInput[]
+    delete?: RecoveryPasswordCodeWhereUniqueInput | RecoveryPasswordCodeWhereUniqueInput[]
+    connect?: RecoveryPasswordCodeWhereUniqueInput | RecoveryPasswordCodeWhereUniqueInput[]
+    update?: RecoveryPasswordCodeUpdateWithWhereUniqueWithoutUserInput | RecoveryPasswordCodeUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: RecoveryPasswordCodeUpdateManyWithWhereWithoutUserInput | RecoveryPasswordCodeUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: RecoveryPasswordCodeScalarWhereInput | RecoveryPasswordCodeScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutRecoveryCodesInput = {
+    create?: XOR<UserCreateWithoutRecoveryCodesInput, UserUncheckedCreateWithoutRecoveryCodesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutRecoveryCodesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutRecoveryCodesNestedInput = {
+    create?: XOR<UserCreateWithoutRecoveryCodesInput, UserUncheckedCreateWithoutRecoveryCodesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutRecoveryCodesInput
+    upsert?: UserUpsertWithoutRecoveryCodesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutRecoveryCodesInput, UserUpdateWithoutRecoveryCodesInput>, UserUncheckedUpdateWithoutRecoveryCodesInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -2492,6 +3998,160 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedBoolFilter<$PrismaModel>
     _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type RecoveryPasswordCodeCreateWithoutUserInput = {
+    id?: string
+    recoveryCode: string
+    isUsed?: boolean
+    createdAt?: Date | string
+    expiresAt: Date | string
+  }
+
+  export type RecoveryPasswordCodeUncheckedCreateWithoutUserInput = {
+    id?: string
+    recoveryCode: string
+    isUsed?: boolean
+    createdAt?: Date | string
+    expiresAt: Date | string
+  }
+
+  export type RecoveryPasswordCodeCreateOrConnectWithoutUserInput = {
+    where: RecoveryPasswordCodeWhereUniqueInput
+    create: XOR<RecoveryPasswordCodeCreateWithoutUserInput, RecoveryPasswordCodeUncheckedCreateWithoutUserInput>
+  }
+
+  export type RecoveryPasswordCodeCreateManyUserInputEnvelope = {
+    data: RecoveryPasswordCodeCreateManyUserInput | RecoveryPasswordCodeCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type RecoveryPasswordCodeUpsertWithWhereUniqueWithoutUserInput = {
+    where: RecoveryPasswordCodeWhereUniqueInput
+    update: XOR<RecoveryPasswordCodeUpdateWithoutUserInput, RecoveryPasswordCodeUncheckedUpdateWithoutUserInput>
+    create: XOR<RecoveryPasswordCodeCreateWithoutUserInput, RecoveryPasswordCodeUncheckedCreateWithoutUserInput>
+  }
+
+  export type RecoveryPasswordCodeUpdateWithWhereUniqueWithoutUserInput = {
+    where: RecoveryPasswordCodeWhereUniqueInput
+    data: XOR<RecoveryPasswordCodeUpdateWithoutUserInput, RecoveryPasswordCodeUncheckedUpdateWithoutUserInput>
+  }
+
+  export type RecoveryPasswordCodeUpdateManyWithWhereWithoutUserInput = {
+    where: RecoveryPasswordCodeScalarWhereInput
+    data: XOR<RecoveryPasswordCodeUpdateManyMutationInput, RecoveryPasswordCodeUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type RecoveryPasswordCodeScalarWhereInput = {
+    AND?: RecoveryPasswordCodeScalarWhereInput | RecoveryPasswordCodeScalarWhereInput[]
+    OR?: RecoveryPasswordCodeScalarWhereInput[]
+    NOT?: RecoveryPasswordCodeScalarWhereInput | RecoveryPasswordCodeScalarWhereInput[]
+    id?: StringFilter<"RecoveryPasswordCode"> | string
+    recoveryCode?: StringFilter<"RecoveryPasswordCode"> | string
+    userId?: StringFilter<"RecoveryPasswordCode"> | string
+    isUsed?: BoolFilter<"RecoveryPasswordCode"> | boolean
+    createdAt?: DateTimeFilter<"RecoveryPasswordCode"> | Date | string
+    expiresAt?: DateTimeFilter<"RecoveryPasswordCode"> | Date | string
+  }
+
+  export type UserCreateWithoutRecoveryCodesInput = {
+    id?: string
+    email: string
+    name?: string | null
+    surName?: string | null
+    lastName?: string | null
+    login: string
+    password: string
+    createdAt?: Date | string
+    isActivated?: boolean
+    activatedEmailCode?: string
+  }
+
+  export type UserUncheckedCreateWithoutRecoveryCodesInput = {
+    id?: string
+    email: string
+    name?: string | null
+    surName?: string | null
+    lastName?: string | null
+    login: string
+    password: string
+    createdAt?: Date | string
+    isActivated?: boolean
+    activatedEmailCode?: string
+  }
+
+  export type UserCreateOrConnectWithoutRecoveryCodesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutRecoveryCodesInput, UserUncheckedCreateWithoutRecoveryCodesInput>
+  }
+
+  export type UserUpsertWithoutRecoveryCodesInput = {
+    update: XOR<UserUpdateWithoutRecoveryCodesInput, UserUncheckedUpdateWithoutRecoveryCodesInput>
+    create: XOR<UserCreateWithoutRecoveryCodesInput, UserUncheckedCreateWithoutRecoveryCodesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutRecoveryCodesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutRecoveryCodesInput, UserUncheckedUpdateWithoutRecoveryCodesInput>
+  }
+
+  export type UserUpdateWithoutRecoveryCodesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    surName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    login?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isActivated?: BoolFieldUpdateOperationsInput | boolean
+    activatedEmailCode?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type UserUncheckedUpdateWithoutRecoveryCodesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    surName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    login?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isActivated?: BoolFieldUpdateOperationsInput | boolean
+    activatedEmailCode?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type RecoveryPasswordCodeCreateManyUserInput = {
+    id?: string
+    recoveryCode: string
+    isUsed?: boolean
+    createdAt?: Date | string
+    expiresAt: Date | string
+  }
+
+  export type RecoveryPasswordCodeUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    recoveryCode?: StringFieldUpdateOperationsInput | string
+    isUsed?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RecoveryPasswordCodeUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    recoveryCode?: StringFieldUpdateOperationsInput | string
+    isUsed?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RecoveryPasswordCodeUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    recoveryCode?: StringFieldUpdateOperationsInput | string
+    isUsed?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

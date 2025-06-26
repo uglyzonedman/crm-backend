@@ -4,6 +4,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
+import { generatedCode } from 'src/utils/generatedCode';
 
 @Injectable()
 export class UserService {
@@ -35,5 +36,28 @@ export class UserService {
       message: 'Успешно',
       data: currentUser,
     };
+  }
+  async recoveryPasswordSendMessage(email: string) {
+    const findUser = await this.prisma.user.findFirst({
+      where: { email: email },
+    });
+
+    if (!findUser) {
+      throw new BadRequestException('Пользователь с таким email не найден');
+    }
+
+    const code: string = generatedCode(6);
+    const expiresAt = new Date(Date.now() + 2 * 60 * 1000);
+
+    await this.prisma.recoveryPasswordCode.create({
+      data: {
+        userId: findUser.id,
+        recoveryCode: code,
+        isUsed: false,
+        expiresAt: expiresAt,
+      },
+    });
+
+    return code;
   }
 }
