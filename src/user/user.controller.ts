@@ -12,9 +12,4 @@ export class UserController {
   async getMe(@User() user: { userId: string; login: string }) {
     return await this.userService.getMe(user.userId);
   }
-
-  @Post('recovery-password/:email')
-  async recoveryPassword(@Param('email') email: string) {
-    return this.userService.recoveryPasswordSendMessage(email);
-  }
 }

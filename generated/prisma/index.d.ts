@@ -19,10 +19,10 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  */
 export type User = $Result.DefaultSelection<Prisma.$UserPayload>
 /**
- * Model RecoveryPasswordCode
+ * Model AuthCode
  * 
  */
-export type RecoveryPasswordCode = $Result.DefaultSelection<Prisma.$RecoveryPasswordCodePayload>
+export type AuthCode = $Result.DefaultSelection<Prisma.$AuthCodePayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -160,14 +160,14 @@ export class PrismaClient<
   get user(): Prisma.UserDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.recoveryPasswordCode`: Exposes CRUD operations for the **RecoveryPasswordCode** model.
+   * `prisma.authCode`: Exposes CRUD operations for the **AuthCode** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more RecoveryPasswordCodes
-    * const recoveryPasswordCodes = await prisma.recoveryPasswordCode.findMany()
+    * // Fetch zero or more AuthCodes
+    * const authCodes = await prisma.authCode.findMany()
     * ```
     */
-  get recoveryPasswordCode(): Prisma.RecoveryPasswordCodeDelegate<ExtArgs, ClientOptions>;
+  get authCode(): Prisma.AuthCodeDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -609,7 +609,7 @@ export namespace Prisma {
 
   export const ModelName: {
     User: 'User',
-    RecoveryPasswordCode: 'RecoveryPasswordCode'
+    AuthCode: 'AuthCode'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -628,7 +628,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "recoveryPasswordCode"
+      modelProps: "user" | "authCode"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -706,77 +706,77 @@ export namespace Prisma {
           }
         }
       }
-      RecoveryPasswordCode: {
-        payload: Prisma.$RecoveryPasswordCodePayload<ExtArgs>
-        fields: Prisma.RecoveryPasswordCodeFieldRefs
+      AuthCode: {
+        payload: Prisma.$AuthCodePayload<ExtArgs>
+        fields: Prisma.AuthCodeFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.RecoveryPasswordCodeFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$RecoveryPasswordCodePayload> | null
+            args: Prisma.AuthCodeFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AuthCodePayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.RecoveryPasswordCodeFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$RecoveryPasswordCodePayload>
+            args: Prisma.AuthCodeFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AuthCodePayload>
           }
           findFirst: {
-            args: Prisma.RecoveryPasswordCodeFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$RecoveryPasswordCodePayload> | null
+            args: Prisma.AuthCodeFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AuthCodePayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.RecoveryPasswordCodeFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$RecoveryPasswordCodePayload>
+            args: Prisma.AuthCodeFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AuthCodePayload>
           }
           findMany: {
-            args: Prisma.RecoveryPasswordCodeFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$RecoveryPasswordCodePayload>[]
+            args: Prisma.AuthCodeFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AuthCodePayload>[]
           }
           create: {
-            args: Prisma.RecoveryPasswordCodeCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$RecoveryPasswordCodePayload>
+            args: Prisma.AuthCodeCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AuthCodePayload>
           }
           createMany: {
-            args: Prisma.RecoveryPasswordCodeCreateManyArgs<ExtArgs>
+            args: Prisma.AuthCodeCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.RecoveryPasswordCodeCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$RecoveryPasswordCodePayload>[]
+            args: Prisma.AuthCodeCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AuthCodePayload>[]
           }
           delete: {
-            args: Prisma.RecoveryPasswordCodeDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$RecoveryPasswordCodePayload>
+            args: Prisma.AuthCodeDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AuthCodePayload>
           }
           update: {
-            args: Prisma.RecoveryPasswordCodeUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$RecoveryPasswordCodePayload>
+            args: Prisma.AuthCodeUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AuthCodePayload>
           }
           deleteMany: {
-            args: Prisma.RecoveryPasswordCodeDeleteManyArgs<ExtArgs>
+            args: Prisma.AuthCodeDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.RecoveryPasswordCodeUpdateManyArgs<ExtArgs>
+            args: Prisma.AuthCodeUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateManyAndReturn: {
-            args: Prisma.RecoveryPasswordCodeUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$RecoveryPasswordCodePayload>[]
+            args: Prisma.AuthCodeUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AuthCodePayload>[]
           }
           upsert: {
-            args: Prisma.RecoveryPasswordCodeUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$RecoveryPasswordCodePayload>
+            args: Prisma.AuthCodeUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AuthCodePayload>
           }
           aggregate: {
-            args: Prisma.RecoveryPasswordCodeAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateRecoveryPasswordCode>
+            args: Prisma.AuthCodeAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAuthCode>
           }
           groupBy: {
-            args: Prisma.RecoveryPasswordCodeGroupByArgs<ExtArgs>
-            result: $Utils.Optional<RecoveryPasswordCodeGroupByOutputType>[]
+            args: Prisma.AuthCodeGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AuthCodeGroupByOutputType>[]
           }
           count: {
-            args: Prisma.RecoveryPasswordCodeCountArgs<ExtArgs>
-            result: $Utils.Optional<RecoveryPasswordCodeCountAggregateOutputType> | number
+            args: Prisma.AuthCodeCountArgs<ExtArgs>
+            result: $Utils.Optional<AuthCodeCountAggregateOutputType> | number
           }
         }
       }
@@ -865,7 +865,7 @@ export namespace Prisma {
   }
   export type GlobalOmitConfig = {
     user?: UserOmit
-    recoveryPasswordCode?: RecoveryPasswordCodeOmit
+    authCode?: AuthCodeOmit
   }
 
   /* Types for Logging */
@@ -960,11 +960,11 @@ export namespace Prisma {
    */
 
   export type UserCountOutputType = {
-    recoveryCodes: number
+    AuthCode: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    recoveryCodes?: boolean | UserCountOutputTypeCountRecoveryCodesArgs
+    AuthCode?: boolean | UserCountOutputTypeCountAuthCodeArgs
   }
 
   // Custom InputTypes
@@ -981,8 +981,8 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountRecoveryCodesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: RecoveryPasswordCodeWhereInput
+  export type UserCountOutputTypeCountAuthCodeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AuthCodeWhereInput
   }
 
 
@@ -1007,7 +1007,6 @@ export namespace Prisma {
     surName: string | null
     lastName: string | null
     login: string | null
-    password: string | null
     createdAt: Date | null
     isActivated: boolean | null
     activatedEmailCode: string | null
@@ -1020,7 +1019,6 @@ export namespace Prisma {
     surName: string | null
     lastName: string | null
     login: string | null
-    password: string | null
     createdAt: Date | null
     isActivated: boolean | null
     activatedEmailCode: string | null
@@ -1033,7 +1031,6 @@ export namespace Prisma {
     surName: number
     lastName: number
     login: number
-    password: number
     createdAt: number
     isActivated: number
     activatedEmailCode: number
@@ -1048,7 +1045,6 @@ export namespace Prisma {
     surName?: true
     lastName?: true
     login?: true
-    password?: true
     createdAt?: true
     isActivated?: true
     activatedEmailCode?: true
@@ -1061,7 +1057,6 @@ export namespace Prisma {
     surName?: true
     lastName?: true
     login?: true
-    password?: true
     createdAt?: true
     isActivated?: true
     activatedEmailCode?: true
@@ -1074,7 +1069,6 @@ export namespace Prisma {
     surName?: true
     lastName?: true
     login?: true
-    password?: true
     createdAt?: true
     isActivated?: true
     activatedEmailCode?: true
@@ -1160,7 +1154,6 @@ export namespace Prisma {
     surName: string | null
     lastName: string | null
     login: string
-    password: string
     createdAt: Date
     isActivated: boolean
     activatedEmailCode: string
@@ -1190,11 +1183,10 @@ export namespace Prisma {
     surName?: boolean
     lastName?: boolean
     login?: boolean
-    password?: boolean
     createdAt?: boolean
     isActivated?: boolean
     activatedEmailCode?: boolean
-    recoveryCodes?: boolean | User$recoveryCodesArgs<ExtArgs>
+    AuthCode?: boolean | User$AuthCodeArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1205,7 +1197,6 @@ export namespace Prisma {
     surName?: boolean
     lastName?: boolean
     login?: boolean
-    password?: boolean
     createdAt?: boolean
     isActivated?: boolean
     activatedEmailCode?: boolean
@@ -1218,7 +1209,6 @@ export namespace Prisma {
     surName?: boolean
     lastName?: boolean
     login?: boolean
-    password?: boolean
     createdAt?: boolean
     isActivated?: boolean
     activatedEmailCode?: boolean
@@ -1231,15 +1221,14 @@ export namespace Prisma {
     surName?: boolean
     lastName?: boolean
     login?: boolean
-    password?: boolean
     createdAt?: boolean
     isActivated?: boolean
     activatedEmailCode?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "name" | "surName" | "lastName" | "login" | "password" | "createdAt" | "isActivated" | "activatedEmailCode", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "name" | "surName" | "lastName" | "login" | "createdAt" | "isActivated" | "activatedEmailCode", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    recoveryCodes?: boolean | User$recoveryCodesArgs<ExtArgs>
+    AuthCode?: boolean | User$AuthCodeArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1248,7 +1237,7 @@ export namespace Prisma {
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
     objects: {
-      recoveryCodes: Prisma.$RecoveryPasswordCodePayload<ExtArgs>[]
+      AuthCode: Prisma.$AuthCodePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -1257,7 +1246,6 @@ export namespace Prisma {
       surName: string | null
       lastName: string | null
       login: string
-      password: string
       createdAt: Date
       isActivated: boolean
       activatedEmailCode: string
@@ -1655,7 +1643,7 @@ export namespace Prisma {
    */
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    recoveryCodes<T extends User$recoveryCodesArgs<ExtArgs> = {}>(args?: Subset<T, User$recoveryCodesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RecoveryPasswordCodePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    AuthCode<T extends User$AuthCodeArgs<ExtArgs> = {}>(args?: Subset<T, User$AuthCodeArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AuthCodePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1691,7 +1679,6 @@ export namespace Prisma {
     readonly surName: FieldRef<"User", 'String'>
     readonly lastName: FieldRef<"User", 'String'>
     readonly login: FieldRef<"User", 'String'>
-    readonly password: FieldRef<"User", 'String'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly isActivated: FieldRef<"User", 'Boolean'>
     readonly activatedEmailCode: FieldRef<"User", 'String'>
@@ -2083,27 +2070,27 @@ export namespace Prisma {
   }
 
   /**
-   * User.recoveryCodes
+   * User.AuthCode
    */
-  export type User$recoveryCodesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$AuthCodeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the RecoveryPasswordCode
+     * Select specific fields to fetch from the AuthCode
      */
-    select?: RecoveryPasswordCodeSelect<ExtArgs> | null
+    select?: AuthCodeSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the RecoveryPasswordCode
+     * Omit specific fields from the AuthCode
      */
-    omit?: RecoveryPasswordCodeOmit<ExtArgs> | null
+    omit?: AuthCodeOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: RecoveryPasswordCodeInclude<ExtArgs> | null
-    where?: RecoveryPasswordCodeWhereInput
-    orderBy?: RecoveryPasswordCodeOrderByWithRelationInput | RecoveryPasswordCodeOrderByWithRelationInput[]
-    cursor?: RecoveryPasswordCodeWhereUniqueInput
+    include?: AuthCodeInclude<ExtArgs> | null
+    where?: AuthCodeWhereInput
+    orderBy?: AuthCodeOrderByWithRelationInput | AuthCodeOrderByWithRelationInput[]
+    cursor?: AuthCodeWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: RecoveryPasswordCodeScalarFieldEnum | RecoveryPasswordCodeScalarFieldEnum[]
+    distinct?: AuthCodeScalarFieldEnum | AuthCodeScalarFieldEnum[]
   }
 
   /**
@@ -2126,362 +2113,408 @@ export namespace Prisma {
 
 
   /**
-   * Model RecoveryPasswordCode
+   * Model AuthCode
    */
 
-  export type AggregateRecoveryPasswordCode = {
-    _count: RecoveryPasswordCodeCountAggregateOutputType | null
-    _min: RecoveryPasswordCodeMinAggregateOutputType | null
-    _max: RecoveryPasswordCodeMaxAggregateOutputType | null
+  export type AggregateAuthCode = {
+    _count: AuthCodeCountAggregateOutputType | null
+    _avg: AuthCodeAvgAggregateOutputType | null
+    _sum: AuthCodeSumAggregateOutputType | null
+    _min: AuthCodeMinAggregateOutputType | null
+    _max: AuthCodeMaxAggregateOutputType | null
   }
 
-  export type RecoveryPasswordCodeMinAggregateOutputType = {
-    id: string | null
-    recoveryCode: string | null
+  export type AuthCodeAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type AuthCodeSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type AuthCodeMinAggregateOutputType = {
+    id: number | null
+    code: string | null
     userId: string | null
+    type: string | null
     isUsed: boolean | null
-    createdAt: Date | null
     expiresAt: Date | null
+    createdAt: Date | null
   }
 
-  export type RecoveryPasswordCodeMaxAggregateOutputType = {
-    id: string | null
-    recoveryCode: string | null
+  export type AuthCodeMaxAggregateOutputType = {
+    id: number | null
+    code: string | null
     userId: string | null
+    type: string | null
     isUsed: boolean | null
-    createdAt: Date | null
     expiresAt: Date | null
+    createdAt: Date | null
   }
 
-  export type RecoveryPasswordCodeCountAggregateOutputType = {
+  export type AuthCodeCountAggregateOutputType = {
     id: number
-    recoveryCode: number
+    code: number
     userId: number
+    type: number
     isUsed: number
-    createdAt: number
     expiresAt: number
+    createdAt: number
     _all: number
   }
 
 
-  export type RecoveryPasswordCodeMinAggregateInputType = {
+  export type AuthCodeAvgAggregateInputType = {
     id?: true
-    recoveryCode?: true
-    userId?: true
-    isUsed?: true
-    createdAt?: true
-    expiresAt?: true
   }
 
-  export type RecoveryPasswordCodeMaxAggregateInputType = {
+  export type AuthCodeSumAggregateInputType = {
     id?: true
-    recoveryCode?: true
-    userId?: true
-    isUsed?: true
-    createdAt?: true
-    expiresAt?: true
   }
 
-  export type RecoveryPasswordCodeCountAggregateInputType = {
+  export type AuthCodeMinAggregateInputType = {
     id?: true
-    recoveryCode?: true
+    code?: true
     userId?: true
+    type?: true
     isUsed?: true
-    createdAt?: true
     expiresAt?: true
+    createdAt?: true
+  }
+
+  export type AuthCodeMaxAggregateInputType = {
+    id?: true
+    code?: true
+    userId?: true
+    type?: true
+    isUsed?: true
+    expiresAt?: true
+    createdAt?: true
+  }
+
+  export type AuthCodeCountAggregateInputType = {
+    id?: true
+    code?: true
+    userId?: true
+    type?: true
+    isUsed?: true
+    expiresAt?: true
+    createdAt?: true
     _all?: true
   }
 
-  export type RecoveryPasswordCodeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type AuthCodeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which RecoveryPasswordCode to aggregate.
+     * Filter which AuthCode to aggregate.
      */
-    where?: RecoveryPasswordCodeWhereInput
+    where?: AuthCodeWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of RecoveryPasswordCodes to fetch.
+     * Determine the order of AuthCodes to fetch.
      */
-    orderBy?: RecoveryPasswordCodeOrderByWithRelationInput | RecoveryPasswordCodeOrderByWithRelationInput[]
+    orderBy?: AuthCodeOrderByWithRelationInput | AuthCodeOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: RecoveryPasswordCodeWhereUniqueInput
+    cursor?: AuthCodeWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` RecoveryPasswordCodes from the position of the cursor.
+     * Take `±n` AuthCodes from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` RecoveryPasswordCodes.
+     * Skip the first `n` AuthCodes.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned RecoveryPasswordCodes
+     * Count returned AuthCodes
     **/
-    _count?: true | RecoveryPasswordCodeCountAggregateInputType
+    _count?: true | AuthCodeCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: AuthCodeAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: AuthCodeSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: RecoveryPasswordCodeMinAggregateInputType
+    _min?: AuthCodeMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: RecoveryPasswordCodeMaxAggregateInputType
+    _max?: AuthCodeMaxAggregateInputType
   }
 
-  export type GetRecoveryPasswordCodeAggregateType<T extends RecoveryPasswordCodeAggregateArgs> = {
-        [P in keyof T & keyof AggregateRecoveryPasswordCode]: P extends '_count' | 'count'
+  export type GetAuthCodeAggregateType<T extends AuthCodeAggregateArgs> = {
+        [P in keyof T & keyof AggregateAuthCode]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateRecoveryPasswordCode[P]>
-      : GetScalarType<T[P], AggregateRecoveryPasswordCode[P]>
+        : GetScalarType<T[P], AggregateAuthCode[P]>
+      : GetScalarType<T[P], AggregateAuthCode[P]>
   }
 
 
 
 
-  export type RecoveryPasswordCodeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: RecoveryPasswordCodeWhereInput
-    orderBy?: RecoveryPasswordCodeOrderByWithAggregationInput | RecoveryPasswordCodeOrderByWithAggregationInput[]
-    by: RecoveryPasswordCodeScalarFieldEnum[] | RecoveryPasswordCodeScalarFieldEnum
-    having?: RecoveryPasswordCodeScalarWhereWithAggregatesInput
+  export type AuthCodeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AuthCodeWhereInput
+    orderBy?: AuthCodeOrderByWithAggregationInput | AuthCodeOrderByWithAggregationInput[]
+    by: AuthCodeScalarFieldEnum[] | AuthCodeScalarFieldEnum
+    having?: AuthCodeScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: RecoveryPasswordCodeCountAggregateInputType | true
-    _min?: RecoveryPasswordCodeMinAggregateInputType
-    _max?: RecoveryPasswordCodeMaxAggregateInputType
+    _count?: AuthCodeCountAggregateInputType | true
+    _avg?: AuthCodeAvgAggregateInputType
+    _sum?: AuthCodeSumAggregateInputType
+    _min?: AuthCodeMinAggregateInputType
+    _max?: AuthCodeMaxAggregateInputType
   }
 
-  export type RecoveryPasswordCodeGroupByOutputType = {
-    id: string
-    recoveryCode: string
+  export type AuthCodeGroupByOutputType = {
+    id: number
+    code: string
     userId: string
+    type: string
     isUsed: boolean
-    createdAt: Date
     expiresAt: Date
-    _count: RecoveryPasswordCodeCountAggregateOutputType | null
-    _min: RecoveryPasswordCodeMinAggregateOutputType | null
-    _max: RecoveryPasswordCodeMaxAggregateOutputType | null
+    createdAt: Date
+    _count: AuthCodeCountAggregateOutputType | null
+    _avg: AuthCodeAvgAggregateOutputType | null
+    _sum: AuthCodeSumAggregateOutputType | null
+    _min: AuthCodeMinAggregateOutputType | null
+    _max: AuthCodeMaxAggregateOutputType | null
   }
 
-  type GetRecoveryPasswordCodeGroupByPayload<T extends RecoveryPasswordCodeGroupByArgs> = Prisma.PrismaPromise<
+  type GetAuthCodeGroupByPayload<T extends AuthCodeGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<RecoveryPasswordCodeGroupByOutputType, T['by']> &
+      PickEnumerable<AuthCodeGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof RecoveryPasswordCodeGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof AuthCodeGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], RecoveryPasswordCodeGroupByOutputType[P]>
-            : GetScalarType<T[P], RecoveryPasswordCodeGroupByOutputType[P]>
+              : GetScalarType<T[P], AuthCodeGroupByOutputType[P]>
+            : GetScalarType<T[P], AuthCodeGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type RecoveryPasswordCodeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type AuthCodeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    recoveryCode?: boolean
+    code?: boolean
     userId?: boolean
+    type?: boolean
     isUsed?: boolean
-    createdAt?: boolean
     expiresAt?: boolean
+    createdAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["recoveryPasswordCode"]>
+  }, ExtArgs["result"]["authCode"]>
 
-  export type RecoveryPasswordCodeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type AuthCodeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    recoveryCode?: boolean
+    code?: boolean
     userId?: boolean
+    type?: boolean
     isUsed?: boolean
-    createdAt?: boolean
     expiresAt?: boolean
+    createdAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["recoveryPasswordCode"]>
+  }, ExtArgs["result"]["authCode"]>
 
-  export type RecoveryPasswordCodeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type AuthCodeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    recoveryCode?: boolean
+    code?: boolean
     userId?: boolean
+    type?: boolean
     isUsed?: boolean
-    createdAt?: boolean
     expiresAt?: boolean
+    createdAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["recoveryPasswordCode"]>
+  }, ExtArgs["result"]["authCode"]>
 
-  export type RecoveryPasswordCodeSelectScalar = {
+  export type AuthCodeSelectScalar = {
     id?: boolean
-    recoveryCode?: boolean
+    code?: boolean
     userId?: boolean
+    type?: boolean
     isUsed?: boolean
-    createdAt?: boolean
     expiresAt?: boolean
+    createdAt?: boolean
   }
 
-  export type RecoveryPasswordCodeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "recoveryCode" | "userId" | "isUsed" | "createdAt" | "expiresAt", ExtArgs["result"]["recoveryPasswordCode"]>
-  export type RecoveryPasswordCodeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type AuthCodeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "code" | "userId" | "type" | "isUsed" | "expiresAt" | "createdAt", ExtArgs["result"]["authCode"]>
+  export type AuthCodeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
-  export type RecoveryPasswordCodeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type AuthCodeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
-  export type RecoveryPasswordCodeIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type AuthCodeIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
 
-  export type $RecoveryPasswordCodePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "RecoveryPasswordCode"
+  export type $AuthCodePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "AuthCode"
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
-      id: string
-      recoveryCode: string
+      id: number
+      code: string
       userId: string
+      type: string
       isUsed: boolean
-      createdAt: Date
       expiresAt: Date
-    }, ExtArgs["result"]["recoveryPasswordCode"]>
+      createdAt: Date
+    }, ExtArgs["result"]["authCode"]>
     composites: {}
   }
 
-  type RecoveryPasswordCodeGetPayload<S extends boolean | null | undefined | RecoveryPasswordCodeDefaultArgs> = $Result.GetResult<Prisma.$RecoveryPasswordCodePayload, S>
+  type AuthCodeGetPayload<S extends boolean | null | undefined | AuthCodeDefaultArgs> = $Result.GetResult<Prisma.$AuthCodePayload, S>
 
-  type RecoveryPasswordCodeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<RecoveryPasswordCodeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: RecoveryPasswordCodeCountAggregateInputType | true
+  type AuthCodeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<AuthCodeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: AuthCodeCountAggregateInputType | true
     }
 
-  export interface RecoveryPasswordCodeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['RecoveryPasswordCode'], meta: { name: 'RecoveryPasswordCode' } }
+  export interface AuthCodeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['AuthCode'], meta: { name: 'AuthCode' } }
     /**
-     * Find zero or one RecoveryPasswordCode that matches the filter.
-     * @param {RecoveryPasswordCodeFindUniqueArgs} args - Arguments to find a RecoveryPasswordCode
+     * Find zero or one AuthCode that matches the filter.
+     * @param {AuthCodeFindUniqueArgs} args - Arguments to find a AuthCode
      * @example
-     * // Get one RecoveryPasswordCode
-     * const recoveryPasswordCode = await prisma.recoveryPasswordCode.findUnique({
+     * // Get one AuthCode
+     * const authCode = await prisma.authCode.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends RecoveryPasswordCodeFindUniqueArgs>(args: SelectSubset<T, RecoveryPasswordCodeFindUniqueArgs<ExtArgs>>): Prisma__RecoveryPasswordCodeClient<$Result.GetResult<Prisma.$RecoveryPasswordCodePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends AuthCodeFindUniqueArgs>(args: SelectSubset<T, AuthCodeFindUniqueArgs<ExtArgs>>): Prisma__AuthCodeClient<$Result.GetResult<Prisma.$AuthCodePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find one RecoveryPasswordCode that matches the filter or throw an error with `error.code='P2025'`
+     * Find one AuthCode that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {RecoveryPasswordCodeFindUniqueOrThrowArgs} args - Arguments to find a RecoveryPasswordCode
+     * @param {AuthCodeFindUniqueOrThrowArgs} args - Arguments to find a AuthCode
      * @example
-     * // Get one RecoveryPasswordCode
-     * const recoveryPasswordCode = await prisma.recoveryPasswordCode.findUniqueOrThrow({
+     * // Get one AuthCode
+     * const authCode = await prisma.authCode.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends RecoveryPasswordCodeFindUniqueOrThrowArgs>(args: SelectSubset<T, RecoveryPasswordCodeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__RecoveryPasswordCodeClient<$Result.GetResult<Prisma.$RecoveryPasswordCodePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends AuthCodeFindUniqueOrThrowArgs>(args: SelectSubset<T, AuthCodeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AuthCodeClient<$Result.GetResult<Prisma.$AuthCodePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first RecoveryPasswordCode that matches the filter.
+     * Find the first AuthCode that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {RecoveryPasswordCodeFindFirstArgs} args - Arguments to find a RecoveryPasswordCode
+     * @param {AuthCodeFindFirstArgs} args - Arguments to find a AuthCode
      * @example
-     * // Get one RecoveryPasswordCode
-     * const recoveryPasswordCode = await prisma.recoveryPasswordCode.findFirst({
+     * // Get one AuthCode
+     * const authCode = await prisma.authCode.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends RecoveryPasswordCodeFindFirstArgs>(args?: SelectSubset<T, RecoveryPasswordCodeFindFirstArgs<ExtArgs>>): Prisma__RecoveryPasswordCodeClient<$Result.GetResult<Prisma.$RecoveryPasswordCodePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends AuthCodeFindFirstArgs>(args?: SelectSubset<T, AuthCodeFindFirstArgs<ExtArgs>>): Prisma__AuthCodeClient<$Result.GetResult<Prisma.$AuthCodePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first RecoveryPasswordCode that matches the filter or
+     * Find the first AuthCode that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {RecoveryPasswordCodeFindFirstOrThrowArgs} args - Arguments to find a RecoveryPasswordCode
+     * @param {AuthCodeFindFirstOrThrowArgs} args - Arguments to find a AuthCode
      * @example
-     * // Get one RecoveryPasswordCode
-     * const recoveryPasswordCode = await prisma.recoveryPasswordCode.findFirstOrThrow({
+     * // Get one AuthCode
+     * const authCode = await prisma.authCode.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends RecoveryPasswordCodeFindFirstOrThrowArgs>(args?: SelectSubset<T, RecoveryPasswordCodeFindFirstOrThrowArgs<ExtArgs>>): Prisma__RecoveryPasswordCodeClient<$Result.GetResult<Prisma.$RecoveryPasswordCodePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends AuthCodeFindFirstOrThrowArgs>(args?: SelectSubset<T, AuthCodeFindFirstOrThrowArgs<ExtArgs>>): Prisma__AuthCodeClient<$Result.GetResult<Prisma.$AuthCodePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find zero or more RecoveryPasswordCodes that matches the filter.
+     * Find zero or more AuthCodes that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {RecoveryPasswordCodeFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {AuthCodeFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all RecoveryPasswordCodes
-     * const recoveryPasswordCodes = await prisma.recoveryPasswordCode.findMany()
+     * // Get all AuthCodes
+     * const authCodes = await prisma.authCode.findMany()
      * 
-     * // Get first 10 RecoveryPasswordCodes
-     * const recoveryPasswordCodes = await prisma.recoveryPasswordCode.findMany({ take: 10 })
+     * // Get first 10 AuthCodes
+     * const authCodes = await prisma.authCode.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const recoveryPasswordCodeWithIdOnly = await prisma.recoveryPasswordCode.findMany({ select: { id: true } })
+     * const authCodeWithIdOnly = await prisma.authCode.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends RecoveryPasswordCodeFindManyArgs>(args?: SelectSubset<T, RecoveryPasswordCodeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RecoveryPasswordCodePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends AuthCodeFindManyArgs>(args?: SelectSubset<T, AuthCodeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AuthCodePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
-     * Create a RecoveryPasswordCode.
-     * @param {RecoveryPasswordCodeCreateArgs} args - Arguments to create a RecoveryPasswordCode.
+     * Create a AuthCode.
+     * @param {AuthCodeCreateArgs} args - Arguments to create a AuthCode.
      * @example
-     * // Create one RecoveryPasswordCode
-     * const RecoveryPasswordCode = await prisma.recoveryPasswordCode.create({
+     * // Create one AuthCode
+     * const AuthCode = await prisma.authCode.create({
      *   data: {
-     *     // ... data to create a RecoveryPasswordCode
+     *     // ... data to create a AuthCode
      *   }
      * })
      * 
      */
-    create<T extends RecoveryPasswordCodeCreateArgs>(args: SelectSubset<T, RecoveryPasswordCodeCreateArgs<ExtArgs>>): Prisma__RecoveryPasswordCodeClient<$Result.GetResult<Prisma.$RecoveryPasswordCodePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends AuthCodeCreateArgs>(args: SelectSubset<T, AuthCodeCreateArgs<ExtArgs>>): Prisma__AuthCodeClient<$Result.GetResult<Prisma.$AuthCodePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Create many RecoveryPasswordCodes.
-     * @param {RecoveryPasswordCodeCreateManyArgs} args - Arguments to create many RecoveryPasswordCodes.
+     * Create many AuthCodes.
+     * @param {AuthCodeCreateManyArgs} args - Arguments to create many AuthCodes.
      * @example
-     * // Create many RecoveryPasswordCodes
-     * const recoveryPasswordCode = await prisma.recoveryPasswordCode.createMany({
+     * // Create many AuthCodes
+     * const authCode = await prisma.authCode.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends RecoveryPasswordCodeCreateManyArgs>(args?: SelectSubset<T, RecoveryPasswordCodeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends AuthCodeCreateManyArgs>(args?: SelectSubset<T, AuthCodeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create many RecoveryPasswordCodes and returns the data saved in the database.
-     * @param {RecoveryPasswordCodeCreateManyAndReturnArgs} args - Arguments to create many RecoveryPasswordCodes.
+     * Create many AuthCodes and returns the data saved in the database.
+     * @param {AuthCodeCreateManyAndReturnArgs} args - Arguments to create many AuthCodes.
      * @example
-     * // Create many RecoveryPasswordCodes
-     * const recoveryPasswordCode = await prisma.recoveryPasswordCode.createManyAndReturn({
+     * // Create many AuthCodes
+     * const authCode = await prisma.authCode.createManyAndReturn({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      * 
-     * // Create many RecoveryPasswordCodes and only return the `id`
-     * const recoveryPasswordCodeWithIdOnly = await prisma.recoveryPasswordCode.createManyAndReturn({
+     * // Create many AuthCodes and only return the `id`
+     * const authCodeWithIdOnly = await prisma.authCode.createManyAndReturn({
      *   select: { id: true },
      *   data: [
      *     // ... provide data here
@@ -2491,28 +2524,28 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends RecoveryPasswordCodeCreateManyAndReturnArgs>(args?: SelectSubset<T, RecoveryPasswordCodeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RecoveryPasswordCodePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+    createManyAndReturn<T extends AuthCodeCreateManyAndReturnArgs>(args?: SelectSubset<T, AuthCodeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AuthCodePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Delete a RecoveryPasswordCode.
-     * @param {RecoveryPasswordCodeDeleteArgs} args - Arguments to delete one RecoveryPasswordCode.
+     * Delete a AuthCode.
+     * @param {AuthCodeDeleteArgs} args - Arguments to delete one AuthCode.
      * @example
-     * // Delete one RecoveryPasswordCode
-     * const RecoveryPasswordCode = await prisma.recoveryPasswordCode.delete({
+     * // Delete one AuthCode
+     * const AuthCode = await prisma.authCode.delete({
      *   where: {
-     *     // ... filter to delete one RecoveryPasswordCode
+     *     // ... filter to delete one AuthCode
      *   }
      * })
      * 
      */
-    delete<T extends RecoveryPasswordCodeDeleteArgs>(args: SelectSubset<T, RecoveryPasswordCodeDeleteArgs<ExtArgs>>): Prisma__RecoveryPasswordCodeClient<$Result.GetResult<Prisma.$RecoveryPasswordCodePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends AuthCodeDeleteArgs>(args: SelectSubset<T, AuthCodeDeleteArgs<ExtArgs>>): Prisma__AuthCodeClient<$Result.GetResult<Prisma.$AuthCodePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Update one RecoveryPasswordCode.
-     * @param {RecoveryPasswordCodeUpdateArgs} args - Arguments to update one RecoveryPasswordCode.
+     * Update one AuthCode.
+     * @param {AuthCodeUpdateArgs} args - Arguments to update one AuthCode.
      * @example
-     * // Update one RecoveryPasswordCode
-     * const recoveryPasswordCode = await prisma.recoveryPasswordCode.update({
+     * // Update one AuthCode
+     * const authCode = await prisma.authCode.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -2522,30 +2555,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends RecoveryPasswordCodeUpdateArgs>(args: SelectSubset<T, RecoveryPasswordCodeUpdateArgs<ExtArgs>>): Prisma__RecoveryPasswordCodeClient<$Result.GetResult<Prisma.$RecoveryPasswordCodePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends AuthCodeUpdateArgs>(args: SelectSubset<T, AuthCodeUpdateArgs<ExtArgs>>): Prisma__AuthCodeClient<$Result.GetResult<Prisma.$AuthCodePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Delete zero or more RecoveryPasswordCodes.
-     * @param {RecoveryPasswordCodeDeleteManyArgs} args - Arguments to filter RecoveryPasswordCodes to delete.
+     * Delete zero or more AuthCodes.
+     * @param {AuthCodeDeleteManyArgs} args - Arguments to filter AuthCodes to delete.
      * @example
-     * // Delete a few RecoveryPasswordCodes
-     * const { count } = await prisma.recoveryPasswordCode.deleteMany({
+     * // Delete a few AuthCodes
+     * const { count } = await prisma.authCode.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends RecoveryPasswordCodeDeleteManyArgs>(args?: SelectSubset<T, RecoveryPasswordCodeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends AuthCodeDeleteManyArgs>(args?: SelectSubset<T, AuthCodeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more RecoveryPasswordCodes.
+     * Update zero or more AuthCodes.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {RecoveryPasswordCodeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {AuthCodeUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many RecoveryPasswordCodes
-     * const recoveryPasswordCode = await prisma.recoveryPasswordCode.updateMany({
+     * // Update many AuthCodes
+     * const authCode = await prisma.authCode.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -2555,14 +2588,14 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends RecoveryPasswordCodeUpdateManyArgs>(args: SelectSubset<T, RecoveryPasswordCodeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends AuthCodeUpdateManyArgs>(args: SelectSubset<T, AuthCodeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more RecoveryPasswordCodes and returns the data updated in the database.
-     * @param {RecoveryPasswordCodeUpdateManyAndReturnArgs} args - Arguments to update many RecoveryPasswordCodes.
+     * Update zero or more AuthCodes and returns the data updated in the database.
+     * @param {AuthCodeUpdateManyAndReturnArgs} args - Arguments to update many AuthCodes.
      * @example
-     * // Update many RecoveryPasswordCodes
-     * const recoveryPasswordCode = await prisma.recoveryPasswordCode.updateManyAndReturn({
+     * // Update many AuthCodes
+     * const authCode = await prisma.authCode.updateManyAndReturn({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -2571,8 +2604,8 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more RecoveryPasswordCodes and only return the `id`
-     * const recoveryPasswordCodeWithIdOnly = await prisma.recoveryPasswordCode.updateManyAndReturn({
+     * // Update zero or more AuthCodes and only return the `id`
+     * const authCodeWithIdOnly = await prisma.authCode.updateManyAndReturn({
      *   select: { id: true },
      *   where: {
      *     // ... provide filter here
@@ -2585,56 +2618,56 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends RecoveryPasswordCodeUpdateManyAndReturnArgs>(args: SelectSubset<T, RecoveryPasswordCodeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RecoveryPasswordCodePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+    updateManyAndReturn<T extends AuthCodeUpdateManyAndReturnArgs>(args: SelectSubset<T, AuthCodeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AuthCodePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Create or update one RecoveryPasswordCode.
-     * @param {RecoveryPasswordCodeUpsertArgs} args - Arguments to update or create a RecoveryPasswordCode.
+     * Create or update one AuthCode.
+     * @param {AuthCodeUpsertArgs} args - Arguments to update or create a AuthCode.
      * @example
-     * // Update or create a RecoveryPasswordCode
-     * const recoveryPasswordCode = await prisma.recoveryPasswordCode.upsert({
+     * // Update or create a AuthCode
+     * const authCode = await prisma.authCode.upsert({
      *   create: {
-     *     // ... data to create a RecoveryPasswordCode
+     *     // ... data to create a AuthCode
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the RecoveryPasswordCode we want to update
+     *     // ... the filter for the AuthCode we want to update
      *   }
      * })
      */
-    upsert<T extends RecoveryPasswordCodeUpsertArgs>(args: SelectSubset<T, RecoveryPasswordCodeUpsertArgs<ExtArgs>>): Prisma__RecoveryPasswordCodeClient<$Result.GetResult<Prisma.$RecoveryPasswordCodePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    upsert<T extends AuthCodeUpsertArgs>(args: SelectSubset<T, AuthCodeUpsertArgs<ExtArgs>>): Prisma__AuthCodeClient<$Result.GetResult<Prisma.$AuthCodePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
-     * Count the number of RecoveryPasswordCodes.
+     * Count the number of AuthCodes.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {RecoveryPasswordCodeCountArgs} args - Arguments to filter RecoveryPasswordCodes to count.
+     * @param {AuthCodeCountArgs} args - Arguments to filter AuthCodes to count.
      * @example
-     * // Count the number of RecoveryPasswordCodes
-     * const count = await prisma.recoveryPasswordCode.count({
+     * // Count the number of AuthCodes
+     * const count = await prisma.authCode.count({
      *   where: {
-     *     // ... the filter for the RecoveryPasswordCodes we want to count
+     *     // ... the filter for the AuthCodes we want to count
      *   }
      * })
     **/
-    count<T extends RecoveryPasswordCodeCountArgs>(
-      args?: Subset<T, RecoveryPasswordCodeCountArgs>,
+    count<T extends AuthCodeCountArgs>(
+      args?: Subset<T, AuthCodeCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], RecoveryPasswordCodeCountAggregateOutputType>
+          : GetScalarType<T['select'], AuthCodeCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a RecoveryPasswordCode.
+     * Allows you to perform aggregations operations on a AuthCode.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {RecoveryPasswordCodeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {AuthCodeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -2654,13 +2687,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends RecoveryPasswordCodeAggregateArgs>(args: Subset<T, RecoveryPasswordCodeAggregateArgs>): Prisma.PrismaPromise<GetRecoveryPasswordCodeAggregateType<T>>
+    aggregate<T extends AuthCodeAggregateArgs>(args: Subset<T, AuthCodeAggregateArgs>): Prisma.PrismaPromise<GetAuthCodeAggregateType<T>>
 
     /**
-     * Group by RecoveryPasswordCode.
+     * Group by AuthCode.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {RecoveryPasswordCodeGroupByArgs} args - Group by arguments.
+     * @param {AuthCodeGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -2675,14 +2708,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends RecoveryPasswordCodeGroupByArgs,
+      T extends AuthCodeGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: RecoveryPasswordCodeGroupByArgs['orderBy'] }
-        : { orderBy?: RecoveryPasswordCodeGroupByArgs['orderBy'] },
+        ? { orderBy: AuthCodeGroupByArgs['orderBy'] }
+        : { orderBy?: AuthCodeGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -2731,20 +2764,20 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, RecoveryPasswordCodeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetRecoveryPasswordCodeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, AuthCodeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAuthCodeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the RecoveryPasswordCode model
+   * Fields of the AuthCode model
    */
-  readonly fields: RecoveryPasswordCodeFieldRefs;
+  readonly fields: AuthCodeFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for RecoveryPasswordCode.
+   * The delegate class that acts as a "Promise-like" for AuthCode.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__RecoveryPasswordCodeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__AuthCodeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
@@ -2773,426 +2806,427 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the RecoveryPasswordCode model
+   * Fields of the AuthCode model
    */
-  interface RecoveryPasswordCodeFieldRefs {
-    readonly id: FieldRef<"RecoveryPasswordCode", 'String'>
-    readonly recoveryCode: FieldRef<"RecoveryPasswordCode", 'String'>
-    readonly userId: FieldRef<"RecoveryPasswordCode", 'String'>
-    readonly isUsed: FieldRef<"RecoveryPasswordCode", 'Boolean'>
-    readonly createdAt: FieldRef<"RecoveryPasswordCode", 'DateTime'>
-    readonly expiresAt: FieldRef<"RecoveryPasswordCode", 'DateTime'>
+  interface AuthCodeFieldRefs {
+    readonly id: FieldRef<"AuthCode", 'Int'>
+    readonly code: FieldRef<"AuthCode", 'String'>
+    readonly userId: FieldRef<"AuthCode", 'String'>
+    readonly type: FieldRef<"AuthCode", 'String'>
+    readonly isUsed: FieldRef<"AuthCode", 'Boolean'>
+    readonly expiresAt: FieldRef<"AuthCode", 'DateTime'>
+    readonly createdAt: FieldRef<"AuthCode", 'DateTime'>
   }
     
 
   // Custom InputTypes
   /**
-   * RecoveryPasswordCode findUnique
+   * AuthCode findUnique
    */
-  export type RecoveryPasswordCodeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type AuthCodeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the RecoveryPasswordCode
+     * Select specific fields to fetch from the AuthCode
      */
-    select?: RecoveryPasswordCodeSelect<ExtArgs> | null
+    select?: AuthCodeSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the RecoveryPasswordCode
+     * Omit specific fields from the AuthCode
      */
-    omit?: RecoveryPasswordCodeOmit<ExtArgs> | null
+    omit?: AuthCodeOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: RecoveryPasswordCodeInclude<ExtArgs> | null
+    include?: AuthCodeInclude<ExtArgs> | null
     /**
-     * Filter, which RecoveryPasswordCode to fetch.
+     * Filter, which AuthCode to fetch.
      */
-    where: RecoveryPasswordCodeWhereUniqueInput
+    where: AuthCodeWhereUniqueInput
   }
 
   /**
-   * RecoveryPasswordCode findUniqueOrThrow
+   * AuthCode findUniqueOrThrow
    */
-  export type RecoveryPasswordCodeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type AuthCodeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the RecoveryPasswordCode
+     * Select specific fields to fetch from the AuthCode
      */
-    select?: RecoveryPasswordCodeSelect<ExtArgs> | null
+    select?: AuthCodeSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the RecoveryPasswordCode
+     * Omit specific fields from the AuthCode
      */
-    omit?: RecoveryPasswordCodeOmit<ExtArgs> | null
+    omit?: AuthCodeOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: RecoveryPasswordCodeInclude<ExtArgs> | null
+    include?: AuthCodeInclude<ExtArgs> | null
     /**
-     * Filter, which RecoveryPasswordCode to fetch.
+     * Filter, which AuthCode to fetch.
      */
-    where: RecoveryPasswordCodeWhereUniqueInput
+    where: AuthCodeWhereUniqueInput
   }
 
   /**
-   * RecoveryPasswordCode findFirst
+   * AuthCode findFirst
    */
-  export type RecoveryPasswordCodeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type AuthCodeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the RecoveryPasswordCode
+     * Select specific fields to fetch from the AuthCode
      */
-    select?: RecoveryPasswordCodeSelect<ExtArgs> | null
+    select?: AuthCodeSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the RecoveryPasswordCode
+     * Omit specific fields from the AuthCode
      */
-    omit?: RecoveryPasswordCodeOmit<ExtArgs> | null
+    omit?: AuthCodeOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: RecoveryPasswordCodeInclude<ExtArgs> | null
+    include?: AuthCodeInclude<ExtArgs> | null
     /**
-     * Filter, which RecoveryPasswordCode to fetch.
+     * Filter, which AuthCode to fetch.
      */
-    where?: RecoveryPasswordCodeWhereInput
+    where?: AuthCodeWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of RecoveryPasswordCodes to fetch.
+     * Determine the order of AuthCodes to fetch.
      */
-    orderBy?: RecoveryPasswordCodeOrderByWithRelationInput | RecoveryPasswordCodeOrderByWithRelationInput[]
+    orderBy?: AuthCodeOrderByWithRelationInput | AuthCodeOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for RecoveryPasswordCodes.
+     * Sets the position for searching for AuthCodes.
      */
-    cursor?: RecoveryPasswordCodeWhereUniqueInput
+    cursor?: AuthCodeWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` RecoveryPasswordCodes from the position of the cursor.
+     * Take `±n` AuthCodes from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` RecoveryPasswordCodes.
+     * Skip the first `n` AuthCodes.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of RecoveryPasswordCodes.
+     * Filter by unique combinations of AuthCodes.
      */
-    distinct?: RecoveryPasswordCodeScalarFieldEnum | RecoveryPasswordCodeScalarFieldEnum[]
+    distinct?: AuthCodeScalarFieldEnum | AuthCodeScalarFieldEnum[]
   }
 
   /**
-   * RecoveryPasswordCode findFirstOrThrow
+   * AuthCode findFirstOrThrow
    */
-  export type RecoveryPasswordCodeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type AuthCodeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the RecoveryPasswordCode
+     * Select specific fields to fetch from the AuthCode
      */
-    select?: RecoveryPasswordCodeSelect<ExtArgs> | null
+    select?: AuthCodeSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the RecoveryPasswordCode
+     * Omit specific fields from the AuthCode
      */
-    omit?: RecoveryPasswordCodeOmit<ExtArgs> | null
+    omit?: AuthCodeOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: RecoveryPasswordCodeInclude<ExtArgs> | null
+    include?: AuthCodeInclude<ExtArgs> | null
     /**
-     * Filter, which RecoveryPasswordCode to fetch.
+     * Filter, which AuthCode to fetch.
      */
-    where?: RecoveryPasswordCodeWhereInput
+    where?: AuthCodeWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of RecoveryPasswordCodes to fetch.
+     * Determine the order of AuthCodes to fetch.
      */
-    orderBy?: RecoveryPasswordCodeOrderByWithRelationInput | RecoveryPasswordCodeOrderByWithRelationInput[]
+    orderBy?: AuthCodeOrderByWithRelationInput | AuthCodeOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for RecoveryPasswordCodes.
+     * Sets the position for searching for AuthCodes.
      */
-    cursor?: RecoveryPasswordCodeWhereUniqueInput
+    cursor?: AuthCodeWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` RecoveryPasswordCodes from the position of the cursor.
+     * Take `±n` AuthCodes from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` RecoveryPasswordCodes.
+     * Skip the first `n` AuthCodes.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of RecoveryPasswordCodes.
+     * Filter by unique combinations of AuthCodes.
      */
-    distinct?: RecoveryPasswordCodeScalarFieldEnum | RecoveryPasswordCodeScalarFieldEnum[]
+    distinct?: AuthCodeScalarFieldEnum | AuthCodeScalarFieldEnum[]
   }
 
   /**
-   * RecoveryPasswordCode findMany
+   * AuthCode findMany
    */
-  export type RecoveryPasswordCodeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type AuthCodeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the RecoveryPasswordCode
+     * Select specific fields to fetch from the AuthCode
      */
-    select?: RecoveryPasswordCodeSelect<ExtArgs> | null
+    select?: AuthCodeSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the RecoveryPasswordCode
+     * Omit specific fields from the AuthCode
      */
-    omit?: RecoveryPasswordCodeOmit<ExtArgs> | null
+    omit?: AuthCodeOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: RecoveryPasswordCodeInclude<ExtArgs> | null
+    include?: AuthCodeInclude<ExtArgs> | null
     /**
-     * Filter, which RecoveryPasswordCodes to fetch.
+     * Filter, which AuthCodes to fetch.
      */
-    where?: RecoveryPasswordCodeWhereInput
+    where?: AuthCodeWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of RecoveryPasswordCodes to fetch.
+     * Determine the order of AuthCodes to fetch.
      */
-    orderBy?: RecoveryPasswordCodeOrderByWithRelationInput | RecoveryPasswordCodeOrderByWithRelationInput[]
+    orderBy?: AuthCodeOrderByWithRelationInput | AuthCodeOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing RecoveryPasswordCodes.
+     * Sets the position for listing AuthCodes.
      */
-    cursor?: RecoveryPasswordCodeWhereUniqueInput
+    cursor?: AuthCodeWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` RecoveryPasswordCodes from the position of the cursor.
+     * Take `±n` AuthCodes from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` RecoveryPasswordCodes.
+     * Skip the first `n` AuthCodes.
      */
     skip?: number
-    distinct?: RecoveryPasswordCodeScalarFieldEnum | RecoveryPasswordCodeScalarFieldEnum[]
+    distinct?: AuthCodeScalarFieldEnum | AuthCodeScalarFieldEnum[]
   }
 
   /**
-   * RecoveryPasswordCode create
+   * AuthCode create
    */
-  export type RecoveryPasswordCodeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type AuthCodeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the RecoveryPasswordCode
+     * Select specific fields to fetch from the AuthCode
      */
-    select?: RecoveryPasswordCodeSelect<ExtArgs> | null
+    select?: AuthCodeSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the RecoveryPasswordCode
+     * Omit specific fields from the AuthCode
      */
-    omit?: RecoveryPasswordCodeOmit<ExtArgs> | null
+    omit?: AuthCodeOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: RecoveryPasswordCodeInclude<ExtArgs> | null
+    include?: AuthCodeInclude<ExtArgs> | null
     /**
-     * The data needed to create a RecoveryPasswordCode.
+     * The data needed to create a AuthCode.
      */
-    data: XOR<RecoveryPasswordCodeCreateInput, RecoveryPasswordCodeUncheckedCreateInput>
+    data: XOR<AuthCodeCreateInput, AuthCodeUncheckedCreateInput>
   }
 
   /**
-   * RecoveryPasswordCode createMany
+   * AuthCode createMany
    */
-  export type RecoveryPasswordCodeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type AuthCodeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many RecoveryPasswordCodes.
+     * The data used to create many AuthCodes.
      */
-    data: RecoveryPasswordCodeCreateManyInput | RecoveryPasswordCodeCreateManyInput[]
+    data: AuthCodeCreateManyInput | AuthCodeCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * RecoveryPasswordCode createManyAndReturn
+   * AuthCode createManyAndReturn
    */
-  export type RecoveryPasswordCodeCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type AuthCodeCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the RecoveryPasswordCode
+     * Select specific fields to fetch from the AuthCode
      */
-    select?: RecoveryPasswordCodeSelectCreateManyAndReturn<ExtArgs> | null
+    select?: AuthCodeSelectCreateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the RecoveryPasswordCode
+     * Omit specific fields from the AuthCode
      */
-    omit?: RecoveryPasswordCodeOmit<ExtArgs> | null
+    omit?: AuthCodeOmit<ExtArgs> | null
     /**
-     * The data used to create many RecoveryPasswordCodes.
+     * The data used to create many AuthCodes.
      */
-    data: RecoveryPasswordCodeCreateManyInput | RecoveryPasswordCodeCreateManyInput[]
+    data: AuthCodeCreateManyInput | AuthCodeCreateManyInput[]
     skipDuplicates?: boolean
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: RecoveryPasswordCodeIncludeCreateManyAndReturn<ExtArgs> | null
+    include?: AuthCodeIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * RecoveryPasswordCode update
+   * AuthCode update
    */
-  export type RecoveryPasswordCodeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type AuthCodeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the RecoveryPasswordCode
+     * Select specific fields to fetch from the AuthCode
      */
-    select?: RecoveryPasswordCodeSelect<ExtArgs> | null
+    select?: AuthCodeSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the RecoveryPasswordCode
+     * Omit specific fields from the AuthCode
      */
-    omit?: RecoveryPasswordCodeOmit<ExtArgs> | null
+    omit?: AuthCodeOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: RecoveryPasswordCodeInclude<ExtArgs> | null
+    include?: AuthCodeInclude<ExtArgs> | null
     /**
-     * The data needed to update a RecoveryPasswordCode.
+     * The data needed to update a AuthCode.
      */
-    data: XOR<RecoveryPasswordCodeUpdateInput, RecoveryPasswordCodeUncheckedUpdateInput>
+    data: XOR<AuthCodeUpdateInput, AuthCodeUncheckedUpdateInput>
     /**
-     * Choose, which RecoveryPasswordCode to update.
+     * Choose, which AuthCode to update.
      */
-    where: RecoveryPasswordCodeWhereUniqueInput
+    where: AuthCodeWhereUniqueInput
   }
 
   /**
-   * RecoveryPasswordCode updateMany
+   * AuthCode updateMany
    */
-  export type RecoveryPasswordCodeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type AuthCodeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update RecoveryPasswordCodes.
+     * The data used to update AuthCodes.
      */
-    data: XOR<RecoveryPasswordCodeUpdateManyMutationInput, RecoveryPasswordCodeUncheckedUpdateManyInput>
+    data: XOR<AuthCodeUpdateManyMutationInput, AuthCodeUncheckedUpdateManyInput>
     /**
-     * Filter which RecoveryPasswordCodes to update
+     * Filter which AuthCodes to update
      */
-    where?: RecoveryPasswordCodeWhereInput
+    where?: AuthCodeWhereInput
     /**
-     * Limit how many RecoveryPasswordCodes to update.
+     * Limit how many AuthCodes to update.
      */
     limit?: number
   }
 
   /**
-   * RecoveryPasswordCode updateManyAndReturn
+   * AuthCode updateManyAndReturn
    */
-  export type RecoveryPasswordCodeUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type AuthCodeUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the RecoveryPasswordCode
+     * Select specific fields to fetch from the AuthCode
      */
-    select?: RecoveryPasswordCodeSelectUpdateManyAndReturn<ExtArgs> | null
+    select?: AuthCodeSelectUpdateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the RecoveryPasswordCode
+     * Omit specific fields from the AuthCode
      */
-    omit?: RecoveryPasswordCodeOmit<ExtArgs> | null
+    omit?: AuthCodeOmit<ExtArgs> | null
     /**
-     * The data used to update RecoveryPasswordCodes.
+     * The data used to update AuthCodes.
      */
-    data: XOR<RecoveryPasswordCodeUpdateManyMutationInput, RecoveryPasswordCodeUncheckedUpdateManyInput>
+    data: XOR<AuthCodeUpdateManyMutationInput, AuthCodeUncheckedUpdateManyInput>
     /**
-     * Filter which RecoveryPasswordCodes to update
+     * Filter which AuthCodes to update
      */
-    where?: RecoveryPasswordCodeWhereInput
+    where?: AuthCodeWhereInput
     /**
-     * Limit how many RecoveryPasswordCodes to update.
+     * Limit how many AuthCodes to update.
      */
     limit?: number
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: RecoveryPasswordCodeIncludeUpdateManyAndReturn<ExtArgs> | null
+    include?: AuthCodeIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * RecoveryPasswordCode upsert
+   * AuthCode upsert
    */
-  export type RecoveryPasswordCodeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type AuthCodeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the RecoveryPasswordCode
+     * Select specific fields to fetch from the AuthCode
      */
-    select?: RecoveryPasswordCodeSelect<ExtArgs> | null
+    select?: AuthCodeSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the RecoveryPasswordCode
+     * Omit specific fields from the AuthCode
      */
-    omit?: RecoveryPasswordCodeOmit<ExtArgs> | null
+    omit?: AuthCodeOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: RecoveryPasswordCodeInclude<ExtArgs> | null
+    include?: AuthCodeInclude<ExtArgs> | null
     /**
-     * The filter to search for the RecoveryPasswordCode to update in case it exists.
+     * The filter to search for the AuthCode to update in case it exists.
      */
-    where: RecoveryPasswordCodeWhereUniqueInput
+    where: AuthCodeWhereUniqueInput
     /**
-     * In case the RecoveryPasswordCode found by the `where` argument doesn't exist, create a new RecoveryPasswordCode with this data.
+     * In case the AuthCode found by the `where` argument doesn't exist, create a new AuthCode with this data.
      */
-    create: XOR<RecoveryPasswordCodeCreateInput, RecoveryPasswordCodeUncheckedCreateInput>
+    create: XOR<AuthCodeCreateInput, AuthCodeUncheckedCreateInput>
     /**
-     * In case the RecoveryPasswordCode was found with the provided `where` argument, update it with this data.
+     * In case the AuthCode was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<RecoveryPasswordCodeUpdateInput, RecoveryPasswordCodeUncheckedUpdateInput>
+    update: XOR<AuthCodeUpdateInput, AuthCodeUncheckedUpdateInput>
   }
 
   /**
-   * RecoveryPasswordCode delete
+   * AuthCode delete
    */
-  export type RecoveryPasswordCodeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type AuthCodeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the RecoveryPasswordCode
+     * Select specific fields to fetch from the AuthCode
      */
-    select?: RecoveryPasswordCodeSelect<ExtArgs> | null
+    select?: AuthCodeSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the RecoveryPasswordCode
+     * Omit specific fields from the AuthCode
      */
-    omit?: RecoveryPasswordCodeOmit<ExtArgs> | null
+    omit?: AuthCodeOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: RecoveryPasswordCodeInclude<ExtArgs> | null
+    include?: AuthCodeInclude<ExtArgs> | null
     /**
-     * Filter which RecoveryPasswordCode to delete.
+     * Filter which AuthCode to delete.
      */
-    where: RecoveryPasswordCodeWhereUniqueInput
+    where: AuthCodeWhereUniqueInput
   }
 
   /**
-   * RecoveryPasswordCode deleteMany
+   * AuthCode deleteMany
    */
-  export type RecoveryPasswordCodeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type AuthCodeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which RecoveryPasswordCodes to delete
+     * Filter which AuthCodes to delete
      */
-    where?: RecoveryPasswordCodeWhereInput
+    where?: AuthCodeWhereInput
     /**
-     * Limit how many RecoveryPasswordCodes to delete.
+     * Limit how many AuthCodes to delete.
      */
     limit?: number
   }
 
   /**
-   * RecoveryPasswordCode without action
+   * AuthCode without action
    */
-  export type RecoveryPasswordCodeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type AuthCodeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the RecoveryPasswordCode
+     * Select specific fields to fetch from the AuthCode
      */
-    select?: RecoveryPasswordCodeSelect<ExtArgs> | null
+    select?: AuthCodeSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the RecoveryPasswordCode
+     * Omit specific fields from the AuthCode
      */
-    omit?: RecoveryPasswordCodeOmit<ExtArgs> | null
+    omit?: AuthCodeOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: RecoveryPasswordCodeInclude<ExtArgs> | null
+    include?: AuthCodeInclude<ExtArgs> | null
   }
 
 
@@ -3217,7 +3251,6 @@ export namespace Prisma {
     surName: 'surName',
     lastName: 'lastName',
     login: 'login',
-    password: 'password',
     createdAt: 'createdAt',
     isActivated: 'isActivated',
     activatedEmailCode: 'activatedEmailCode'
@@ -3226,16 +3259,17 @@ export namespace Prisma {
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
-  export const RecoveryPasswordCodeScalarFieldEnum: {
+  export const AuthCodeScalarFieldEnum: {
     id: 'id',
-    recoveryCode: 'recoveryCode',
+    code: 'code',
     userId: 'userId',
+    type: 'type',
     isUsed: 'isUsed',
-    createdAt: 'createdAt',
-    expiresAt: 'expiresAt'
+    expiresAt: 'expiresAt',
+    createdAt: 'createdAt'
   };
 
-  export type RecoveryPasswordCodeScalarFieldEnum = (typeof RecoveryPasswordCodeScalarFieldEnum)[keyof typeof RecoveryPasswordCodeScalarFieldEnum]
+  export type AuthCodeScalarFieldEnum = (typeof AuthCodeScalarFieldEnum)[keyof typeof AuthCodeScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -3314,6 +3348,20 @@ export namespace Prisma {
    */
   export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
     
+
+
+  /**
+   * Reference to a field of type 'Float'
+   */
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float[]'
+   */
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+    
   /**
    * Deep Input Types
    */
@@ -3329,11 +3377,10 @@ export namespace Prisma {
     surName?: StringNullableFilter<"User"> | string | null
     lastName?: StringNullableFilter<"User"> | string | null
     login?: StringFilter<"User"> | string
-    password?: StringFilter<"User"> | string
     createdAt?: DateTimeFilter<"User"> | Date | string
     isActivated?: BoolFilter<"User"> | boolean
     activatedEmailCode?: StringFilter<"User"> | string
-    recoveryCodes?: RecoveryPasswordCodeListRelationFilter
+    AuthCode?: AuthCodeListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -3343,11 +3390,10 @@ export namespace Prisma {
     surName?: SortOrderInput | SortOrder
     lastName?: SortOrderInput | SortOrder
     login?: SortOrder
-    password?: SortOrder
     createdAt?: SortOrder
     isActivated?: SortOrder
     activatedEmailCode?: SortOrder
-    recoveryCodes?: RecoveryPasswordCodeOrderByRelationAggregateInput
+    AuthCode?: AuthCodeOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -3360,11 +3406,10 @@ export namespace Prisma {
     name?: StringNullableFilter<"User"> | string | null
     surName?: StringNullableFilter<"User"> | string | null
     lastName?: StringNullableFilter<"User"> | string | null
-    password?: StringFilter<"User"> | string
     createdAt?: DateTimeFilter<"User"> | Date | string
     isActivated?: BoolFilter<"User"> | boolean
     activatedEmailCode?: StringFilter<"User"> | string
-    recoveryCodes?: RecoveryPasswordCodeListRelationFilter
+    AuthCode?: AuthCodeListRelationFilter
   }, "id" | "email" | "login">
 
   export type UserOrderByWithAggregationInput = {
@@ -3374,7 +3419,6 @@ export namespace Prisma {
     surName?: SortOrderInput | SortOrder
     lastName?: SortOrderInput | SortOrder
     login?: SortOrder
-    password?: SortOrder
     createdAt?: SortOrder
     isActivated?: SortOrder
     activatedEmailCode?: SortOrder
@@ -3393,70 +3437,76 @@ export namespace Prisma {
     surName?: StringNullableWithAggregatesFilter<"User"> | string | null
     lastName?: StringNullableWithAggregatesFilter<"User"> | string | null
     login?: StringWithAggregatesFilter<"User"> | string
-    password?: StringWithAggregatesFilter<"User"> | string
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     isActivated?: BoolWithAggregatesFilter<"User"> | boolean
     activatedEmailCode?: StringWithAggregatesFilter<"User"> | string
   }
 
-  export type RecoveryPasswordCodeWhereInput = {
-    AND?: RecoveryPasswordCodeWhereInput | RecoveryPasswordCodeWhereInput[]
-    OR?: RecoveryPasswordCodeWhereInput[]
-    NOT?: RecoveryPasswordCodeWhereInput | RecoveryPasswordCodeWhereInput[]
-    id?: StringFilter<"RecoveryPasswordCode"> | string
-    recoveryCode?: StringFilter<"RecoveryPasswordCode"> | string
-    userId?: StringFilter<"RecoveryPasswordCode"> | string
-    isUsed?: BoolFilter<"RecoveryPasswordCode"> | boolean
-    createdAt?: DateTimeFilter<"RecoveryPasswordCode"> | Date | string
-    expiresAt?: DateTimeFilter<"RecoveryPasswordCode"> | Date | string
+  export type AuthCodeWhereInput = {
+    AND?: AuthCodeWhereInput | AuthCodeWhereInput[]
+    OR?: AuthCodeWhereInput[]
+    NOT?: AuthCodeWhereInput | AuthCodeWhereInput[]
+    id?: IntFilter<"AuthCode"> | number
+    code?: StringFilter<"AuthCode"> | string
+    userId?: StringFilter<"AuthCode"> | string
+    type?: StringFilter<"AuthCode"> | string
+    isUsed?: BoolFilter<"AuthCode"> | boolean
+    expiresAt?: DateTimeFilter<"AuthCode"> | Date | string
+    createdAt?: DateTimeFilter<"AuthCode"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
-  export type RecoveryPasswordCodeOrderByWithRelationInput = {
+  export type AuthCodeOrderByWithRelationInput = {
     id?: SortOrder
-    recoveryCode?: SortOrder
+    code?: SortOrder
     userId?: SortOrder
+    type?: SortOrder
     isUsed?: SortOrder
-    createdAt?: SortOrder
     expiresAt?: SortOrder
+    createdAt?: SortOrder
     user?: UserOrderByWithRelationInput
   }
 
-  export type RecoveryPasswordCodeWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    AND?: RecoveryPasswordCodeWhereInput | RecoveryPasswordCodeWhereInput[]
-    OR?: RecoveryPasswordCodeWhereInput[]
-    NOT?: RecoveryPasswordCodeWhereInput | RecoveryPasswordCodeWhereInput[]
-    recoveryCode?: StringFilter<"RecoveryPasswordCode"> | string
-    userId?: StringFilter<"RecoveryPasswordCode"> | string
-    isUsed?: BoolFilter<"RecoveryPasswordCode"> | boolean
-    createdAt?: DateTimeFilter<"RecoveryPasswordCode"> | Date | string
-    expiresAt?: DateTimeFilter<"RecoveryPasswordCode"> | Date | string
+  export type AuthCodeWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: AuthCodeWhereInput | AuthCodeWhereInput[]
+    OR?: AuthCodeWhereInput[]
+    NOT?: AuthCodeWhereInput | AuthCodeWhereInput[]
+    code?: StringFilter<"AuthCode"> | string
+    userId?: StringFilter<"AuthCode"> | string
+    type?: StringFilter<"AuthCode"> | string
+    isUsed?: BoolFilter<"AuthCode"> | boolean
+    expiresAt?: DateTimeFilter<"AuthCode"> | Date | string
+    createdAt?: DateTimeFilter<"AuthCode"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
 
-  export type RecoveryPasswordCodeOrderByWithAggregationInput = {
+  export type AuthCodeOrderByWithAggregationInput = {
     id?: SortOrder
-    recoveryCode?: SortOrder
+    code?: SortOrder
     userId?: SortOrder
+    type?: SortOrder
     isUsed?: SortOrder
-    createdAt?: SortOrder
     expiresAt?: SortOrder
-    _count?: RecoveryPasswordCodeCountOrderByAggregateInput
-    _max?: RecoveryPasswordCodeMaxOrderByAggregateInput
-    _min?: RecoveryPasswordCodeMinOrderByAggregateInput
+    createdAt?: SortOrder
+    _count?: AuthCodeCountOrderByAggregateInput
+    _avg?: AuthCodeAvgOrderByAggregateInput
+    _max?: AuthCodeMaxOrderByAggregateInput
+    _min?: AuthCodeMinOrderByAggregateInput
+    _sum?: AuthCodeSumOrderByAggregateInput
   }
 
-  export type RecoveryPasswordCodeScalarWhereWithAggregatesInput = {
-    AND?: RecoveryPasswordCodeScalarWhereWithAggregatesInput | RecoveryPasswordCodeScalarWhereWithAggregatesInput[]
-    OR?: RecoveryPasswordCodeScalarWhereWithAggregatesInput[]
-    NOT?: RecoveryPasswordCodeScalarWhereWithAggregatesInput | RecoveryPasswordCodeScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"RecoveryPasswordCode"> | string
-    recoveryCode?: StringWithAggregatesFilter<"RecoveryPasswordCode"> | string
-    userId?: StringWithAggregatesFilter<"RecoveryPasswordCode"> | string
-    isUsed?: BoolWithAggregatesFilter<"RecoveryPasswordCode"> | boolean
-    createdAt?: DateTimeWithAggregatesFilter<"RecoveryPasswordCode"> | Date | string
-    expiresAt?: DateTimeWithAggregatesFilter<"RecoveryPasswordCode"> | Date | string
+  export type AuthCodeScalarWhereWithAggregatesInput = {
+    AND?: AuthCodeScalarWhereWithAggregatesInput | AuthCodeScalarWhereWithAggregatesInput[]
+    OR?: AuthCodeScalarWhereWithAggregatesInput[]
+    NOT?: AuthCodeScalarWhereWithAggregatesInput | AuthCodeScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"AuthCode"> | number
+    code?: StringWithAggregatesFilter<"AuthCode"> | string
+    userId?: StringWithAggregatesFilter<"AuthCode"> | string
+    type?: StringWithAggregatesFilter<"AuthCode"> | string
+    isUsed?: BoolWithAggregatesFilter<"AuthCode"> | boolean
+    expiresAt?: DateTimeWithAggregatesFilter<"AuthCode"> | Date | string
+    createdAt?: DateTimeWithAggregatesFilter<"AuthCode"> | Date | string
   }
 
   export type UserCreateInput = {
@@ -3466,11 +3516,10 @@ export namespace Prisma {
     surName?: string | null
     lastName?: string | null
     login: string
-    password: string
     createdAt?: Date | string
     isActivated?: boolean
     activatedEmailCode?: string
-    recoveryCodes?: RecoveryPasswordCodeCreateNestedManyWithoutUserInput
+    AuthCode?: AuthCodeCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -3480,11 +3529,10 @@ export namespace Prisma {
     surName?: string | null
     lastName?: string | null
     login: string
-    password: string
     createdAt?: Date | string
     isActivated?: boolean
     activatedEmailCode?: string
-    recoveryCodes?: RecoveryPasswordCodeUncheckedCreateNestedManyWithoutUserInput
+    AuthCode?: AuthCodeUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -3494,11 +3542,10 @@ export namespace Prisma {
     surName?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     login?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     isActivated?: BoolFieldUpdateOperationsInput | boolean
     activatedEmailCode?: StringFieldUpdateOperationsInput | string
-    recoveryCodes?: RecoveryPasswordCodeUpdateManyWithoutUserNestedInput
+    AuthCode?: AuthCodeUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -3508,11 +3555,10 @@ export namespace Prisma {
     surName?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     login?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     isActivated?: BoolFieldUpdateOperationsInput | boolean
     activatedEmailCode?: StringFieldUpdateOperationsInput | string
-    recoveryCodes?: RecoveryPasswordCodeUncheckedUpdateManyWithoutUserNestedInput
+    AuthCode?: AuthCodeUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -3522,7 +3568,6 @@ export namespace Prisma {
     surName?: string | null
     lastName?: string | null
     login: string
-    password: string
     createdAt?: Date | string
     isActivated?: boolean
     activatedEmailCode?: string
@@ -3535,7 +3580,6 @@ export namespace Prisma {
     surName?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     login?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     isActivated?: BoolFieldUpdateOperationsInput | boolean
     activatedEmailCode?: StringFieldUpdateOperationsInput | string
@@ -3548,72 +3592,75 @@ export namespace Prisma {
     surName?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     login?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     isActivated?: BoolFieldUpdateOperationsInput | boolean
     activatedEmailCode?: StringFieldUpdateOperationsInput | string
   }
 
-  export type RecoveryPasswordCodeCreateInput = {
-    id?: string
-    recoveryCode: string
+  export type AuthCodeCreateInput = {
+    code: string
+    type: string
     isUsed?: boolean
-    createdAt?: Date | string
     expiresAt: Date | string
-    user: UserCreateNestedOneWithoutRecoveryCodesInput
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutAuthCodeInput
   }
 
-  export type RecoveryPasswordCodeUncheckedCreateInput = {
-    id?: string
-    recoveryCode: string
+  export type AuthCodeUncheckedCreateInput = {
+    id?: number
+    code: string
     userId: string
+    type: string
     isUsed?: boolean
-    createdAt?: Date | string
     expiresAt: Date | string
+    createdAt?: Date | string
   }
 
-  export type RecoveryPasswordCodeUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    recoveryCode?: StringFieldUpdateOperationsInput | string
+  export type AuthCodeUpdateInput = {
+    code?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
     isUsed?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutRecoveryCodesNestedInput
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutAuthCodeNestedInput
   }
 
-  export type RecoveryPasswordCodeUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    recoveryCode?: StringFieldUpdateOperationsInput | string
+  export type AuthCodeUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    code?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
     isUsed?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type RecoveryPasswordCodeCreateManyInput = {
-    id?: string
-    recoveryCode: string
+  export type AuthCodeCreateManyInput = {
+    id?: number
+    code: string
     userId: string
+    type: string
     isUsed?: boolean
-    createdAt?: Date | string
     expiresAt: Date | string
+    createdAt?: Date | string
   }
 
-  export type RecoveryPasswordCodeUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    recoveryCode?: StringFieldUpdateOperationsInput | string
+  export type AuthCodeUpdateManyMutationInput = {
+    code?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
     isUsed?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type RecoveryPasswordCodeUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    recoveryCode?: StringFieldUpdateOperationsInput | string
+  export type AuthCodeUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    code?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
     isUsed?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -3662,10 +3709,10 @@ export namespace Prisma {
     not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
-  export type RecoveryPasswordCodeListRelationFilter = {
-    every?: RecoveryPasswordCodeWhereInput
-    some?: RecoveryPasswordCodeWhereInput
-    none?: RecoveryPasswordCodeWhereInput
+  export type AuthCodeListRelationFilter = {
+    every?: AuthCodeWhereInput
+    some?: AuthCodeWhereInput
+    none?: AuthCodeWhereInput
   }
 
   export type SortOrderInput = {
@@ -3673,7 +3720,7 @@ export namespace Prisma {
     nulls?: NullsOrder
   }
 
-  export type RecoveryPasswordCodeOrderByRelationAggregateInput = {
+  export type AuthCodeOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -3684,7 +3731,6 @@ export namespace Prisma {
     surName?: SortOrder
     lastName?: SortOrder
     login?: SortOrder
-    password?: SortOrder
     createdAt?: SortOrder
     isActivated?: SortOrder
     activatedEmailCode?: SortOrder
@@ -3697,7 +3743,6 @@ export namespace Prisma {
     surName?: SortOrder
     lastName?: SortOrder
     login?: SortOrder
-    password?: SortOrder
     createdAt?: SortOrder
     isActivated?: SortOrder
     activatedEmailCode?: SortOrder
@@ -3710,7 +3755,6 @@ export namespace Prisma {
     surName?: SortOrder
     lastName?: SortOrder
     login?: SortOrder
-    password?: SortOrder
     createdAt?: SortOrder
     isActivated?: SortOrder
     activatedEmailCode?: SortOrder
@@ -3774,50 +3818,88 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
   export type UserScalarRelationFilter = {
     is?: UserWhereInput
     isNot?: UserWhereInput
   }
 
-  export type RecoveryPasswordCodeCountOrderByAggregateInput = {
+  export type AuthCodeCountOrderByAggregateInput = {
     id?: SortOrder
-    recoveryCode?: SortOrder
+    code?: SortOrder
     userId?: SortOrder
+    type?: SortOrder
     isUsed?: SortOrder
-    createdAt?: SortOrder
     expiresAt?: SortOrder
+    createdAt?: SortOrder
   }
 
-  export type RecoveryPasswordCodeMaxOrderByAggregateInput = {
+  export type AuthCodeAvgOrderByAggregateInput = {
     id?: SortOrder
-    recoveryCode?: SortOrder
-    userId?: SortOrder
-    isUsed?: SortOrder
-    createdAt?: SortOrder
-    expiresAt?: SortOrder
   }
 
-  export type RecoveryPasswordCodeMinOrderByAggregateInput = {
+  export type AuthCodeMaxOrderByAggregateInput = {
     id?: SortOrder
-    recoveryCode?: SortOrder
+    code?: SortOrder
     userId?: SortOrder
+    type?: SortOrder
     isUsed?: SortOrder
-    createdAt?: SortOrder
     expiresAt?: SortOrder
+    createdAt?: SortOrder
   }
 
-  export type RecoveryPasswordCodeCreateNestedManyWithoutUserInput = {
-    create?: XOR<RecoveryPasswordCodeCreateWithoutUserInput, RecoveryPasswordCodeUncheckedCreateWithoutUserInput> | RecoveryPasswordCodeCreateWithoutUserInput[] | RecoveryPasswordCodeUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: RecoveryPasswordCodeCreateOrConnectWithoutUserInput | RecoveryPasswordCodeCreateOrConnectWithoutUserInput[]
-    createMany?: RecoveryPasswordCodeCreateManyUserInputEnvelope
-    connect?: RecoveryPasswordCodeWhereUniqueInput | RecoveryPasswordCodeWhereUniqueInput[]
+  export type AuthCodeMinOrderByAggregateInput = {
+    id?: SortOrder
+    code?: SortOrder
+    userId?: SortOrder
+    type?: SortOrder
+    isUsed?: SortOrder
+    expiresAt?: SortOrder
+    createdAt?: SortOrder
   }
 
-  export type RecoveryPasswordCodeUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<RecoveryPasswordCodeCreateWithoutUserInput, RecoveryPasswordCodeUncheckedCreateWithoutUserInput> | RecoveryPasswordCodeCreateWithoutUserInput[] | RecoveryPasswordCodeUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: RecoveryPasswordCodeCreateOrConnectWithoutUserInput | RecoveryPasswordCodeCreateOrConnectWithoutUserInput[]
-    createMany?: RecoveryPasswordCodeCreateManyUserInputEnvelope
-    connect?: RecoveryPasswordCodeWhereUniqueInput | RecoveryPasswordCodeWhereUniqueInput[]
+  export type AuthCodeSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type AuthCodeCreateNestedManyWithoutUserInput = {
+    create?: XOR<AuthCodeCreateWithoutUserInput, AuthCodeUncheckedCreateWithoutUserInput> | AuthCodeCreateWithoutUserInput[] | AuthCodeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AuthCodeCreateOrConnectWithoutUserInput | AuthCodeCreateOrConnectWithoutUserInput[]
+    createMany?: AuthCodeCreateManyUserInputEnvelope
+    connect?: AuthCodeWhereUniqueInput | AuthCodeWhereUniqueInput[]
+  }
+
+  export type AuthCodeUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<AuthCodeCreateWithoutUserInput, AuthCodeUncheckedCreateWithoutUserInput> | AuthCodeCreateWithoutUserInput[] | AuthCodeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AuthCodeCreateOrConnectWithoutUserInput | AuthCodeCreateOrConnectWithoutUserInput[]
+    createMany?: AuthCodeCreateManyUserInputEnvelope
+    connect?: AuthCodeWhereUniqueInput | AuthCodeWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -3836,46 +3918,54 @@ export namespace Prisma {
     set?: boolean
   }
 
-  export type RecoveryPasswordCodeUpdateManyWithoutUserNestedInput = {
-    create?: XOR<RecoveryPasswordCodeCreateWithoutUserInput, RecoveryPasswordCodeUncheckedCreateWithoutUserInput> | RecoveryPasswordCodeCreateWithoutUserInput[] | RecoveryPasswordCodeUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: RecoveryPasswordCodeCreateOrConnectWithoutUserInput | RecoveryPasswordCodeCreateOrConnectWithoutUserInput[]
-    upsert?: RecoveryPasswordCodeUpsertWithWhereUniqueWithoutUserInput | RecoveryPasswordCodeUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: RecoveryPasswordCodeCreateManyUserInputEnvelope
-    set?: RecoveryPasswordCodeWhereUniqueInput | RecoveryPasswordCodeWhereUniqueInput[]
-    disconnect?: RecoveryPasswordCodeWhereUniqueInput | RecoveryPasswordCodeWhereUniqueInput[]
-    delete?: RecoveryPasswordCodeWhereUniqueInput | RecoveryPasswordCodeWhereUniqueInput[]
-    connect?: RecoveryPasswordCodeWhereUniqueInput | RecoveryPasswordCodeWhereUniqueInput[]
-    update?: RecoveryPasswordCodeUpdateWithWhereUniqueWithoutUserInput | RecoveryPasswordCodeUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: RecoveryPasswordCodeUpdateManyWithWhereWithoutUserInput | RecoveryPasswordCodeUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: RecoveryPasswordCodeScalarWhereInput | RecoveryPasswordCodeScalarWhereInput[]
+  export type AuthCodeUpdateManyWithoutUserNestedInput = {
+    create?: XOR<AuthCodeCreateWithoutUserInput, AuthCodeUncheckedCreateWithoutUserInput> | AuthCodeCreateWithoutUserInput[] | AuthCodeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AuthCodeCreateOrConnectWithoutUserInput | AuthCodeCreateOrConnectWithoutUserInput[]
+    upsert?: AuthCodeUpsertWithWhereUniqueWithoutUserInput | AuthCodeUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: AuthCodeCreateManyUserInputEnvelope
+    set?: AuthCodeWhereUniqueInput | AuthCodeWhereUniqueInput[]
+    disconnect?: AuthCodeWhereUniqueInput | AuthCodeWhereUniqueInput[]
+    delete?: AuthCodeWhereUniqueInput | AuthCodeWhereUniqueInput[]
+    connect?: AuthCodeWhereUniqueInput | AuthCodeWhereUniqueInput[]
+    update?: AuthCodeUpdateWithWhereUniqueWithoutUserInput | AuthCodeUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: AuthCodeUpdateManyWithWhereWithoutUserInput | AuthCodeUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: AuthCodeScalarWhereInput | AuthCodeScalarWhereInput[]
   }
 
-  export type RecoveryPasswordCodeUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<RecoveryPasswordCodeCreateWithoutUserInput, RecoveryPasswordCodeUncheckedCreateWithoutUserInput> | RecoveryPasswordCodeCreateWithoutUserInput[] | RecoveryPasswordCodeUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: RecoveryPasswordCodeCreateOrConnectWithoutUserInput | RecoveryPasswordCodeCreateOrConnectWithoutUserInput[]
-    upsert?: RecoveryPasswordCodeUpsertWithWhereUniqueWithoutUserInput | RecoveryPasswordCodeUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: RecoveryPasswordCodeCreateManyUserInputEnvelope
-    set?: RecoveryPasswordCodeWhereUniqueInput | RecoveryPasswordCodeWhereUniqueInput[]
-    disconnect?: RecoveryPasswordCodeWhereUniqueInput | RecoveryPasswordCodeWhereUniqueInput[]
-    delete?: RecoveryPasswordCodeWhereUniqueInput | RecoveryPasswordCodeWhereUniqueInput[]
-    connect?: RecoveryPasswordCodeWhereUniqueInput | RecoveryPasswordCodeWhereUniqueInput[]
-    update?: RecoveryPasswordCodeUpdateWithWhereUniqueWithoutUserInput | RecoveryPasswordCodeUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: RecoveryPasswordCodeUpdateManyWithWhereWithoutUserInput | RecoveryPasswordCodeUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: RecoveryPasswordCodeScalarWhereInput | RecoveryPasswordCodeScalarWhereInput[]
+  export type AuthCodeUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<AuthCodeCreateWithoutUserInput, AuthCodeUncheckedCreateWithoutUserInput> | AuthCodeCreateWithoutUserInput[] | AuthCodeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AuthCodeCreateOrConnectWithoutUserInput | AuthCodeCreateOrConnectWithoutUserInput[]
+    upsert?: AuthCodeUpsertWithWhereUniqueWithoutUserInput | AuthCodeUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: AuthCodeCreateManyUserInputEnvelope
+    set?: AuthCodeWhereUniqueInput | AuthCodeWhereUniqueInput[]
+    disconnect?: AuthCodeWhereUniqueInput | AuthCodeWhereUniqueInput[]
+    delete?: AuthCodeWhereUniqueInput | AuthCodeWhereUniqueInput[]
+    connect?: AuthCodeWhereUniqueInput | AuthCodeWhereUniqueInput[]
+    update?: AuthCodeUpdateWithWhereUniqueWithoutUserInput | AuthCodeUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: AuthCodeUpdateManyWithWhereWithoutUserInput | AuthCodeUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: AuthCodeScalarWhereInput | AuthCodeScalarWhereInput[]
   }
 
-  export type UserCreateNestedOneWithoutRecoveryCodesInput = {
-    create?: XOR<UserCreateWithoutRecoveryCodesInput, UserUncheckedCreateWithoutRecoveryCodesInput>
-    connectOrCreate?: UserCreateOrConnectWithoutRecoveryCodesInput
+  export type UserCreateNestedOneWithoutAuthCodeInput = {
+    create?: XOR<UserCreateWithoutAuthCodeInput, UserUncheckedCreateWithoutAuthCodeInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAuthCodeInput
     connect?: UserWhereUniqueInput
   }
 
-  export type UserUpdateOneRequiredWithoutRecoveryCodesNestedInput = {
-    create?: XOR<UserCreateWithoutRecoveryCodesInput, UserUncheckedCreateWithoutRecoveryCodesInput>
-    connectOrCreate?: UserCreateOrConnectWithoutRecoveryCodesInput
-    upsert?: UserUpsertWithoutRecoveryCodesInput
+  export type UserUpdateOneRequiredWithoutAuthCodeNestedInput = {
+    create?: XOR<UserCreateWithoutAuthCodeInput, UserUncheckedCreateWithoutAuthCodeInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAuthCodeInput
+    upsert?: UserUpsertWithoutAuthCodeInput
     connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutRecoveryCodesInput, UserUpdateWithoutRecoveryCodesInput>, UserUncheckedUpdateWithoutRecoveryCodesInput>
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAuthCodeInput, UserUpdateWithoutAuthCodeInput>, UserUncheckedUpdateWithoutAuthCodeInput>
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -4000,158 +4090,186 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
-  export type RecoveryPasswordCodeCreateWithoutUserInput = {
-    id?: string
-    recoveryCode: string
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type AuthCodeCreateWithoutUserInput = {
+    code: string
+    type: string
     isUsed?: boolean
-    createdAt?: Date | string
     expiresAt: Date | string
+    createdAt?: Date | string
   }
 
-  export type RecoveryPasswordCodeUncheckedCreateWithoutUserInput = {
-    id?: string
-    recoveryCode: string
+  export type AuthCodeUncheckedCreateWithoutUserInput = {
+    id?: number
+    code: string
+    type: string
     isUsed?: boolean
-    createdAt?: Date | string
     expiresAt: Date | string
+    createdAt?: Date | string
   }
 
-  export type RecoveryPasswordCodeCreateOrConnectWithoutUserInput = {
-    where: RecoveryPasswordCodeWhereUniqueInput
-    create: XOR<RecoveryPasswordCodeCreateWithoutUserInput, RecoveryPasswordCodeUncheckedCreateWithoutUserInput>
+  export type AuthCodeCreateOrConnectWithoutUserInput = {
+    where: AuthCodeWhereUniqueInput
+    create: XOR<AuthCodeCreateWithoutUserInput, AuthCodeUncheckedCreateWithoutUserInput>
   }
 
-  export type RecoveryPasswordCodeCreateManyUserInputEnvelope = {
-    data: RecoveryPasswordCodeCreateManyUserInput | RecoveryPasswordCodeCreateManyUserInput[]
+  export type AuthCodeCreateManyUserInputEnvelope = {
+    data: AuthCodeCreateManyUserInput | AuthCodeCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
-  export type RecoveryPasswordCodeUpsertWithWhereUniqueWithoutUserInput = {
-    where: RecoveryPasswordCodeWhereUniqueInput
-    update: XOR<RecoveryPasswordCodeUpdateWithoutUserInput, RecoveryPasswordCodeUncheckedUpdateWithoutUserInput>
-    create: XOR<RecoveryPasswordCodeCreateWithoutUserInput, RecoveryPasswordCodeUncheckedCreateWithoutUserInput>
+  export type AuthCodeUpsertWithWhereUniqueWithoutUserInput = {
+    where: AuthCodeWhereUniqueInput
+    update: XOR<AuthCodeUpdateWithoutUserInput, AuthCodeUncheckedUpdateWithoutUserInput>
+    create: XOR<AuthCodeCreateWithoutUserInput, AuthCodeUncheckedCreateWithoutUserInput>
   }
 
-  export type RecoveryPasswordCodeUpdateWithWhereUniqueWithoutUserInput = {
-    where: RecoveryPasswordCodeWhereUniqueInput
-    data: XOR<RecoveryPasswordCodeUpdateWithoutUserInput, RecoveryPasswordCodeUncheckedUpdateWithoutUserInput>
+  export type AuthCodeUpdateWithWhereUniqueWithoutUserInput = {
+    where: AuthCodeWhereUniqueInput
+    data: XOR<AuthCodeUpdateWithoutUserInput, AuthCodeUncheckedUpdateWithoutUserInput>
   }
 
-  export type RecoveryPasswordCodeUpdateManyWithWhereWithoutUserInput = {
-    where: RecoveryPasswordCodeScalarWhereInput
-    data: XOR<RecoveryPasswordCodeUpdateManyMutationInput, RecoveryPasswordCodeUncheckedUpdateManyWithoutUserInput>
+  export type AuthCodeUpdateManyWithWhereWithoutUserInput = {
+    where: AuthCodeScalarWhereInput
+    data: XOR<AuthCodeUpdateManyMutationInput, AuthCodeUncheckedUpdateManyWithoutUserInput>
   }
 
-  export type RecoveryPasswordCodeScalarWhereInput = {
-    AND?: RecoveryPasswordCodeScalarWhereInput | RecoveryPasswordCodeScalarWhereInput[]
-    OR?: RecoveryPasswordCodeScalarWhereInput[]
-    NOT?: RecoveryPasswordCodeScalarWhereInput | RecoveryPasswordCodeScalarWhereInput[]
-    id?: StringFilter<"RecoveryPasswordCode"> | string
-    recoveryCode?: StringFilter<"RecoveryPasswordCode"> | string
-    userId?: StringFilter<"RecoveryPasswordCode"> | string
-    isUsed?: BoolFilter<"RecoveryPasswordCode"> | boolean
-    createdAt?: DateTimeFilter<"RecoveryPasswordCode"> | Date | string
-    expiresAt?: DateTimeFilter<"RecoveryPasswordCode"> | Date | string
+  export type AuthCodeScalarWhereInput = {
+    AND?: AuthCodeScalarWhereInput | AuthCodeScalarWhereInput[]
+    OR?: AuthCodeScalarWhereInput[]
+    NOT?: AuthCodeScalarWhereInput | AuthCodeScalarWhereInput[]
+    id?: IntFilter<"AuthCode"> | number
+    code?: StringFilter<"AuthCode"> | string
+    userId?: StringFilter<"AuthCode"> | string
+    type?: StringFilter<"AuthCode"> | string
+    isUsed?: BoolFilter<"AuthCode"> | boolean
+    expiresAt?: DateTimeFilter<"AuthCode"> | Date | string
+    createdAt?: DateTimeFilter<"AuthCode"> | Date | string
   }
 
-  export type UserCreateWithoutRecoveryCodesInput = {
+  export type UserCreateWithoutAuthCodeInput = {
     id?: string
     email: string
     name?: string | null
     surName?: string | null
     lastName?: string | null
     login: string
-    password: string
     createdAt?: Date | string
     isActivated?: boolean
     activatedEmailCode?: string
   }
 
-  export type UserUncheckedCreateWithoutRecoveryCodesInput = {
+  export type UserUncheckedCreateWithoutAuthCodeInput = {
     id?: string
     email: string
     name?: string | null
     surName?: string | null
     lastName?: string | null
     login: string
-    password: string
     createdAt?: Date | string
     isActivated?: boolean
     activatedEmailCode?: string
   }
 
-  export type UserCreateOrConnectWithoutRecoveryCodesInput = {
+  export type UserCreateOrConnectWithoutAuthCodeInput = {
     where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutRecoveryCodesInput, UserUncheckedCreateWithoutRecoveryCodesInput>
+    create: XOR<UserCreateWithoutAuthCodeInput, UserUncheckedCreateWithoutAuthCodeInput>
   }
 
-  export type UserUpsertWithoutRecoveryCodesInput = {
-    update: XOR<UserUpdateWithoutRecoveryCodesInput, UserUncheckedUpdateWithoutRecoveryCodesInput>
-    create: XOR<UserCreateWithoutRecoveryCodesInput, UserUncheckedCreateWithoutRecoveryCodesInput>
+  export type UserUpsertWithoutAuthCodeInput = {
+    update: XOR<UserUpdateWithoutAuthCodeInput, UserUncheckedUpdateWithoutAuthCodeInput>
+    create: XOR<UserCreateWithoutAuthCodeInput, UserUncheckedCreateWithoutAuthCodeInput>
     where?: UserWhereInput
   }
 
-  export type UserUpdateToOneWithWhereWithoutRecoveryCodesInput = {
+  export type UserUpdateToOneWithWhereWithoutAuthCodeInput = {
     where?: UserWhereInput
-    data: XOR<UserUpdateWithoutRecoveryCodesInput, UserUncheckedUpdateWithoutRecoveryCodesInput>
+    data: XOR<UserUpdateWithoutAuthCodeInput, UserUncheckedUpdateWithoutAuthCodeInput>
   }
 
-  export type UserUpdateWithoutRecoveryCodesInput = {
+  export type UserUpdateWithoutAuthCodeInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
     surName?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     login?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     isActivated?: BoolFieldUpdateOperationsInput | boolean
     activatedEmailCode?: StringFieldUpdateOperationsInput | string
   }
 
-  export type UserUncheckedUpdateWithoutRecoveryCodesInput = {
+  export type UserUncheckedUpdateWithoutAuthCodeInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
     surName?: NullableStringFieldUpdateOperationsInput | string | null
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     login?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     isActivated?: BoolFieldUpdateOperationsInput | boolean
     activatedEmailCode?: StringFieldUpdateOperationsInput | string
   }
 
-  export type RecoveryPasswordCodeCreateManyUserInput = {
-    id?: string
-    recoveryCode: string
+  export type AuthCodeCreateManyUserInput = {
+    id?: number
+    code: string
+    type: string
     isUsed?: boolean
-    createdAt?: Date | string
     expiresAt: Date | string
+    createdAt?: Date | string
   }
 
-  export type RecoveryPasswordCodeUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    recoveryCode?: StringFieldUpdateOperationsInput | string
+  export type AuthCodeUpdateWithoutUserInput = {
+    code?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
     isUsed?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type RecoveryPasswordCodeUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    recoveryCode?: StringFieldUpdateOperationsInput | string
+  export type AuthCodeUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    code?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
     isUsed?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type RecoveryPasswordCodeUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    recoveryCode?: StringFieldUpdateOperationsInput | string
+  export type AuthCodeUncheckedUpdateManyWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    code?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
     isUsed?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

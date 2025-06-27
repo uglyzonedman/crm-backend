@@ -19,9 +19,6 @@ export class UserService {
 
     const currentUser = await this.prisma.user.findUnique({
       where: { id },
-      omit: {
-        password: true,
-      },
     });
 
     if (!currentUser) {
@@ -36,28 +33,5 @@ export class UserService {
       message: 'Успешно',
       data: currentUser,
     };
-  }
-  async recoveryPasswordSendMessage(email: string) {
-    const findUser = await this.prisma.user.findFirst({
-      where: { email: email },
-    });
-
-    if (!findUser) {
-      throw new BadRequestException('Пользователь с таким email не найден');
-    }
-
-    const code: string = generatedCode(6);
-    const expiresAt = new Date(Date.now() + 2 * 60 * 1000);
-
-    await this.prisma.recoveryPasswordCode.create({
-      data: {
-        userId: findUser.id,
-        recoveryCode: code,
-        isUsed: false,
-        expiresAt: expiresAt,
-      },
-    });
-
-    return code;
   }
 }

@@ -8,12 +8,15 @@ import { LoginDto, RegisterDto } from './auth.dto';
 import { hashPassword } from 'src/utils/hashPassword';
 import { checkPassword } from 'src/utils/checkPassword';
 import { JwtService } from '@nestjs/jwt';
+import { generatedCode } from 'src/utils/generatedCode';
+import { MailService } from 'src/mail/mail.service';
 
 @Injectable()
 export class AuthService {
   constructor(
     private readonly prisma: PrismaService,
     private jwtService: JwtService,
+    private readonly mailService: MailService,
   ) {}
 
   async register(dto: RegisterDto) {
@@ -36,7 +39,6 @@ export class AuthService {
       data: {
         email: dto.email,
         login: dto.login,
-        password: hashedPassword,
       },
       select: {
         id: true,
@@ -57,7 +59,7 @@ export class AuthService {
     try {
       const findUser = await this.prisma.user.findFirst({
         where: {
-          OR: [{ login: dto.identifier }, { email: dto.identifier }],
+          OR: [{ email: dto.identifier }, { login: dto.identifier }],
         },
       });
 
@@ -68,30 +70,41 @@ export class AuthService {
         });
       }
 
-      const isPasswordValid = await checkPassword(
-        dto.password,
-        findUser.password,
+      const login_code = generatedCode(6);
+      const expiresAt = new Date(Date.now() + 2 * 60 * 1000); // 2 минуты
+
+      await this.prisma.authCode.create({
+        data: {
+          code: login_code,
+          expiresAt,
+          type: 'email',
+          isUsed: false,
+          userId: findUser.id,
+        },
+      });
+
+      this.mailService.sendMail(
+        findUser.email,
+        'Код авторизации',
+        `
+    <div style="font-family: Arial, sans-serif; padding: 20px; background-color: #f9f9f9; color: #333;">
+      <h2 style="color: #2c3e50;">Код авторизации</h2>
+      <p>Здравствуйте!</p>
+      <p>Вы запросили код авторизации. Пожалуйста, введите следующий код:</p>
+      <div style="font-size: 24px; font-weight: bold; background-color: #ecf0f1; padding: 10px 20px; display: inline-block; border-radius: 5px; margin: 20px 0;">
+        ${login_code}
+      </div>
+      <p style="color: #7f8c8d;">Срок действия кода: 2 минуты.</p>
+      <p>Если вы не запрашивали этот код, просто проигнорируйте это письмо.</p>
+      <hr style="margin: 30px 0; border: none; border-top: 1px solid #ddd;" />
+      <p style="font-size: 12px; color: #aaa;">С уважением, Ваша команда поддержки</p>
+    </div>
+    `,
       );
-
-      if (!isPasswordValid) {
-        throw new BadRequestException({
-          status: 'error',
-          message: 'Неверный пароль',
-        });
-      }
-
-      const payload = { sub: findUser.id, login: findUser.login };
-      const now = Date.now();
-
-      const accessTokenExpiresInMs = 45 * 60 * 1000;
-      const refreshTokenExpiresInMs = 7 * 24 * 60 * 60 * 1000;
-
-      const accessToken = this.jwtService.sign(payload, { expiresIn: '45m' });
-      const refreshToken = this.jwtService.sign(payload, { expiresIn: '7d' });
 
       return {
         status: 'success',
-        message: 'Успешный вход',
+        message: 'Код авторизации отправлен на почту',
         data: {
           user: {
             id: findUser.id,
@@ -99,29 +112,68 @@ export class AuthService {
             email: findUser.email,
             createdAt: findUser.createdAt,
           },
-          tokens: {
-            accessToken,
-            accessTokenExpiresAt: new Date(
-              now + accessTokenExpiresInMs,
-            ).toISOString(),
-            refreshToken,
-            refreshTokenExpiresAt: new Date(
-              now + refreshTokenExpiresInMs,
-            ).toISOString(),
+          code: {
+            expiresAt: expiresAt.toISOString(),
           },
         },
       };
     } catch (error) {
+      console.error('Ошибка при отправке кода авторизации:', error);
+
       if (error instanceof BadRequestException) {
         throw error;
       }
 
-      console.error('Login error:', error);
-
-      throw new InternalServerErrorException({
+      throw new BadRequestException({
         status: 'error',
-        message: 'Произошла внутренняя ошибка при входе',
+        message:
+          'Не удалось отправить код авторизации. Повторите попытку позже.',
       });
     }
+
+    // const payload = { sub: findUser.id, login: findUser.login };
+    // const now = Date.now();
+
+    // const accessTokenExpiresInMs = 45 * 60 * 1000;
+    // const refreshTokenExpiresInMs = 7 * 24 * 60 * 60 * 1000;
+
+    // const accessToken = this.jwtService.sign(payload, { expiresIn: '45m' });
+    // const refreshToken = this.jwtService.sign(payload, { expiresIn: '7d' });
+
+    //   return {
+    //     status: 'success',
+    //     message: 'Успешный вход',
+    //     data: {
+    //       user: {
+    //         id: findUser.id,
+    //         login: findUser.login,
+    //         email: findUser.email,
+    //         createdAt: findUser.createdAt,
+    //       },
+    //       tokens: {
+    //         accessToken,
+    //         accessTokenExpiresAt: new Date(
+    //           now + accessTokenExpiresInMs,
+    //         ).toISOString(),
+    //         refreshToken,
+    //         refreshTokenExpiresAt: new Date(
+    //           now + refreshTokenExpiresInMs,
+    //         ).toISOString(),
+    //       },
+    //     },
+    //   };
+    // } catch (error) {
+    //   if (error instanceof BadRequestException) {
+    //     throw error;
+    //   }
+
+    //   console.error('Login error:', error);
+
+    //   throw new InternalServerErrorException({
+    //     status: 'error',
+    //     message: 'Произошла внутренняя ошибка при входе',
+    //   });
+    // }
+    // }
   }
 }

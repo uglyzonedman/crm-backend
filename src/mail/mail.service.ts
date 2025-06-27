@@ -23,11 +23,11 @@ export class MailService {
     `;
 
     await this.transporter.sendMail({
-      from: '"Поддержка" <your_email@example.com>',
+      from: 'majest228@gmail.com',
       to,
       subject,
-      text, // fallback для старых клиентов
-      html: htmlContent, // красиво для большинства клиентов
+      text,
+      html: htmlContent,
     });
   }
 }
