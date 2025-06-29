@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Param, Post } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
 import {
@@ -35,5 +35,10 @@ export class AuthController {
   @ApiResponse({ status: 400, description: 'Неверные данные' })
   async login(@Body() dto: LoginDto) {
     return this.authService.login(dto);
+  }
+
+  @Post('verify-login/:code')
+  async verifyLoginCode(@Param('code') code: string) {
+    return this.authService.verifyLoginCode(code);
   }
 }

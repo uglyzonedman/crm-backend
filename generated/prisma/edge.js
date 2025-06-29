@@ -145,7 +145,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\Moiseenko_DYu\\Desktop\\Projects\\crm\\crm-backend\\generated\\prisma",
+      "value": "F:\\Projects\\crm\\crm-backend\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -159,7 +159,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\Users\\Moiseenko_DYu\\Desktop\\Projects\\crm\\crm-backend\\prisma\\schema.prisma",
+    "sourceFilePath": "F:\\Projects\\crm\\crm-backend\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {

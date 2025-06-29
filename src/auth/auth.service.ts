@@ -33,8 +33,6 @@ export class AuthService {
       });
     }
 
-    const hashedPassword = await hashPassword(dto.password);
-
     const user = await this.prisma.user.create({
       data: {
         email: dto.email,
@@ -71,7 +69,7 @@ export class AuthService {
       }
 
       const login_code = generatedCode(6);
-      const expiresAt = new Date(Date.now() + 2 * 60 * 1000); // 2 минуты
+      const expiresAt = new Date(Date.now() + 2 * 60 * 1000);
 
       await this.prisma.authCode.create({
         data: {
@@ -131,37 +129,28 @@ export class AuthService {
       });
     }
 
-    // const payload = { sub: findUser.id, login: findUser.login };
-    // const now = Date.now();
-
-    // const accessTokenExpiresInMs = 45 * 60 * 1000;
-    // const refreshTokenExpiresInMs = 7 * 24 * 60 * 60 * 1000;
-
-    // const accessToken = this.jwtService.sign(payload, { expiresIn: '45m' });
-    // const refreshToken = this.jwtService.sign(payload, { expiresIn: '7d' });
-
-    //   return {
-    //     status: 'success',
-    //     message: 'Успешный вход',
-    //     data: {
-    //       user: {
-    //         id: findUser.id,
-    //         login: findUser.login,
-    //         email: findUser.email,
-    //         createdAt: findUser.createdAt,
-    //       },
-    //       tokens: {
-    //         accessToken,
-    //         accessTokenExpiresAt: new Date(
-    //           now + accessTokenExpiresInMs,
-    //         ).toISOString(),
-    //         refreshToken,
-    //         refreshTokenExpiresAt: new Date(
-    //           now + refreshTokenExpiresInMs,
-    //         ).toISOString(),
-    //       },
+    // return {
+    //   status: 'success',
+    //   message: 'Успешный вход',
+    //   data: {
+    //     user: {
+    //       id: findUser.id,
+    //       login: findUser.login,
+    //       email: findUser.email,
+    //       createdAt: findUser.createdAt,
     //     },
-    //   };
+    //     tokens: {
+    //       accessToken,
+    //       accessTokenExpiresAt: new Date(
+    //         now + accessTokenExpiresInMs,
+    //       ).toISOString(),
+    //       refreshToken,
+    //       refreshTokenExpiresAt: new Date(
+    //         now + refreshTokenExpiresInMs,
+    //       ).toISOString(),
+    //     },
+    //   },
+    // };
     // } catch (error) {
     //   if (error instanceof BadRequestException) {
     //     throw error;
@@ -175,5 +164,70 @@ export class AuthService {
     //   });
     // }
     // }
+  }
+
+  async verifyLoginCode(code: string) {
+    try {
+      const authCode = await this.prisma.authCode.findFirst({
+        where: { code },
+      });
+
+      if (!authCode) {
+        throw new BadRequestException('Код не найден');
+      }
+
+      await this.prisma.authCode.update({
+        where: { id: authCode.id },
+        data: { isUsed: true },
+      });
+
+      const user = await this.prisma.user.findFirst({
+        where: { id: authCode.userId },
+      });
+
+      if (!user) {
+        throw new BadRequestException('Пользователь не найден');
+      }
+
+      const payload = { sub: user.id, login: user.login };
+      const now = Date.now();
+      const accessTokenExpiresInMs = 45 * 60 * 1000; // 45 минут
+      const refreshTokenExpiresInMs = 7 * 24 * 60 * 60 * 1000; // 7 дней
+
+      const accessToken = this.jwtService.sign(payload, { expiresIn: '45m' });
+      const refreshToken = this.jwtService.sign(payload, { expiresIn: '7d' });
+
+      return {
+        status: 'success',
+        message: 'Успешный вход',
+        data: {
+          user: {
+            id: user.id,
+            login: user.login,
+            email: user.email,
+            createdAt: user.createdAt,
+          },
+          tokens: {
+            accessToken,
+            accessTokenExpiresAt: new Date(
+              now + accessTokenExpiresInMs,
+            ).toISOString(),
+            refreshToken,
+            refreshTokenExpiresAt: new Date(
+              now + refreshTokenExpiresInMs,
+            ).toISOString(),
+          },
+        },
+      };
+    } catch (error) {
+      if (error instanceof BadRequestException) {
+        throw error;
+      }
+
+      console.error('Ошибка при проверке кода:', error);
+      throw new InternalServerErrorException(
+        'Произошла ошибка при проверке кода',
+      );
+    }
   }
 }
