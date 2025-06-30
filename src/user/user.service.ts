@@ -34,4 +34,14 @@ export class UserService {
       data: currentUser,
     };
   }
+
+  async getAllUsers() {
+    const all = await this.prisma.user.findMany({});
+
+    return {
+      status: 'success',
+      message: 'Успешно',
+      data: all,
+    };
+  }
 }

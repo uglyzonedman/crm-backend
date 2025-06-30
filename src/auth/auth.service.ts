@@ -10,6 +10,7 @@ import { checkPassword } from 'src/utils/checkPassword';
 import { JwtService } from '@nestjs/jwt';
 import { generatedCode } from 'src/utils/generatedCode';
 import { MailService } from 'src/mail/mail.service';
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
 export class AuthService {
@@ -20,37 +21,104 @@ export class AuthService {
   ) {}
 
   async register(dto: RegisterDto) {
-    const existingUser = await this.prisma.user.findFirst({
-      where: {
-        login: dto.login,
-      },
-    });
+    try {
+      const existingLogin = await this.prisma.user.findFirst({
+        where: {
+          login: dto.login,
+        },
+      });
 
-    if (existingUser) {
-      throw new BadRequestException({
+      if (existingLogin) {
+        throw new BadRequestException({
+          status: 'error',
+          message: 'Пользователь с таким логином уже существует',
+        });
+      }
+
+      const existingEmail = await this.prisma.user.findFirst({
+        where: {
+          email: dto.email,
+        },
+      });
+
+      if (existingEmail) {
+        throw new BadRequestException({
+          status: 'error',
+          message: 'Пользователь с таким email уже существует',
+        });
+      }
+
+      const user = await this.prisma.user.create({
+        data: {
+          email: dto.email,
+          login: dto.login,
+          activatedEmailCode: uuidv4(),
+          isActivated: false,
+        },
+      });
+
+      return {
+        status: 'success',
+        message: 'Регистрация прошла успешно',
+        data: user,
+      };
+    } catch (error) {
+      console.error('Ошибка при регистрации пользователя:', error);
+
+      if (error instanceof BadRequestException) {
+        throw error;
+      }
+
+      throw new InternalServerErrorException({
         status: 'error',
-        message: 'Пользователь с таким логином уже существует',
+        message: 'Произошла ошибка при регистрации пользователя',
       });
     }
+  }
 
-    const user = await this.prisma.user.create({
-      data: {
-        email: dto.email,
-        login: dto.login,
-      },
-      select: {
-        id: true,
-        email: true,
-        login: true,
-        createdAt: true,
-      },
-    });
+  async activatedAccount(activatedCode: string) {
+    try {
+      const findUser = await this.prisma.user.findFirst({
+        where: {
+          activatedEmailCode: activatedCode,
+        },
+      });
 
-    return {
-      status: 'success',
-      message: 'Регистрация прошла успешно',
-      data: user,
-    };
+      if (!findUser) {
+        throw new BadRequestException({
+          status: 'error',
+          message: 'Аккаунт с таким кодом активации не найден',
+        });
+      }
+      if (findUser.isActivated) {
+        return {
+          status: 'info',
+          message: 'Аккаунт уже активирован',
+        };
+      }
+
+      await this.prisma.user.update({
+        where: {
+          id: findUser.id,
+        },
+        data: {
+          isActivated: true,
+          activatedEmailCode: '',
+        },
+      });
+
+      return {
+        status: 'success',
+        message: 'Вы успешно активировали аккаунт',
+      };
+    } catch (error) {
+      console.error('Ошибка при активации аккаунта:', error);
+
+      throw new BadRequestException({
+        status: 'error',
+        message: error?.message || 'Произошла ошибка при активации аккаунта',
+      });
+    }
   }
 
   async login(dto: LoginDto) {
@@ -128,42 +196,6 @@ export class AuthService {
           'Не удалось отправить код авторизации. Повторите попытку позже.',
       });
     }
-
-    // return {
-    //   status: 'success',
-    //   message: 'Успешный вход',
-    //   data: {
-    //     user: {
-    //       id: findUser.id,
-    //       login: findUser.login,
-    //       email: findUser.email,
-    //       createdAt: findUser.createdAt,
-    //     },
-    //     tokens: {
-    //       accessToken,
-    //       accessTokenExpiresAt: new Date(
-    //         now + accessTokenExpiresInMs,
-    //       ).toISOString(),
-    //       refreshToken,
-    //       refreshTokenExpiresAt: new Date(
-    //         now + refreshTokenExpiresInMs,
-    //       ).toISOString(),
-    //     },
-    //   },
-    // };
-    // } catch (error) {
-    //   if (error instanceof BadRequestException) {
-    //     throw error;
-    //   }
-
-    //   console.error('Login error:', error);
-
-    //   throw new InternalServerErrorException({
-    //     status: 'error',
-    //     message: 'Произошла внутренняя ошибка при входе',
-    //   });
-    // }
-    // }
   }
 
   async verifyLoginCode(code: string) {

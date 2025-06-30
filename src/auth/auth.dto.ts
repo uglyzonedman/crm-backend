@@ -6,12 +6,6 @@ export class RegisterDto {
   login: string;
 
   @ApiProperty({
-    example: 'securePassword123',
-    description: 'Пароль пользователя',
-  })
-  password: string;
-
-  @ApiProperty({
     example: 'user@example.com',
     description: 'Электронная почта',
   })

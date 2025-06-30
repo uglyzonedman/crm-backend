@@ -1,4 +1,4 @@
-import { Body, Controller, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put, Res } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
 import {
@@ -7,6 +7,7 @@ import {
   RegisterDto,
   RegisterResponseDto,
 } from './auth.dto';
+import { Response } from 'express';
 
 @ApiTags('Auth')
 @Controller('auth')
@@ -36,9 +37,15 @@ export class AuthController {
   async login(@Body() dto: LoginDto) {
     return this.authService.login(dto);
   }
-
   @Post('verify-login/:code')
   async verifyLoginCode(@Param('code') code: string) {
     return this.authService.verifyLoginCode(code);
+  }
+
+  @Get('activated-account/:code')
+  async activatedAccount(@Param('code') code: string, @Res() res: Response) {
+    const result = await this.authService.activatedAccount(code);
+
+    return res.redirect('http://localhost:3000/auth/sign-in');
   }
 }
