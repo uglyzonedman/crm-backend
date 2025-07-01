@@ -132,6 +132,17 @@ exports.Prisma.UserScalarFieldEnum = {
   activatedEmailCode: 'activatedEmailCode'
 };
 
+exports.Prisma.SessionUserScalarFieldEnum = {
+  id: 'id',
+  refreshToken: 'refreshToken',
+  userId: 'userId',
+  ip: 'ip',
+  userAgent: 'userAgent',
+  createdAt: 'createdAt',
+  expiresAt: 'expiresAt',
+  isRevoked: 'isRevoked'
+};
+
 exports.Prisma.AuthCodeScalarFieldEnum = {
   id: 'id',
   code: 'code',
@@ -160,6 +171,7 @@ exports.Prisma.NullsOrder = {
 
 exports.Prisma.ModelName = {
   User: 'User',
+  SessionUser: 'SessionUser',
   AuthCode: 'AuthCode'
 };
 
