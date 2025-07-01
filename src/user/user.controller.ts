@@ -12,4 +12,10 @@ export class UserController {
   async getMe(@User() user: { userId: string; login: string }) {
     return await this.userService.getMe(user.userId);
   }
+
+  @Get('all')
+  @UseGuards(JwtAuthGuard)
+  async getAllUsers() {
+    return this.userService.getAllUsers();
+  }
 }
