@@ -26,7 +26,7 @@ model User {
 
 model SessionUser {
   id           String   @id @default(uuid())
-  refreshToken String
+  refreshToken String   @unique
   user         User     @relation(fields: [userId], references: [id])
   userId       String
   ip           String?
