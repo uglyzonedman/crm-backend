@@ -1,12 +1,3 @@
-/*
-  Warnings:
-
-  - You are about to drop the `User` table. If the table is not empty, all the data it contains will be lost.
-
-*/
--- DropTable
-DROP TABLE "User";
-
 -- CreateTable
 CREATE TABLE "user" (
     "id" TEXT NOT NULL,
@@ -54,6 +45,9 @@ CREATE UNIQUE INDEX "user_email_key" ON "user"("email");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "user_login_key" ON "user"("login");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "session_user_refreshToken_key" ON "session_user"("refreshToken");
 
 -- CreateIndex
 CREATE INDEX "auth_code_code_idx" ON "auth_code"("code");
