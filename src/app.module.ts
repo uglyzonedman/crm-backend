@@ -7,6 +7,7 @@ import { ConfigModule } from '@nestjs/config';
 import { MailModule } from './mail/mail.module';
 import { UserModule } from './user/user.module';
 import { ScheduleModule } from '@nestjs/schedule';
+import { SessionModule } from './session/session.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { ScheduleModule } from '@nestjs/schedule';
     MailModule,
     UserModule,
     ScheduleModule.forRoot(),
+    SessionModule,
   ],
   controllers: [AppController],
   providers: [AppService, PrismaService],

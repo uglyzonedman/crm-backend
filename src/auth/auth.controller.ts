@@ -41,7 +41,6 @@ export class AuthController {
   async verifyLoginCode(@Param('code') code: string) {
     return this.authService.verifyLoginCode(code);
   }
-
   @Get('activated-account/:code')
   async activatedAccount(@Param('code') code: string, @Res() res: Response) {
     const result = await this.authService.activatedAccount(code);
