@@ -3,6 +3,7 @@ import {
   HttpException,
   HttpStatus,
   Injectable,
+  NotFoundException,
 } from '@nestjs/common';
 import { PrismaService } from '../prisma.service';
 import { AddSessionDto } from './session.dto';
@@ -77,8 +78,8 @@ export class SessionService {
       login: currentRefreshToken.user.login,
     };
     const now = Date.now();
-    const newAccessTokenExpiresInMs = 45 * 60 * 1000; // 45 минут
-    const newRefreshTokenExpiresInMs = 7 * 24 * 60 * 60 * 1000; // 7 дней
+    const newAccessTokenExpiresInMs = 45 * 60 * 1000;
+    const newRefreshTokenExpiresInMs = 7 * 24 * 60 * 60 * 1000;
 
     const newAccessToken = this.jwtService.sign(payload, { expiresIn: '45m' });
     const newRefreshToken = this.jwtService.sign(payload, { expiresIn: '7d' });
@@ -99,12 +100,37 @@ export class SessionService {
       accessToken: newAccessToken,
       accessTokenExpiresInMs: newAccessTokenExpiresInMs,
       refreshToken: newRefreshToken,
+      refreshTokenExpiresInMs: newRefreshTokenExpiresInMs,
     };
 
     return {
       status: 'success',
       message: 'done',
       data: response,
+    };
+  }
+
+  async revokeAllSessionsExceptCurrent(refreshToken: string) {
+    const session = await this.prisma.sessionUser.findFirst({
+      where: { refreshToken },
+    });
+
+    if (!session) throw new NotFoundException('Сессия не найдена');
+
+    await this.prisma.sessionUser.updateMany({
+      where: {
+        userId: session.userId,
+        id: { not: session.id },
+        isRevoked: false,
+      },
+      data: {
+        isRevoked: true,
+      },
+    });
+
+    return {
+      status: 'success',
+      message: 'Все сессии, кроме текущей, отключены',
     };
   }
 }
