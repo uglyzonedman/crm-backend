@@ -38,8 +38,11 @@ export class AuthController {
     return this.authService.login(dto);
   }
   @Post('verify-login/:code')
-  async verifyLoginCode(@Param('code') code: string) {
-    return this.authService.verifyLoginCode(code);
+  async verifyLoginCode(
+    @Param('code') code: string,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    return this.authService.verifyLoginCode(code, res);
   }
   @Get('activated-account/:code')
   async activatedAccount(@Param('code') code: string, @Res() res: Response) {

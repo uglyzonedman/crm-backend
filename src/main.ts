@@ -11,7 +11,7 @@ async function bootstrap() {
     .addBearerAuth()
     .build();
   app.setGlobalPrefix('api');
-  app.enableCors({ origin: '*' });
+  app.enableCors({ origin: 'http://localhost:3000', credentials: true });
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('swagger', app, document);
   app.setGlobalPrefix('api');

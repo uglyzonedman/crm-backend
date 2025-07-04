@@ -11,7 +11,7 @@ import { JwtService } from '@nestjs/jwt';
 import { generatedCode } from 'src/utils/generatedCode';
 import { MailService } from 'src/mail/mail.service';
 import { v4 as uuidv4 } from 'uuid';
-
+import { Response } from 'express';
 @Injectable()
 export class AuthService {
   constructor(
@@ -149,24 +149,24 @@ export class AuthService {
         },
       });
 
-      this.mailService.sendMail(
-        findUser.email,
-        'Код авторизации',
-        `
-    <div style="font-family: Arial, sans-serif; padding: 20px; background-color: #f9f9f9; color: #333;">
-      <h2 style="color: #2c3e50;">Код авторизации</h2>
-      <p>Здравствуйте!</p>
-      <p>Вы запросили код авторизации. Пожалуйста, введите следующий код:</p>
-      <div style="font-size: 24px; font-weight: bold; background-color: #ecf0f1; padding: 10px 20px; display: inline-block; border-radius: 5px; margin: 20px 0;">
-        ${login_code}
-      </div>
-      <p style="color: #7f8c8d;">Срок действия кода: 2 минуты.</p>
-      <p>Если вы не запрашивали этот код, просто проигнорируйте это письмо.</p>
-      <hr style="margin: 30px 0; border: none; border-top: 1px solid #ddd;" />
-      <p style="font-size: 12px; color: #aaa;">С уважением, Ваша команда поддержки</p>
-    </div>
-    `,
-      );
+      //   this.mailService.sendMail(
+      //     findUser.email,
+      //     'Код авторизации',
+      //     `
+      // <div style="font-family: Arial, sans-serif; padding: 20px; background-color: #f9f9f9; color: #333;">
+      //   <h2 style="color: #2c3e50;">Код авторизации</h2>
+      //   <p>Здравствуйте!</p>
+      //   <p>Вы запросили код авторизации. Пожалуйста, введите следующий код:</p>
+      //   <div style="font-size: 24px; font-weight: bold; background-color: #ecf0f1; padding: 10px 20px; display: inline-block; border-radius: 5px; margin: 20px 0;">
+      //     ${login_code}
+      //   </div>
+      //   <p style="color: #7f8c8d;">Срок действия кода: 2 минуты.</p>
+      //   <p>Если вы не запрашивали этот код, просто проигнорируйте это письмо.</p>
+      //   <hr style="margin: 30px 0; border: none; border-top: 1px solid #ddd;" />
+      //   <p style="font-size: 12px; color: #aaa;">С уважением, Ваша команда поддержки</p>
+      // </div>
+      // `,
+      //   );
 
       return {
         status: 'success',
@@ -198,7 +198,7 @@ export class AuthService {
     }
   }
 
-  async verifyLoginCode(code: string) {
+  async verifyLoginCode(code: string, res: Response) {
     try {
       const authCode = await this.prisma.authCode.findFirst({
         where: { code },
@@ -223,10 +223,10 @@ export class AuthService {
 
       const payload = { sub: user.id, login: user.login };
       const now = Date.now();
-      const accessTokenExpiresInMs = 45 * 60 * 1000; // 45 минут
+      const accessTokenExpiresInMs = 1 * 60 * 1000; // 45 минут
       const refreshTokenExpiresInMs = 7 * 24 * 60 * 60 * 1000; // 7 дней
 
-      const accessToken = this.jwtService.sign(payload, { expiresIn: '45m' });
+      const accessToken = this.jwtService.sign(payload, { expiresIn: '1m' });
       const refreshToken = this.jwtService.sign(payload, { expiresIn: '7d' });
 
       return {

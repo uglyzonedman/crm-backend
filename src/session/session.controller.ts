@@ -7,10 +7,12 @@ import {
   Post,
   Put,
   Req,
+  Res,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { SessionService } from './session.service';
 import { AddSessionDto } from './session.dto';
-import { Request } from 'express';
+import { Request, Response } from 'express';
 
 @Controller('session')
 export class SessionController {
@@ -22,8 +24,16 @@ export class SessionController {
   }
 
   @Put('update-session')
-  async updateSession(@Body('refreshToken') refreshToken: string, @Req() req) {
-    return this.sessionService.updateSession(refreshToken, req);
+  async updateSession(
+    @Body('refreshToken') refreshToken: string,
+    @Req() req: Request,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    if (!refreshToken) {
+      throw new UnauthorizedException('Нет refresh токена в cookie');
+    }
+
+    return this.sessionService.updateSession(refreshToken, req, res);
   }
 
   @Delete('revoke-sessions/:refreshToken')

@@ -8,6 +8,7 @@ import {
 import { PrismaService } from '../prisma.service';
 import { AddSessionDto } from './session.dto';
 import { Prisma } from 'generated/prisma';
+import { Response } from 'express';
 import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
@@ -52,17 +53,22 @@ export class SessionService {
     }
   }
 
-  async updateSession(refreshToken: string, req: any) {
+  async updateSession(refreshToken: string, req: any, res: Response) {
     const currentRefreshToken = await this.prisma.sessionUser.findFirst({
       where: {
         refreshToken: refreshToken,
+        isRevoked: false,
+        expiresAt: {
+          gt: new Date(),
+        },
       },
       include: {
         user: true,
       },
     });
 
-    if (!currentRefreshToken) throw new BadGatewayException('..');
+    if (!currentRefreshToken)
+      throw new BadGatewayException('Refresh token недействителен или истёк');
 
     await this.prisma.sessionUser.update({
       where: {
@@ -78,10 +84,10 @@ export class SessionService {
       login: currentRefreshToken.user.login,
     };
     const now = Date.now();
-    const newAccessTokenExpiresInMs = 45 * 60 * 1000;
+    const newAccessTokenExpiresInMs = 1 * 60 * 1000;
     const newRefreshTokenExpiresInMs = 7 * 24 * 60 * 60 * 1000;
 
-    const newAccessToken = this.jwtService.sign(payload, { expiresIn: '45m' });
+    const newAccessToken = this.jwtService.sign(payload, { expiresIn: '1m' });
     const newRefreshToken = this.jwtService.sign(payload, { expiresIn: '7d' });
 
     const newSession = await this.prisma.sessionUser.create({
@@ -98,9 +104,13 @@ export class SessionService {
     const response = {
       ...newSession,
       accessToken: newAccessToken,
-      accessTokenExpiresInMs: newAccessTokenExpiresInMs,
+      accessTokenExpiresInMs: new Date(
+        now + newAccessTokenExpiresInMs,
+      ).toISOString(),
       refreshToken: newRefreshToken,
-      refreshTokenExpiresInMs: newRefreshTokenExpiresInMs,
+      refreshTokenExpiresInMs: new Date(
+        now + newRefreshTokenExpiresInMs,
+      ).toISOString(),
     };
 
     return {
