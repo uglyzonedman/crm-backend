@@ -11,13 +11,15 @@ import { JwtService } from '@nestjs/jwt';
 import { generatedCode } from 'src/utils/generatedCode';
 import { MailService } from 'src/mail/mail.service';
 import { v4 as uuidv4 } from 'uuid';
-import { Response } from 'express';
+import { Request, Response } from 'express';
+import { SessionService } from 'src/session/session.service';
 @Injectable()
 export class AuthService {
   constructor(
     private readonly prisma: PrismaService,
     private jwtService: JwtService,
     private readonly mailService: MailService,
+    private readonly sessionService: SessionService,
   ) {}
 
   async register(dto: RegisterDto) {
@@ -198,7 +200,7 @@ export class AuthService {
     }
   }
 
-  async verifyLoginCode(code: string, res: Response) {
+  async verifyLoginCode(code: string, res: Response, req: Request) {
     try {
       const authCode = await this.prisma.authCode.findFirst({
         where: { code },
@@ -229,6 +231,28 @@ export class AuthService {
       const accessToken = this.jwtService.sign(payload, { expiresIn: '1m' });
       const refreshToken = this.jwtService.sign(payload, { expiresIn: '7d' });
 
+      res.cookie('refreshToken', refreshToken, {
+        httpOnly: true,
+        sameSite: 'none',
+        secure: true,
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+      });
+
+      res.cookie('accessToken', accessToken, {
+        httpOnly: false,
+        sameSite: 'none',
+        secure: true,
+        maxAge: 1 * 60 * 1000,
+      });
+      const newSession = await this.sessionService.addSession(
+        {
+          expiresAt: new Date(refreshTokenExpiresInMs),
+          refreshToken: refreshToken,
+          userId: user.id,
+        },
+        req,
+      );
+
       return {
         status: 'success',
         message: 'Успешный вход',
@@ -249,6 +273,7 @@ export class AuthService {
               now + refreshTokenExpiresInMs,
             ).toISOString(),
           },
+          session: newSession,
         },
       };
     } catch (error) {

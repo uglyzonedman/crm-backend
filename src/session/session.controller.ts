@@ -25,15 +25,10 @@ export class SessionController {
 
   @Put('update-session')
   async updateSession(
-    @Body('refreshToken') refreshToken: string,
     @Req() req: Request,
     @Res({ passthrough: true }) res: Response,
   ) {
-    if (!refreshToken) {
-      throw new UnauthorizedException('Нет refresh токена в cookie');
-    }
-
-    return this.sessionService.updateSession(refreshToken, req, res);
+    return this.sessionService.updateSession(req, res);
   }
 
   @Delete('revoke-sessions/:refreshToken')

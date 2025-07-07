@@ -1,4 +1,13 @@
-import { Body, Controller, Get, Param, Post, Put, Res } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Put,
+  Req,
+  Res,
+} from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
 import {
@@ -7,7 +16,7 @@ import {
   RegisterDto,
   RegisterResponseDto,
 } from './auth.dto';
-import { Response } from 'express';
+import { Request, Response } from 'express';
 
 @ApiTags('Auth')
 @Controller('auth')
@@ -41,8 +50,9 @@ export class AuthController {
   async verifyLoginCode(
     @Param('code') code: string,
     @Res({ passthrough: true }) res: Response,
+    @Req() req: Request,
   ) {
-    return this.authService.verifyLoginCode(code, res);
+    return this.authService.verifyLoginCode(code, res, req);
   }
   @Get('activated-account/:code')
   async activatedAccount(@Param('code') code: string, @Res() res: Response) {

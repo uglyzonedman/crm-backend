@@ -4,6 +4,7 @@ import {
   HttpStatus,
   Injectable,
   NotFoundException,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { PrismaService } from '../prisma.service';
 import { AddSessionDto } from './session.dto';
@@ -53,7 +54,11 @@ export class SessionService {
     }
   }
 
-  async updateSession(refreshToken: string, req: any, res: Response) {
+  async updateSession(req: any, res: Response) {
+    const { refreshToken } = req.cookies;
+    console.log('oldRefresh', refreshToken);
+    if (!refreshToken) throw new UnauthorizedException('No refresh token');
+
     const currentRefreshToken = await this.prisma.sessionUser.findFirst({
       where: {
         refreshToken: refreshToken,
@@ -99,6 +104,20 @@ export class SessionService {
         isRevoked: false,
         userId: currentRefreshToken.user.id,
       },
+    });
+
+    res.cookie('refreshToken', newRefreshToken, {
+      httpOnly: true,
+      sameSite: 'none',
+      secure: true,
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+    });
+
+    res.cookie('accessToken', newAccessToken, {
+      httpOnly: false,
+      sameSite: 'none',
+      secure: true,
+      maxAge: 1 * 60 * 1000,
     });
 
     const response = {
