@@ -98,7 +98,7 @@ export class SessionService {
     const newSession = await this.prisma.sessionUser.create({
       data: {
         refreshToken: newRefreshToken,
-        expiresAt: new Date(now + newRefreshTokenExpiresInMs).toISOString(),
+        expiresAt: new Date(Date.now() + newRefreshTokenExpiresInMs),
         ip: req.ip || '',
         userAgent: req.headers['user-agent'] || '',
         isRevoked: false,
@@ -123,13 +123,9 @@ export class SessionService {
     const response = {
       ...newSession,
       accessToken: newAccessToken,
-      accessTokenExpiresInMs: new Date(
-        now + newAccessTokenExpiresInMs,
-      ).toISOString(),
+      accessTokenExpiresInMs: newAccessTokenExpiresInMs,
       refreshToken: newRefreshToken,
-      refreshTokenExpiresInMs: new Date(
-        now + newRefreshTokenExpiresInMs,
-      ).toISOString(),
+      refreshTokenExpiresInMs: newRefreshTokenExpiresInMs,
     };
 
     return {

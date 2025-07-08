@@ -1,5 +1,5 @@
 export class AddSessionDto {
   refreshToken: string;
-  expiresAt: Date;
+  expiresAt: any;
   userId: string;
 }

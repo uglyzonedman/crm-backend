@@ -43,17 +43,17 @@ export class AuthController {
     type: LoginResponseDto,
   })
   @ApiResponse({ status: 400, description: 'Неверные данные' })
-  async login(@Body() dto: LoginDto) {
-    return this.authService.login(dto);
+  async login(@Body() dto: LoginDto,  @Res({ passthrough: true }) res: Response, @Req() req: Request,) {
+    return this.authService.login(dto, res, req);
   }
-  @Post('verify-login/:code')
-  async verifyLoginCode(
-    @Param('code') code: string,
-    @Res({ passthrough: true }) res: Response,
-    @Req() req: Request,
-  ) {
-    return this.authService.verifyLoginCode(code, res, req);
-  }
+  // @Post('verify-login/:code')
+  // async verifyLoginCode(
+  //   @Param('code') code: string,
+  //   @Res({ passthrough: true }) res: Response,
+  //   @Req() req: Request,
+  // ) {
+  //   return this.authService.verifyLoginCode(code, res, req);
+  // }
   @Get('activated-account/:code')
   async activatedAccount(@Param('code') code: string, @Res() res: Response) {
     const result = await this.authService.activatedAccount(code);

@@ -8,7 +8,6 @@ import { LoginDto, RegisterDto } from './auth.dto';
 import { hashPassword } from 'src/utils/hashPassword';
 import { checkPassword } from 'src/utils/checkPassword';
 import { JwtService } from '@nestjs/jwt';
-import { generatedCode } from 'src/utils/generatedCode';
 import { MailService } from 'src/mail/mail.service';
 import { v4 as uuidv4 } from 'uuid';
 import { Request, Response } from 'express';
@@ -20,7 +19,7 @@ export class AuthService {
     private jwtService: JwtService,
     private readonly mailService: MailService,
     private readonly sessionService: SessionService,
-  ) {}
+  ) { }
 
   async register(dto: RegisterDto) {
     try {
@@ -50,12 +49,22 @@ export class AuthService {
         });
       }
 
+      if (dto.password !== dto.repeatPassword) {
+        throw new BadRequestException({
+          status: 'error',
+          message: 'Пароли не совпадают',
+        });
+      }
+
+      const cryptPassword: string = await hashPassword(dto.password)
+
       const user = await this.prisma.user.create({
         data: {
           email: dto.email,
           login: dto.login,
           activatedEmailCode: uuidv4(),
           isActivated: false,
+          password: cryptPassword
         },
       });
 
@@ -123,7 +132,7 @@ export class AuthService {
     }
   }
 
-  async login(dto: LoginDto) {
+  async login(dto: LoginDto, res: Response, req: Request) {
     try {
       const findUser = await this.prisma.user.findFirst({
         where: {
@@ -138,18 +147,29 @@ export class AuthService {
         });
       }
 
-      const login_code = generatedCode(6);
-      const expiresAt = new Date(Date.now() + 2 * 60 * 1000);
+      const isCheckPassword = await checkPassword(dto.password, findUser.password)
 
-      await this.prisma.authCode.create({
-        data: {
-          code: login_code,
-          expiresAt,
-          type: 'email',
-          isUsed: false,
-          userId: findUser.id,
-        },
-      });
+      if (!isCheckPassword) {
+        throw new BadRequestException({
+          status: 'error',
+          message: 'Неверный пароль',
+        });
+      }
+
+
+
+      // const login_code = generatedCode(6);
+      // const expiresAt = new Date(Date.now() + 2 * 60 * 1000);
+
+      // await this.prisma.authCode.create({
+      //   data: {
+      //     code: login_code,
+      //     expiresAt,
+      //     type: 'email',
+      //     isUsed: false,
+      //     userId: findUser.id,
+      //   },
+      // });
 
       //   this.mailService.sendMail(
       //     findUser.email,
@@ -170,61 +190,7 @@ export class AuthService {
       // `,
       //   );
 
-      return {
-        status: 'success',
-        message: 'Код авторизации отправлен на почту',
-        data: {
-          user: {
-            id: findUser.id,
-            login: findUser.login,
-            email: findUser.email,
-            createdAt: findUser.createdAt,
-          },
-          code: {
-            expiresAt: expiresAt.toISOString(),
-          },
-        },
-      };
-    } catch (error) {
-      console.error('Ошибка при отправке кода авторизации:', error);
-
-      if (error instanceof BadRequestException) {
-        throw error;
-      }
-
-      throw new BadRequestException({
-        status: 'error',
-        message:
-          'Не удалось отправить код авторизации. Повторите попытку позже.',
-      });
-    }
-  }
-
-  async verifyLoginCode(code: string, res: Response, req: Request) {
-    try {
-      const authCode = await this.prisma.authCode.findFirst({
-        where: { code },
-      });
-
-      if (!authCode) {
-        throw new BadRequestException('Код не найден');
-      }
-
-      await this.prisma.authCode.update({
-        where: { id: authCode.id },
-        data: { isUsed: true },
-      });
-
-      const user = await this.prisma.user.findFirst({
-        where: { id: authCode.userId },
-      });
-
-      if (!user) {
-        throw new BadRequestException('Пользователь не найден');
-      }
-
-      const payload = { sub: user.id, login: user.login };
-      const now = Date.now();
+      const payload = { sub: findUser.id, login: findUser.login };
       const accessTokenExpiresInMs = 1 * 60 * 1000; // 45 минут
       const refreshTokenExpiresInMs = 7 * 24 * 60 * 60 * 1000; // 7 дней
 
@@ -244,47 +210,128 @@ export class AuthService {
         secure: true,
         maxAge: 1 * 60 * 1000,
       });
+
       const newSession = await this.sessionService.addSession(
         {
-          expiresAt: new Date(refreshTokenExpiresInMs),
+          expiresAt: new Date(Date.now() + refreshTokenExpiresInMs),
           refreshToken: refreshToken,
-          userId: user.id,
+          userId: findUser.id,
         },
         req,
       );
 
+
+
       return {
         status: 'success',
-        message: 'Успешный вход',
+        message: 'Код авторизации отправлен на почту',
         data: {
           user: {
-            id: user.id,
-            login: user.login,
-            email: user.email,
-            createdAt: user.createdAt,
+            id: findUser.id,
+            login: findUser.login,
+            email: findUser.email,
+            createdAt: findUser.createdAt,
           },
           tokens: {
             accessToken,
-            accessTokenExpiresAt: new Date(
-              now + accessTokenExpiresInMs,
-            ).toISOString(),
             refreshToken,
-            refreshTokenExpiresAt: new Date(
-              now + refreshTokenExpiresInMs,
-            ).toISOString(),
+            accessTokenExpiresInMs,
+            refreshTokenExpiresInMs
           },
-          session: newSession,
+          session: newSession
+
         },
       };
     } catch (error) {
-      if (error instanceof BadRequestException) {
-        throw error;
-      }
-
-      console.error('Ошибка при проверке кода:', error);
-      throw new InternalServerErrorException(
-        'Произошла ошибка при проверке кода',
-      );
+      console.error('Ошибка при отправке кода авторизации:', error);
     }
   }
+
+  // async verifyLoginCode(code: string, res: Response, req: Request) {
+  //   try {
+  //     const authCode = await this.prisma.authCode.findFirst({
+  //       where: { code },
+  //     });
+
+  //     if (!authCode) {
+  //       throw new BadRequestException('Код не найден');
+  //     }
+
+  //     await this.prisma.authCode.update({
+  //       where: { id: authCode.id },
+  //       data: { isUsed: true },
+  //     });
+
+  //     const user = await this.prisma.user.findFirst({
+  //       where: { id: authCode.userId },
+  //     });
+
+  //     if (!user) {
+  //       throw new BadRequestException('Пользователь не найден');
+  //     }
+
+  // const payload = { sub: user.id, login: user.login };
+  // const now = Date.now();
+  // const accessTokenExpiresInMs = 1 * 60 * 1000; // 45 минут
+  // const refreshTokenExpiresInMs = 7 * 24 * 60 * 60 * 1000; // 7 дней
+
+  // const accessToken = this.jwtService.sign(payload, { expiresIn: '1m' });
+  // const refreshToken = this.jwtService.sign(payload, { expiresIn: '7d' });
+
+  // res.cookie('refreshToken', refreshToken, {
+  //   httpOnly: true,
+  //   sameSite: 'none',
+  //   secure: true,
+  //   maxAge: 7 * 24 * 60 * 60 * 1000,
+  // });
+
+  // res.cookie('accessToken', accessToken, {
+  //   httpOnly: false,
+  //   sameSite: 'none',
+  //   secure: true,
+  //   maxAge: 1 * 60 * 1000,
+  // });
+  // const newSession = await this.sessionService.addSession(
+  //   {
+  //     expiresAt: new Date(refreshTokenExpiresInMs),
+  //     refreshToken: refreshToken,
+  //     userId: user.id,
+  //   },
+  //   req,
+  // );
+
+  //     return {
+  //       status: 'success',
+  //       message: 'Успешный вход',
+  //       data: {
+  //         user: {
+  //           id: user.id,
+  //           login: user.login,
+  //           email: user.email,
+  //           createdAt: user.createdAt,
+  //         },
+  //         tokens: {
+  //           accessToken,
+  //           accessTokenExpiresAt: new Date(
+  //             now + accessTokenExpiresInMs,
+  //           ).toISOString(),
+  //           refreshToken,
+  //           refreshTokenExpiresAt: new Date(
+  //             now + refreshTokenExpiresInMs,
+  //           ).toISOString(),
+  //         },
+  //         session: newSession,
+  //       },
+  //     };
+  //   } catch (error) {
+  //     if (error instanceof BadRequestException) {
+  //       throw error;
+  //     }
+
+  //     console.error('Ошибка при проверке кода:', error);
+  //     throw new InternalServerErrorException(
+  //       'Произошла ошибка при проверке кода',
+  //     );
+  //   }
+  // }
 }

@@ -10,6 +10,10 @@ export class RegisterDto {
     description: 'Электронная почта',
   })
   email: string;
+
+
+  password: string
+  repeatPassword: string
 }
 
 export class LoginDto {
