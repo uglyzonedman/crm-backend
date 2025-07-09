@@ -4634,16 +4634,19 @@ export namespace Prisma {
   export type RoleMinAggregateOutputType = {
     id: string | null
     name: string | null
+    label: string | null
   }
 
   export type RoleMaxAggregateOutputType = {
     id: string | null
     name: string | null
+    label: string | null
   }
 
   export type RoleCountAggregateOutputType = {
     id: number
     name: number
+    label: number
     permissions: number
     _all: number
   }
@@ -4652,16 +4655,19 @@ export namespace Prisma {
   export type RoleMinAggregateInputType = {
     id?: true
     name?: true
+    label?: true
   }
 
   export type RoleMaxAggregateInputType = {
     id?: true
     name?: true
+    label?: true
   }
 
   export type RoleCountAggregateInputType = {
     id?: true
     name?: true
+    label?: true
     permissions?: true
     _all?: true
   }
@@ -4741,6 +4747,7 @@ export namespace Prisma {
   export type RoleGroupByOutputType = {
     id: string
     name: string
+    label: string
     permissions: string[]
     _count: RoleCountAggregateOutputType | null
     _min: RoleMinAggregateOutputType | null
@@ -4764,6 +4771,7 @@ export namespace Prisma {
   export type RoleSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    label?: boolean
     permissions?: boolean
     users?: boolean | Role$usersArgs<ExtArgs>
     _count?: boolean | RoleCountOutputTypeDefaultArgs<ExtArgs>
@@ -4772,22 +4780,25 @@ export namespace Prisma {
   export type RoleSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    label?: boolean
     permissions?: boolean
   }, ExtArgs["result"]["role"]>
 
   export type RoleSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    label?: boolean
     permissions?: boolean
   }, ExtArgs["result"]["role"]>
 
   export type RoleSelectScalar = {
     id?: boolean
     name?: boolean
+    label?: boolean
     permissions?: boolean
   }
 
-  export type RoleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "permissions", ExtArgs["result"]["role"]>
+  export type RoleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "label" | "permissions", ExtArgs["result"]["role"]>
   export type RoleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     users?: boolean | Role$usersArgs<ExtArgs>
     _count?: boolean | RoleCountOutputTypeDefaultArgs<ExtArgs>
@@ -4803,6 +4814,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       name: string
+      label: string
       permissions: string[]
     }, ExtArgs["result"]["role"]>
     composites: {}
@@ -5230,6 +5242,7 @@ export namespace Prisma {
   interface RoleFieldRefs {
     readonly id: FieldRef<"Role", 'String'>
     readonly name: FieldRef<"Role", 'String'>
+    readonly label: FieldRef<"Role", 'String'>
     readonly permissions: FieldRef<"Role", 'String[]'>
   }
     
@@ -5722,6 +5735,7 @@ export namespace Prisma {
   export const RoleScalarFieldEnum: {
     id: 'id',
     name: 'name',
+    label: 'label',
     permissions: 'permissions'
   };
 
@@ -6057,6 +6071,7 @@ export namespace Prisma {
     NOT?: RoleWhereInput | RoleWhereInput[]
     id?: StringFilter<"Role"> | string
     name?: StringFilter<"Role"> | string
+    label?: StringFilter<"Role"> | string
     permissions?: StringNullableListFilter<"Role">
     users?: UserListRelationFilter
   }
@@ -6064,6 +6079,7 @@ export namespace Prisma {
   export type RoleOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
+    label?: SortOrder
     permissions?: SortOrder
     users?: UserOrderByRelationAggregateInput
   }
@@ -6074,6 +6090,7 @@ export namespace Prisma {
     AND?: RoleWhereInput | RoleWhereInput[]
     OR?: RoleWhereInput[]
     NOT?: RoleWhereInput | RoleWhereInput[]
+    label?: StringFilter<"Role"> | string
     permissions?: StringNullableListFilter<"Role">
     users?: UserListRelationFilter
   }, "id" | "name">
@@ -6081,6 +6098,7 @@ export namespace Prisma {
   export type RoleOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
+    label?: SortOrder
     permissions?: SortOrder
     _count?: RoleCountOrderByAggregateInput
     _max?: RoleMaxOrderByAggregateInput
@@ -6093,6 +6111,7 @@ export namespace Prisma {
     NOT?: RoleScalarWhereWithAggregatesInput | RoleScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Role"> | string
     name?: StringWithAggregatesFilter<"Role"> | string
+    label?: StringWithAggregatesFilter<"Role"> | string
     permissions?: StringNullableListFilter<"Role">
   }
 
@@ -6346,6 +6365,7 @@ export namespace Prisma {
   export type RoleCreateInput = {
     id?: string
     name: string
+    label: string
     permissions?: RoleCreatepermissionsInput | string[]
     users?: UserCreateNestedManyWithoutRoleInput
   }
@@ -6353,6 +6373,7 @@ export namespace Prisma {
   export type RoleUncheckedCreateInput = {
     id?: string
     name: string
+    label: string
     permissions?: RoleCreatepermissionsInput | string[]
     users?: UserUncheckedCreateNestedManyWithoutRoleInput
   }
@@ -6360,6 +6381,7 @@ export namespace Prisma {
   export type RoleUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
     permissions?: RoleUpdatepermissionsInput | string[]
     users?: UserUpdateManyWithoutRoleNestedInput
   }
@@ -6367,6 +6389,7 @@ export namespace Prisma {
   export type RoleUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
     permissions?: RoleUpdatepermissionsInput | string[]
     users?: UserUncheckedUpdateManyWithoutRoleNestedInput
   }
@@ -6374,18 +6397,21 @@ export namespace Prisma {
   export type RoleCreateManyInput = {
     id?: string
     name: string
+    label: string
     permissions?: RoleCreatepermissionsInput | string[]
   }
 
   export type RoleUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
     permissions?: RoleUpdatepermissionsInput | string[]
   }
 
   export type RoleUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
     permissions?: RoleUpdatepermissionsInput | string[]
   }
 
@@ -6689,17 +6715,20 @@ export namespace Prisma {
   export type RoleCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    label?: SortOrder
     permissions?: SortOrder
   }
 
   export type RoleMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    label?: SortOrder
   }
 
   export type RoleMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    label?: SortOrder
   }
 
   export type AuthCodeCreateNestedManyWithoutUserInput = {
@@ -7112,12 +7141,14 @@ export namespace Prisma {
   export type RoleCreateWithoutUsersInput = {
     id?: string
     name: string
+    label: string
     permissions?: RoleCreatepermissionsInput | string[]
   }
 
   export type RoleUncheckedCreateWithoutUsersInput = {
     id?: string
     name: string
+    label: string
     permissions?: RoleCreatepermissionsInput | string[]
   }
 
@@ -7199,12 +7230,14 @@ export namespace Prisma {
   export type RoleUpdateWithoutUsersInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
     permissions?: RoleUpdatepermissionsInput | string[]
   }
 
   export type RoleUncheckedUpdateWithoutUsersInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
     permissions?: RoleUpdatepermissionsInput | string[]
   }
 

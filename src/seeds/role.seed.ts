@@ -8,14 +8,17 @@ const createRoles = async () => {
       {
         name: 'freelancer',
         permissions: [],
+        label: 'Фрилансер',
       },
       {
         name: 'customer',
         permissions: [],
+        label: 'Заказчик',
       },
       {
         name: 'admin',
         permissions: [],
+        label: 'Администратор',
       },
     ];
 

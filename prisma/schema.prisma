@@ -57,6 +57,7 @@ model AuthCode {
 model Role {
   id          String   @id @default(uuid())
   name        String        @unique
+  label       String 
   permissions String[]
   users       User[]   
 

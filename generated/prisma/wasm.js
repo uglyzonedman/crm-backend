@@ -158,6 +158,7 @@ exports.Prisma.AuthCodeScalarFieldEnum = {
 exports.Prisma.RoleScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  label: 'label',
   permissions: 'permissions'
 };
 
