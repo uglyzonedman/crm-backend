@@ -24,4 +24,30 @@ export class RoleService {
       };
     }
   }
+
+  async getAllWithoutAdmin() {
+    try {
+      const roles = await this.prisma.role.findMany({
+        where: {
+          name: {
+            notIn: ['admin'],
+          },
+        },
+      });
+
+      return {
+        message: 'Роли без admin получены',
+        status: 'success',
+        data: roles,
+      };
+    } catch (error) {
+      console.error('Ошибка при получении ролей без admin:', error);
+
+      return {
+        message: 'Не удалось получить роли',
+        status: 'error',
+        data: null,
+      };
+    }
+  }
 }

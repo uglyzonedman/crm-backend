@@ -20,4 +20,18 @@ export class RoleController {
   async getAll() {
     return this.roleService.getAllRoles();
   }
+
+  @Get('get-all-without-admin')
+  @ApiOperation({ summary: 'Получить все роли, кроме admin' })
+  @ApiResponse({
+    status: 200,
+    description: 'Роли успешно получены (без admin)',
+  })
+  @ApiResponse({
+    status: 500,
+    description: 'Ошибка сервера при получении ролей',
+  })
+  async getAllWithoutAdmin() {
+    return this.roleService.getAllWithoutAdmin();
+  }
 }
