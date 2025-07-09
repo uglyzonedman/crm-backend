@@ -125,11 +125,13 @@ exports.Prisma.UserScalarFieldEnum = {
   email: 'email',
   name: 'name',
   surName: 'surName',
+  password: 'password',
   lastName: 'lastName',
   login: 'login',
   createdAt: 'createdAt',
   isActivated: 'isActivated',
-  activatedEmailCode: 'activatedEmailCode'
+  activatedEmailCode: 'activatedEmailCode',
+  roleId: 'roleId'
 };
 
 exports.Prisma.SessionUserScalarFieldEnum = {
@@ -153,6 +155,12 @@ exports.Prisma.AuthCodeScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.RoleScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  permissions: 'permissions'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -172,7 +180,8 @@ exports.Prisma.NullsOrder = {
 exports.Prisma.ModelName = {
   User: 'User',
   SessionUser: 'SessionUser',
-  AuthCode: 'AuthCode'
+  AuthCode: 'AuthCode',
+  Role: 'Role'
 };
 
 /**

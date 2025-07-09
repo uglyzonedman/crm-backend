@@ -8,6 +8,7 @@ import { MailModule } from './mail/mail.module';
 import { UserModule } from './user/user.module';
 import { ScheduleModule } from '@nestjs/schedule';
 import { SessionModule } from './session/session.module';
+import { RoleModule } from './role/role.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { SessionModule } from './session/session.module';
     UserModule,
     ScheduleModule.forRoot(),
     SessionModule,
+    RoleModule,
   ],
   controllers: [AppController],
   providers: [AppService, PrismaService],
