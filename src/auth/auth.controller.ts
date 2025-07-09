@@ -18,7 +18,7 @@ import {
 } from './auth.dto';
 import { Request, Response } from 'express';
 
-@ApiTags('Auth')
+@ApiTags('Авторизационный сервис')
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
@@ -43,7 +43,11 @@ export class AuthController {
     type: LoginResponseDto,
   })
   @ApiResponse({ status: 400, description: 'Неверные данные' })
-  async login(@Body() dto: LoginDto,  @Res({ passthrough: true }) res: Response, @Req() req: Request,) {
+  async login(
+    @Body() dto: LoginDto,
+    @Res({ passthrough: true }) res: Response,
+    @Req() req: Request,
+  ) {
     return this.authService.login(dto, res, req);
   }
   // @Post('verify-login/:code')

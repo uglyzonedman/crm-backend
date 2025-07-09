@@ -9,9 +9,9 @@ async function bootstrap() {
   app.use(cookieParser()); // ✅ добавил
 
   const config = new DocumentBuilder()
-    .setTitle('User API')
-    .setDescription('Документация API для пользователей')
-    .setVersion('1.0')
+    .setTitle('Сваггер крутого программиста (нет)')
+    .setDescription('Дока для людей, которые будут кайфовать')
+    .setVersion('1488.322')
     .addBearerAuth()
     .build();
 

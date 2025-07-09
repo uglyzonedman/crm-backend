@@ -21,7 +21,8 @@ model User {
   activatedEmailCode String        @default("") @map("activated_email_code")
   AuthCode           AuthCode[]
   SessionUser        SessionUser[]
-
+  roleId             String
+  role               Role          @relation(fields: [roleId], references: [id])
   @@map("user")
 }
 
@@ -51,4 +52,13 @@ model AuthCode {
 
   @@index([code])
   @@map("auth_code")
+}
+
+model Role {
+  id          String   @id @default(uuid())
+  name        String        @unique
+  permissions String[]
+  users       User[]   
+
+  @@map("role")
 }

@@ -19,7 +19,7 @@ export class AuthService {
     private jwtService: JwtService,
     private readonly mailService: MailService,
     private readonly sessionService: SessionService,
-  ) { }
+  ) {}
 
   async register(dto: RegisterDto) {
     try {
@@ -56,7 +56,7 @@ export class AuthService {
         });
       }
 
-      const cryptPassword: string = await hashPassword(dto.password)
+      const cryptPassword: string = await hashPassword(dto.password);
 
       const user = await this.prisma.user.create({
         data: {
@@ -64,7 +64,8 @@ export class AuthService {
           login: dto.login,
           activatedEmailCode: uuidv4(),
           isActivated: false,
-          password: cryptPassword
+          password: cryptPassword,
+          roleId: dto.roleId,
         },
       });
 
@@ -147,7 +148,10 @@ export class AuthService {
         });
       }
 
-      const isCheckPassword = await checkPassword(dto.password, findUser.password)
+      const isCheckPassword = await checkPassword(
+        dto.password,
+        findUser.password,
+      );
 
       if (!isCheckPassword) {
         throw new BadRequestException({
@@ -155,8 +159,6 @@ export class AuthService {
           message: 'Неверный пароль',
         });
       }
-
-
 
       // const login_code = generatedCode(6);
       // const expiresAt = new Date(Date.now() + 2 * 60 * 1000);
@@ -220,8 +222,6 @@ export class AuthService {
         req,
       );
 
-
-
       return {
         status: 'success',
         message: 'Код авторизации отправлен на почту',
@@ -236,10 +236,9 @@ export class AuthService {
             accessToken,
             refreshToken,
             accessTokenExpiresInMs,
-            refreshTokenExpiresInMs
+            refreshTokenExpiresInMs,
           },
-          session: newSession
-
+          session: newSession,
         },
       };
     } catch (error) {
