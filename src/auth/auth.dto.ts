@@ -10,6 +10,26 @@ export class RegisterDto {
     description: 'Электронная почта',
   })
   email: string;
+
+  @ApiProperty({
+    example: 'StrongPassword123!',
+    description: 'Пароль пользователя',
+    minLength: 6,
+  })
+  password: string;
+
+  @ApiProperty({
+    example: 'StrongPassword123!',
+    description: 'Повтор пароля для подтверждения',
+    minLength: 6,
+  })
+  repeatPassword: string;
+
+  @ApiProperty({
+    example: 'freelancer-id',
+    description: 'ID роли (например: admin-id, client-id, freelancer-id)',
+  })
+  roleId: string;
 }
 
 export class LoginDto {
