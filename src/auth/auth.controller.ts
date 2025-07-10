@@ -50,18 +50,21 @@ export class AuthController {
   ) {
     return this.authService.login(dto, res, req);
   }
-  // @Post('verify-login/:code')
-  // async verifyLoginCode(
-  //   @Param('code') code: string,
-  //   @Res({ passthrough: true }) res: Response,
-  //   @Req() req: Request,
-  // ) {
-  //   return this.authService.verifyLoginCode(code, res, req);
-  // }
-  @Get('activated-account/:code')
-  async activatedAccount(@Param('code') code: string, @Res() res: Response) {
-    const result = await this.authService.activatedAccount(code);
 
-    return res.redirect('http://localhost:3000/auth/sign-in');
+  // @Get('activated-account/:code')
+  // async activatedAccount(@Param('code') code: string, @Res() res: Response) {
+  //   const result = await this.authService.activatedAccount(code);
+
+  //   return res.redirect('http://localhost:3000/auth/sign-in');
+  // }
+
+  @Post('send-code')
+  async registerSendCode(@Body('email') email: string) {
+    return await this.authService.registerSendCode(email);
+  }
+
+  @Put('veify-account/:code')
+  async verifyAccount(@Param('code') code: string) {
+    return await this.authService.verifyAccount(code);
   }
 }

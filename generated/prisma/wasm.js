@@ -155,6 +155,22 @@ exports.Prisma.AuthCodeScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.PendingUserScalarFieldEnum = {
+  id: 'id',
+  email: 'email',
+  isActivatedCode: 'isActivatedCode',
+  code: 'code',
+  codeExpiresAt: 'codeExpiresAt',
+  login: 'login',
+  password: 'password',
+  roleId: 'roleId',
+  name: 'name',
+  surName: 'surName',
+  lastName: 'lastName',
+  step: 'step',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.RoleScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -182,6 +198,7 @@ exports.Prisma.ModelName = {
   User: 'User',
   SessionUser: 'SessionUser',
   AuthCode: 'AuthCode',
+  PendingUser: 'PendingUser',
   Role: 'Role'
 };
 

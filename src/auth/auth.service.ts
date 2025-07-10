@@ -4,7 +4,12 @@ import {
   InternalServerErrorException,
 } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
-import { LoginDto, RegisterDto } from './auth.dto';
+import {
+  LoginDto,
+  RegisterCredentialsDto,
+  RegisterDto,
+  RegisterProfileInfoDto,
+} from './auth.dto';
 import { hashPassword } from 'src/utils/hashPassword';
 import { checkPassword } from 'src/utils/checkPassword';
 import { JwtService } from '@nestjs/jwt';
@@ -12,6 +17,7 @@ import { MailService } from 'src/mail/mail.service';
 import { v4 as uuidv4 } from 'uuid';
 import { Request, Response } from 'express';
 import { SessionService } from 'src/session/session.service';
+import { generatedCode } from 'src/utils/generatedCode';
 @Injectable()
 export class AuthService {
   constructor(
@@ -22,115 +28,196 @@ export class AuthService {
   ) {}
 
   async register(dto: RegisterDto) {
-    try {
-      const existingLogin = await this.prisma.user.findFirst({
-        where: {
-          login: dto.login,
-        },
-      });
-
-      if (existingLogin) {
-        throw new BadRequestException({
-          status: 'error',
-          message: 'Пользователь с таким логином уже существует',
-        });
-      }
-
-      const existingEmail = await this.prisma.user.findFirst({
-        where: {
-          email: dto.email,
-        },
-      });
-
-      if (existingEmail) {
-        throw new BadRequestException({
-          status: 'error',
-          message: 'Пользователь с таким email уже существует',
-        });
-      }
-
-      if (dto.password !== dto.repeatPassword) {
-        throw new BadRequestException({
-          status: 'error',
-          message: 'Пароли не совпадают',
-        });
-      }
-
-      const cryptPassword: string = await hashPassword(dto.password);
-
-      const user = await this.prisma.user.create({
-        data: {
-          email: dto.email,
-          login: dto.login,
-          activatedEmailCode: uuidv4(),
-          isActivated: false,
-          password: cryptPassword,
-          roleId: dto.roleId,
-        },
-      });
-
-      return {
-        status: 'success',
-        message: 'Регистрация прошла успешно',
-        data: user,
-      };
-    } catch (error) {
-      console.error('Ошибка при регистрации пользователя:', error);
-
-      if (error instanceof BadRequestException) {
-        throw error;
-      }
-
-      throw new InternalServerErrorException({
-        status: 'error',
-        message: 'Произошла ошибка при регистрации пользователя',
-      });
-    }
+    // try {
+    //   const existingLogin = await this.prisma.user.findFirst({
+    //     where: {
+    //       login: dto.login,
+    //     },
+    //   });
+    //   if (existingLogin) {
+    //     throw new BadRequestException({
+    //       status: 'error',
+    //       message: 'Пользователь с таким логином уже существует',
+    //     });
+    //   }
+    //   const existingEmail = await this.prisma.user.findFirst({
+    //     where: {
+    //       email: dto.email,
+    //     },
+    //   });
+    //   if (existingEmail) {
+    // throw new BadRequestException({
+    //   status: 'error',
+    //   message: 'Пользователь с таким email уже существует',
+    // });
+    //   }
+    // if (dto.password !== dto.repeatPassword) {
+    //   throw new BadRequestException({
+    //     status: 'error',
+    //     message: 'Пароли не совпадают',
+    //   });
+    // }
+    // const cryptPassword: string = await hashPassword(dto.password);
+    //   const user = await this.prisma.user.create({
+    //     data: {
+    //       email: dto.email,
+    //       login: dto.login,
+    //       activatedEmailCode: uuidv4(),
+    //       isActivated: false,
+    //       password: cryptPassword,
+    //       roleId: dto.roleId,
+    //     },
+    //   });
+    //   return {
+    //     status: 'success',
+    //     message: 'Регистрация прошла успешно',
+    //     data: user,
+    //   };
+    // } catch (error) {
+    //   console.error('Ошибка при регистрации пользователя:', error);
+    //   if (error instanceof BadRequestException) {
+    //     throw error;
+    //   }
+    //   throw new InternalServerErrorException({
+    //     status: 'error',
+    //     message: 'Произошла ошибка при регистрации пользователя',
+    //   });
+    // }
   }
 
-  async activatedAccount(activatedCode: string) {
-    try {
-      const findUser = await this.prisma.user.findFirst({
-        where: {
-          activatedEmailCode: activatedCode,
-        },
-      });
+  async registerSendCode(email: string) {
+    const existingUser = await this.prisma.user.findFirst({
+      where: {
+        email: email,
+      },
+    });
 
-      if (!findUser) {
-        throw new BadRequestException({
-          status: 'error',
-          message: 'Аккаунт с таким кодом активации не найден',
-        });
-      }
-      if (findUser.isActivated) {
-        return {
-          status: 'info',
-          message: 'Аккаунт уже активирован',
-        };
-      }
+    const existingPendingUser = await this.prisma.pendingUser.findFirst({
+      where: {
+        email: email,
+      },
+    });
 
-      await this.prisma.user.update({
-        where: {
-          id: findUser.id,
-        },
-        data: {
-          isActivated: true,
-          activatedEmailCode: '',
-        },
-      });
-
-      return {
-        status: 'success',
-        message: 'Вы успешно активировали аккаунт',
-      };
-    } catch (error) {
-      console.error('Ошибка при активации аккаунта:', error);
-
+    if (existingPendingUser || existingUser) {
       throw new BadRequestException({
         status: 'error',
-        message: error?.message || 'Произошла ошибка при активации аккаунта',
+        message: 'Пользователь с таким email уже существует',
       });
     }
+
+    const activatedCode = generatedCode(4);
+    const codeExpiresAt = 60 * 60 * 1000;
+    const response = await this.prisma.pendingUser.create({
+      data: {
+        email: email,
+        code: activatedCode,
+        codeExpiresAt: new Date(Date.now() + codeExpiresAt),
+      },
+    });
+
+    return {
+      status: 'success',
+      message: 'Код отправлен на почту',
+      data: response,
+    };
+  }
+
+  async verifyAccount(code: string) {
+    const existingCode = await this.prisma.pendingUser.findFirst({
+      where: {
+        code: code,
+      },
+    });
+
+    if (!existingCode) {
+      throw new BadRequestException({
+        status: 'error',
+        message: 'Код отсутствует в базе данных',
+      });
+    }
+
+    await this.prisma.pendingUser.update({
+      where: {
+        email: existingCode.email,
+      },
+      data: {
+        code: '',
+        isActivatedCode: true,
+      },
+    });
+
+    return {
+      status: 'success',
+      message: 'Аккаунт успешно активирован',
+    };
+  }
+
+  async registerCredentials(dto: RegisterCredentialsDto) {
+    if (dto.password !== dto.repeatPassword) {
+      throw new BadRequestException({
+        status: 'error',
+        message: 'Пароли не совпадают',
+      });
+    }
+    const cryptPassword: string = await hashPassword(dto.password);
+
+    await this.prisma.pendingUser.update({
+      where: {
+        email: dto.email,
+      },
+      data: {
+        login: dto.login,
+        password: cryptPassword,
+        roleId: dto.roleId,
+      },
+    });
+  }
+
+  async registerProfileInfo(dto: RegisterProfileInfoDto) {
+    const updated = await this.prisma.pendingUser.update({
+      where: { email: dto.email },
+      data: {
+        lastName: dto.lastname,
+        surName: dto.surname,
+        name: dto.name,
+      },
+    });
+    return {
+      status: 'success',
+      message: 'Данные добавлены',
+      data: updated,
+    };
+  }
+
+  async registerConfirmed(email: string) {
+    const pendingUser = await this.prisma.pendingUser.findFirst({
+      where: { email },
+    });
+
+    if (!pendingUser) {
+      throw new BadRequestException({
+        status: 'error',
+        message: 'Временного пользователя нет в базе данных',
+      });
+    }
+
+    const newUser = await this.prisma.user.create({
+      data: {
+        email: pendingUser.email,
+        login: pendingUser.login ?? '',
+        password: pendingUser.password ?? '',
+        lastName: pendingUser.lastName,
+        name: pendingUser.name,
+        roleId: pendingUser.roleId ?? '',
+        surName: pendingUser.surName,
+        isActivated: pendingUser.isActivatedCode,
+      },
+    });
+    return {
+      status: 'success',
+      message: 'Успешно создан пользователь',
+      data: newUser,
+    };
   }
 
   async login(dto: LoginDto, res: Response, req: Request) {

@@ -54,6 +54,24 @@ model AuthCode {
   @@map("auth_code")
 }
 
+model PendingUser {
+  id         String   @id @default(uuid())
+  email      String   @unique
+  isActivatedCode Boolean @default(false) @map("is_activated_code")
+  code       String   
+  codeExpiresAt DateTime
+  login      String?
+  password   String?
+  roleId     String?
+  name       String?
+  surName    String?
+  lastName   String?
+  step       Int      @default(1)
+  createdAt  DateTime @default(now())
+
+  @@map("pending_user")
+}
+
 model Role {
   id          String   @id @default(uuid())
   name        String        @unique

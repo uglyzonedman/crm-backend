@@ -32,6 +32,21 @@ export class RegisterDto {
   roleId: string;
 }
 
+export class RegisterCredentialsDto {
+  email: string;
+  login: string;
+  password: string;
+  repeatPassword: string;
+  roleId: string;
+}
+
+export class RegisterProfileInfoDto {
+  email: string;
+  lastname: string;
+  surname: string;
+  name: string;
+}
+
 export class LoginDto {
   @ApiProperty({
     example: 'user123 или user@example.com',
